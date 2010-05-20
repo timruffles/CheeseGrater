@@ -1,0 +1,30 @@
+topics: &id1
+    - Small Business
+    - Business
+    - Entrepreneurship
+    - Lean Startup
+    - Agile Methods
+    - Visual Communication
+    - Small Business
+    - Entrepreneur
+    - Design Thinking
+    - Customer Development
+    - Marketing Strategy
+    - Visual Thinking
+    - Marketing
+    - Networking
+    - Finance
+    - MBA
+    - Strategy
+    - Sales
+countries: &id2
+    - gb
+cities: &id3
+    - london
+    - manchester
+meetup:
+    key:601b6869351a5d69521e40232f4a1a65
+    topics: *id1
+    locations: *id2
+    cities: *id3
+       
