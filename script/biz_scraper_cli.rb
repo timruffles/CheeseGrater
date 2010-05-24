@@ -1,8 +1,11 @@
 require 'yaml'
-ROOT = '/Users/timruffles/Development/Cothink/spikes/EventsScraper/'
-require "#{ROOT}lib/eventscraper"
+require 'csv'
+FILEDIR = File.dirname(__FILE__) + '/'
+require "#{FILEDIR}../lib/eventscraper"
 
-s = BusinessLink.new("#{ROOT}spec/eventscraper/scrapers/fixtures/business_link.html")
+output_file = "#{FILEDIR}../output/output.csv"
+
+s = BusinessLink.new("#{FILEDIR}../spec/eventscraper/scrapers/fixtures/business_link.html")
 
 l2 = []
 s.scrape do |yielded|
@@ -16,10 +19,15 @@ l2.each do |l2|
   end
 end
 
-#puts events.select { |e| e.respond_to? :title}.first
-events.select { |e| e.respond_to? :title}.each do |e|
-  es = EventSaver.new
-  es.perform(Marshal.dump(e))
+for_csv = []
+events.select { |e| e.respond_to? :title}.each do |event|
+  order = [:title, :description, :date, :location, :organiser, :link, :source]
+  for_csv << order.collect do |data|
+    event.send(data)
+  end
 end
-
-
+CSV.open("#{FILEDIR}../output/output.csv", "w") do |csv|
+  for_csv.each do |line|
+    csv << line
+  end 
+end
