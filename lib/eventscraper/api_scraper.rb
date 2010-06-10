@@ -63,9 +63,9 @@ class ApiScraper
     
   end
   
-  def make_request fields, pager
+  def make_request fields, pager, &block
     
-    yield url_query(@request.fields)
+     = url_query(@request.fields)
     
   end
   
