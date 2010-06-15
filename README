@@ -1,3 +1,6 @@
+TRACK REMOTE BRANCH:
+	git checkout --track -b newapi origin/newapi	
+
 Dates:
 - should be passed into the EventVo as a ruby Time object - raise an explanatory exception if your parsing routine fails
 - are stored as mysql, UTC datetimes (YYYY-MM-DD HH:MM:SS, http://dev.mysql.com/doc/refman/5.1/en/datetime.html)
