@@ -4,6 +4,8 @@ require 'yaml'
 # TODO - Move to Rspec mixin :)
 
 module ScraperTestHelper
+  
+  # poor man's model validation :)
   def self.check_event e
      (e.date.instance_of? Time).should == true
      e.title.length.should >= 2
