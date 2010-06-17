@@ -1,14 +1,19 @@
 require File.dirname(__FILE__) + '/scraper'
 require 'json/pure'
+require 'resque'
 
 # creates all Requests required by an API setup
 class ApiScraper
   
-  @queue :events
+  @queue = :events
   
   def initialize(config)
     config = keys_to_symbols(config)
     @config = config
+  end
+  
+  def perform
+    puts "ApiScraper#perform"
   end
   
   def scrape
@@ -17,8 +22,7 @@ class ApiScraper
     end
   end
   
-  def make_requests 
-    
+  def make_requests
     fields_for_requests = []
     
     # prepare all fields, and generated diff hashes for all per request fields, adding to que of requests
@@ -34,7 +38,7 @@ class ApiScraper
       end
     end
     
-     # initial request which has transformed fields (eg csvs from [] to ,,), but is the same as req.fields
+    # initial request which has transformed fields (eg csvs from [] to ,,), but is the same as req.fields
     fields_for_requests << {}
     
     # all additiional requests required
@@ -60,18 +64,19 @@ class ApiScraper
     end
     hash.keys_to_symbols
   end
-  
 end
 
-
 # Runs an API scrape based on jsonpath info from a config hash, yielding Events and Additional scrapers
-class ApiScraperL2
+class ApiScraperL2  
+  @queue = :events
   
-  @queue :events
-  
-  def initialize config
-    
+  def initialize config  
   end
+
+  def perform
+    puts "ApiScraperL2#perform"
+  end
+  
   def scrape &result_block
     jsonpath(@dataset,@response.item_graph) do |item|
       item_query(item, @response.fields) do |result|
