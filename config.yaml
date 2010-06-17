@@ -39,33 +39,33 @@ cities: &id3
 #             request
 #             response
 api_scrapers:
-    EventBrite: &eventbrite
+    EventBrite:
+        request:
+            format: Querystring
+            fields:
+                app_key: MWY0YWRmMjNhZjFl
         Events: 
             endpoint: https://www/eventbrite/com/json/event_search
-            request: &eventbrite/request
-                format: Querystring
+            request:
                 fields:
-                    app_key: MWY0YWRmMjNhZjFl
                     country: GB
                     keywords:
                         type: csv
                         values: *id1
             response:
-                format: json
+                format: xpath
                 Event:
                     item_path: [//event]
                     fields:
-                        title: title
-                        description: description
+                        title: /title
+                        description: /description
                         location: [/venue/name,/venue/address,/venue/address_2,/venue/city,/venue/postal_code]
-                        start_date: start_date
-                        url: url
+                        start_date: /start_date
+                        url: /url
                         people: Unknown
                         notes: Unknown
-                        source: EventBrite
-                        EventBrite/Organiser: 
-                            fields: 
-                                id: [/organiser/id]
+                        EventBrite::Organiser: 
+                            id: [/organiser/id]
             pager:
                 request:
                     per_page:
@@ -77,15 +77,14 @@ api_scrapers:
                     page_results: num_showing
         Organiser:
             response:
-                format: json
+                format: xpath
                 Organiser:
                     item_path: [//organiser]
                     fields:
                         telephone: Organiser[/telephone]
                         email: Organiser[/email]
-            request: *eventbrite/request
+            request: 
                 fields:
-                    app_key: MWY0YWRmMjNhZjFl
                     id:
             pager:
                 request:
@@ -107,20 +106,19 @@ api_scrapers:
                     type: one_per_request
                     values: *id1
         response:
-            format: json
+            format: xpath
             Event:
                 item_path: [//results]
                 fields:
-                    title: name
-                    description: description
+                    title: /name
+                    description: /description
                     location: [/venue/name,/venue/address_1,/venue/address_2,/venue/address_3,/venue/city,/venue/zip]
-                    start_date: start_date
-                    url: event_url
+                    start_date: /start_date
+                    url: /event_url
                     telephone: Unknown
                     email: Unknown
                     people: Unknown
                     notes: Unknown
-                    source: Meetup
         pager:
             request:
                 per_page:
@@ -132,12 +130,17 @@ api_scrapers:
                 page_results: count
 http_scrapers:
     BusinessLink:
-        EventSearch:
+        request:
+            format: Querystring
+        EventDateSearch:
             endpoint: http://www.businesslink.gov.uk/bdotg/action/event?site=210
             response:
-                Business/EventResults:
+                format: xpath
+                Event:
+                    item_path: date: id('eventDate')//option[value!=99]
                     fields:
-                        date: id('eventDate')//option[value!=99]
-        EventResults:
+                        BusinessLink::EventsOnDate:
+                            date: @value
+        EventsOnDate:
             endpoint:http://online.businesslink.gov.uk/bdotg/action/eventsearch?keywords=&location=-999&date=#{option['value']}&submit=Go&page=1
     
