@@ -45,8 +45,8 @@ api_scrapers:
             fields:
                 app_key: MWY0YWRmMjNhZjFl
         Events: 
-            endpoint: https://www/eventbrite/com/json/event_search
             request:
+                endpoint: https://www/eventbrite/com/json/event_search
                 fields:
                     country: GB
                     keywords:
