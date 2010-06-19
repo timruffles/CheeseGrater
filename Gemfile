@@ -5,7 +5,15 @@
 
 source "http://rubygems.org"
 
-gem 'rspec'
 gem 'json_pure'
 gem 'hpricot'
+
+# testing
+gem 'rspec'
 gem 'cucumber'
+
+# resque
+gem 'redis'
+gem 'redis-namespace'
+gem 'yajl-ruby'
+gem 'resque'

@@ -39,12 +39,12 @@ class MeetupTopicLocation < Scraper
       v = event['venue'] ||= false
       address = v ? [v['name'],v['address_1'],v['address_2'],v['city']].join("\n") : Unknown
       yield_proc.call(EventVo.new(event['name'], 
-                                  event['description'] || Unknown, 
+                                  event['description'], 
                                   Time.at(event['time'].to_s.gsub!(/0+$/,'').to_i), 
                                   address,
                                   event['event_url'], 
                                   Source,
-                                  event['group']['name'] || Unknown))
+                                  event['group']['name']))
     end
   end
   def make_request

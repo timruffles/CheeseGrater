@@ -4,9 +4,9 @@ require File.dirname(__FILE__) + '/eventscraper/api_scraper'
 require File.dirname(__FILE__) + '/eventscraper/url_scraper'
 require File.dirname(__FILE__) + '/eventscraper/scraper_runner'
 require File.dirname(__FILE__) + '/eventscraper/event_saver'
-require File.dirname(__FILE__) + '/eventscraper/querystring_api_scraper'
 
-sdir = File.dirname(__FILE__) + '/eventscraper/scrapers'
-Dir.new(sdir).select {|f| f !~ /^\.+/ }.each do |scraper|
-  require sdir + '/' + scraper.gsub!('.rb','')
-end
+# no file exists yet!
+#require File.dirname(__FILE__) + '/eventscraper/querystring_api_scraper'
+
+scrapers_lib_dir = File.dirname(__FILE__) + '/eventscraper/scrapers'
+Dir["#{scrapers_lib_dir}/*.rb"].each { |f| load(f) }

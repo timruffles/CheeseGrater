@@ -12,7 +12,12 @@ class Scraper
     parse(make_request,&block)
   end
   
-  protected
+  # commented out protected - hash_to_query_s used publically - mistake or on purpose?
+  # NoMethodError in 'Scraper when given a hash should return an & deliminated listed' --- protected method `hash_to_query_s' called for #<Scraper:0x1018bc9f8> --- /Users/dan/code/cothink/scraper/spec/eventscraper/scraper_spec.rb:8:
+  # NoMethodError in 'Scraper when given a hash of values where key and value are url escaped' --- protected method `hash_to_query_s' called for #<Scraper:0x1018bc9f8> --- /Users/dan/code/cothink/scraper/spec/eventscraper/scraper_spec.rb:12:
+  
+  #protected
+  
   # IO encapsulated here
   def make_request
   end
