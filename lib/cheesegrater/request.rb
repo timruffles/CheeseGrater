@@ -38,11 +38,16 @@ module CheeseGrater
        # prepare all fields, and generated diff hashes for all per request fields, adding to que of requests
        def prepare_fields_and_override_hashes fields
          fields = fields.dup
+         one_per_request_count = 0
          fields.each_pair do |field, setup|
             if setup.respond_to? :[]
               value = setup[:value]
               case setup[:type]
                 when OnePerRequest
+                  
+                  one_per_request_count += 1
+                  raise MultiplePerRequestFieldError unless one_per_request_count == 1
+                  
                   # use first one for initial request, and rest for additional, yielding n - 1 new requests
                   fields[field] = value.shift
                   (value.map {|val| {field => val} }).each do |overrides|
@@ -73,6 +78,10 @@ module CheeseGrater
     
     class Querystring < Http
       
+      
+    end
+    
+    class MultiplePerRequestFieldError < ::Exception
       
     end
     

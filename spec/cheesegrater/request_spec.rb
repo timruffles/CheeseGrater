@@ -70,23 +70,16 @@ describe CheeseGrater::Request do
     %w[mustapha ghandi].each do |expected_arg| 
       (additional.select do |hash|
         hash[:keywords] == expected_arg
-      end).length.should == 1
+      end).length.should == 1 # one and only one request should have each of the per-request values
     end
     
-    additional = []
+  end
+  
+  it "should not allow multiple per-request varialbes " do
     
-    fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@multiple_per_request[:fields]) do |yielded|
-      additional << yielded
-    end
-
-    # should yield an override for the second two: the first value is used in the main request
-    additional.length.should == 4
-    %w[mustapha ghandi one three].each do |expected_arg| 
-      (additional.select do |hash|
-        hash[:keywords] == expected_arg
-      end).length.should == 1
-    end
-    
+     lambda {
+       CheeseGrater::Request.prepare_fields_and_override_hashes(@multiple_per_request[:fields]) {}
+     }.should raise_error(CheeseGrater::Request::MultiplePerRequestFieldError)
     
   end
   
@@ -99,20 +92,6 @@ describe CheeseGrater::Request do
       fields[:keywords].should_not == nil
     end 
     
-  end
-  
-  it "should create multiple requests from fields that require a separate request per value (cartasian product -1)" do
-     
-     requests = CheeseGrater::Request.create_requests @per_request
-     requests.length.should == 3
-     
-     requests = CheeseGrater::Request.create_requests @multiple_per_request
-     requests.length.should == 5
-     
-  end
-  
-  it "should set value of all one_per_request fields on the default/initial request to the first possible value" do
-    requests = CheeseGrater::Request.create_requests @multiple_per_request
   end
   
 end
