@@ -74,28 +74,3 @@ describe CheeseGrater::Request do
   end
   
 end
-
-describe CheeseGrater::Request::Http do
-  
-  before :each do
-    @setup = {:endpoint => 'http://google.com', :method => 'get'}
-    @http =  CheeseGrater::Request::Http.new(@setup)
-  end
-  
-  it "should require a request :method in config" do
-    CheeseGrater::Request::Http.new @setup # works
-    @setup.delete(:method)
-    lambda {
-      CheeseGrater::Request::Http.new @setup
-    }.should raise_error(CheeseGrater::Request::Http::InvalidOrMissingRequestMethod)
-  end
-  
-  it "should load the endpoint and return the response body" do
-    times = 0
-   @http.run do | response |
-     times += 1
-   end
-   p times
-  end
-  
-end

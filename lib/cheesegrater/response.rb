@@ -1,6 +1,5 @@
- def load_url_xpath(url)
-    return open(url) { |f| Hpricot(f) }
+module CheeseGrater 
+  module Response
+    
   end
-  def load_str_xpath(str)
-    return Hpricot.parse(str)
-  end
+end
