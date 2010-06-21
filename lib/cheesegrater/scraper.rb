@@ -1,5 +1,6 @@
 module CheeseGrater
   class Scraper
+    
     class << self
       def create
         
