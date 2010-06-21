@@ -6,12 +6,17 @@ describe CheeseGrater::Response::Xpath do
   Xpath = CheeseGrater::Response::Xpath
   
   before :each do
-    setup = YAML.load_file(root + 'fixtures/xpath').keys_to_symbols
-    @fixture1 = setup[:one]
+    setup = YAML.load_file(root + 'fixtures/xpath.yml').keys_to_symbols
+    @html = setup[:one]
   end
   
-  it "should allow querying by an xpath, and return the field" do
-    xpath = Xpath.new @fixture1
+  # it "should allow querying of an xml document by an xpath, and return the field" do
+  #   xpath = Xpath.new @xml, true
+  #   xpath.query("id('location)@name").should == 'location'
+  # end
+  
+  it "should allow querying of an html document by an xpath, and return the field" do
+    xpath = Xpath.new @html, true
     xpath.query("id('location)@name").should == 'location'
   end
 

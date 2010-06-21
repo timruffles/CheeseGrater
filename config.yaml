@@ -135,7 +135,7 @@ http_scrapers:
         EventDateSearch:
             endpoint: http://www.businesslink.gov.uk/bdotg/action/event?site=210
             response:
-                format: xpath
+                format: xpath::html
                 Event:
                     item_path: date: id('eventDate')//option[value!=99]
                     fields:
