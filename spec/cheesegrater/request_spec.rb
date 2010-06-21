@@ -1,54 +1,33 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe CheeseGrater::Request do
+  fixtures = YAML.load_file(File.dirname(__FILE__) + '/fixtures/request.yml').keys_to_symbols
   
   before :each do
-    
-    @request = YAML.load( <<-YAML
-      format: querystring
-      endpoint: http://blah.com
-      fields:
-          country: GB
-          keywords:
-              type: csv
-              value: [hippo, mustapha, ghandi]
-    YAML
-    ).keys_to_symbols
-    
-    
-    @per_request = YAML.load( <<-YAML
-      format: querystring
-      endpoint: http://blah.com
-      fields:
-          country: GB
-          keywords:
-              type: one_per_request
-              value: [hippo, mustapha, ghandi]
-    YAML
-    ).keys_to_symbols
-    
-    @multiple_per_request = YAML.load( <<-YAML
-      format: querystring
-      endpoint: http://blah.com
-      fields:
-          country: GB
-          keywords:
-              type: one_per_request
-              value: [hippo, mustapha, ghandi]
-          type:
-              type: one_per_request
-              value: [one, two, three]
-    YAML
-    ).keys_to_symbols
-    
-    
+    @request = fixtures[:csv].dup
+    @per_request =  fixtures[:one_per_request].dup
+    @multiple_per_request = fixtures[:multiple_one_per_request].dup
+  end
+  
+  it "should raise an error if any required constructor args are missing" do
+       lambda {
+         @request.delete(:endpoint)
+         CheeseGrater::Request.create @request
+       }.should(raise_error(CheeseGrater::Request::MissingRequestField))
+  end
+  
+  it "should raise an error if an invliad or null request format are missing" do
+       lambda {
+         @request.delete(:format)
+         CheeseGrater::Request.create @request
+       }.should(raise_error(CheeseGrater::Request::InvalidRequestFormat))
   end
   
   it "should format csv type fields correctly" do
     
     additional = []
     
-    fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@request[:fields]) do |yielded|
+   fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@request[:fields]) do | yielded |
       additional << yielded
     end
     
@@ -61,14 +40,14 @@ describe CheeseGrater::Request do
     
     additional = []
     
-    fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@per_request[:fields]) do |yielded|
+   fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@per_request[:fields]) do | yielded |
       additional << yielded
     end
     
     # should yield an override for the second two: the first value is used in the main request
     additional.length.should == 2
-    %w[mustapha ghandi].each do |expected_arg| 
-      (additional.select do |hash|
+   %w[mustapha ghandi].each do | expected_arg |
+   (additional.select do       | hash         |
         hash[:keywords] == expected_arg
       end).length.should == 1 # one and only one request should have each of the per-request values
     end
@@ -96,3 +75,27 @@ describe CheeseGrater::Request do
   
 end
 
+describe CheeseGrater::Request::Http do
+  
+  before :each do
+    @setup = {:endpoint => 'http://google.com', :method => 'get'}
+    @http =  CheeseGrater::Request::Http.new(@setup)
+  end
+  
+  it "should require a request :method in config" do
+    CheeseGrater::Request::Http.new @setup # works
+    @setup.delete(:method)
+    lambda {
+      CheeseGrater::Request::Http.new @setup
+    }.should raise_error(CheeseGrater::Request::Http::InvalidOrMissingRequestMethod)
+  end
+  
+  it "should load the endpoint and return the response body" do
+    times = 0
+   @http.run do | response |
+     times += 1
+   end
+   p times
+  end
+  
+end

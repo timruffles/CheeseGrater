@@ -1,0 +1,27 @@
+csv:
+    format: querystring
+    endpoint: http://blah.com
+    fields:
+        country: GB
+        keywords:
+            type: csv
+            value: [hippo, mustapha, ghandi]
+one_per_request:
+  format: querystring
+  endpoint: http://blah.com
+  fields:
+      country: GB
+      keywords:
+          type: one_per_request
+          value: [hippo, mustapha, ghandi]
+multiple_one_per_request:
+    format: querystring
+    endpoint: http://blah.com
+    fields:
+        country: GB
+        keywords:
+            type: one_per_request
+            value: [hippo, mustapha, ghandi]
+        type:
+            type: one_per_request
+            value: [one, two, three]

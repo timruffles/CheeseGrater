@@ -14,7 +14,7 @@ module CheeseGrater
         end)
         
         return clazz.new(config) if clazz
-        raise "Unrecognised Request type #{type}"
+        raise InvalidRequestFormat.new("Unrecognised Request format #{config[:format]}")
       end
       
       # create all requsts required, formatting fields
@@ -37,12 +37,15 @@ module CheeseGrater
        
        # prepare all fields, and generated diff hashes for all per request fields, adding to que of requests
        def prepare_fields_and_override_hashes fields
+         
          fields = fields.dup
          one_per_request_count = 0
+         
          fields.each_pair do |field, setup|
             if setup.respond_to? :[]
               value = setup[:value]
               case setup[:type]
+                
                 when OnePerRequest
                   
                   one_per_request_count += 1
@@ -53,8 +56,10 @@ module CheeseGrater
                   (value.map {|val| {field => val} }).each do |overrides|
                     yield overrides
                   end
+                  
                 when Csv
                   fields[field] = value.join(',') 
+                  
               end
             end
           end
@@ -64,9 +69,11 @@ module CheeseGrater
     class Base
       def initialize config
         {:fields => false, :endpoint => true}.each_pair do |instance_var, required|
-          raise "Missing required setup #{instance_var.to_s}" if required && config[instance_var] == nil
+          raise MissingRequestField.new("Missing required setup #{instance_var.to_s}") if required && config[instance_var] == nil
           send("#{instance_var.to_s}=".to_sym, config[instance_var])
         end
+        
+        @config = config
       end
       
       attr_accessor :fields, :endpoint
@@ -74,16 +81,84 @@ module CheeseGrater
     
     class Http < Base
       
+      include Net
+      
+      @@supported_methods = ['get']
+
+      def initialize config
+        super(config)
+        @method = config[:method] || @method
+        raise InvalidOrMissingRequestMethod.new("Didn't recognise method '#{@method}'") unless @@supported_methods.include? @method
+      end
+      
+      def run &block
+        yield load(endpoint, &block)
+      end
+      
+      def load endpoint
+        
+         uri = URI.parse(endpoint)
+         request = make_request uri
+         
+         response = {}
+         previous_locations = []
+         requests = 0
+         
+         while requests < 10
+           
+           requests += 1
+           
+           http = HTTP.new(uri.host, uri.port) 
+           response = http.send(@method, request)
+           
+           if response['location']
+             uri = URI.parse(response['location'])
+             request = make_request(uri)
+           else
+             yield response.body
+             break
+           end
+           
+         end
+         
+      end
+      
+      def make_request uri
+        
+        path = uri.path != '' ? uri.path : '/'
+        query = uri.query ? "?#{uri.query}" : ''
+        request = path + query
+        
+      end
+      
+      define_exception :InvalidOrMissingRequestMethod
+      
     end
     
     class Querystring < Http
       
+      def initialize config
+        @method = 'get'
+        super config
+      end
       
+      def endpoint
+        @endpoint + hash_to_query_s(fields)
+      end
+      
+      # query string format for a hash, with trailing ?
+      def hash_to_query_s(params_hash)
+        '?' + (params_hash.to_a.collect do |k_v|
+          sk, sv = CGI::escape(k_v[0].to_s), CGI::escape(k_v[1].to_s)
+          "#{sk}=#{sv}"
+        end).join('&')
+      end
+     
     end
     
-    class MultiplePerRequestFieldError < ::Exception
-      
-    end
+    define_exception :MultiplePerRequestFieldError
+    define_exception :MissingRequestField
+    define_exception :InvalidRequestFormat
     
   end
   

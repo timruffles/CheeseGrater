@@ -1,6 +1,3 @@
-#require File.dirname(__FILE__) + '/scraper'
-#require 'json/pure'
-
 # creates all Requests required by an API setup
 class ApiScraper
   

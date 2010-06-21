@@ -1,3 +1,7 @@
+require "rubygems"
+require "bundler"
+Bundler.setup(:default, :test)
+
 lib_dir = File.dirname(__FILE__) + "/../../lib/"
 require lib_dir + 'cheese_grater'
 def _____req_all file

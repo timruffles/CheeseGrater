@@ -140,7 +140,8 @@ http_scrapers:
                     item_path: date: id('eventDate')//option[value!=99]
                     fields:
                         BusinessLink::EventsOnDate:
-                            date: @value
+                            fields:
+                                date: @value
         EventsOnDate:
             endpoint:http://online.businesslink.gov.uk/bdotg/action/eventsearch?keywords=&location=-999&date=#{option['value']}&submit=Go&page=1
     

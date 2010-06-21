@@ -21,5 +21,18 @@ class Hash
   end
 end
 
-a = {'y'=>'b',:x => 'b'}
-p a.keys_to_symbols
+class Module
+  
+    
+  def define_exception the_class, default_message = nil, type = RuntimeError
+    exception = Class.new(type) do
+      @@default_message = default_message
+      def self.new msg = nil
+        super msg || @@default_message
+      end
+    end
+    const_set(the_class.to_s, exception)
+  end
+    
+  
+end

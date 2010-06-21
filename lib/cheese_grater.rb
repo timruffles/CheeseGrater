@@ -1,5 +1,3 @@
-require 'YAML'
-
 module CheeseGrater
   class Loader
     

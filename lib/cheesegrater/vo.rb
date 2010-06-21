@@ -1,4 +1,4 @@
 module CheeseGrater
-  class Vo < ::OpenStruct
+  class Vo
   end
 end
