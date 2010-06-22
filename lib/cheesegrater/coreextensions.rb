@@ -22,7 +22,6 @@ class Hash
 end
 
 class Module
-  
     
   def define_exception the_class, default_message = nil, type = RuntimeError
     exception = Class.new(type) do
@@ -34,5 +33,4 @@ class Module
     const_set(the_class.to_s, exception)
   end
     
-  
 end

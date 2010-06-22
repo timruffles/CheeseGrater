@@ -3,22 +3,34 @@ require 'optparse'
 require 'log4r'
 
 module CheeseGrater
+  
   class Cli
     
     include Log4r
     
+    define_exception :CliError
+    
     Version = [0,1]
     
-    def run
+    def run args
       
-      options = read_options
+      begin
       
-      raise if files.length == 0 
-      (files = ARGV).each do |file|
+        options = read_options args
+      
+        (files = args).each do |file|
+          path = Pathname.new(file)
+          config = YAML.load_file(path.absolute? ? path.realpath : "#{Dir.getwd}/#{path}")
+          logger.info "Loaded #{file.split('/').pop}" if config
+        end
+      
+        raise CliError.new("No config file specified") if files.length == 0 
         
+      rescue CliError => e
+        logger.error e
+      rescue Exception => e  
+        logger.error e
       end
-      
-      
       
     end
     
@@ -30,7 +42,7 @@ module CheeseGrater
       @logger ||= logger
     end
     
-    def read_options
+    def read_options args
       options               = OpenStruct.new {
         runner = 'single'
       }
@@ -61,7 +73,7 @@ module CheeseGrater
         
       end
       
-      opts.parse!(ARGV)
+      opts.parse!(args)
       options
     end
   end

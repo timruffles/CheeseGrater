@@ -5,10 +5,10 @@ Feature: Output progress
 	
   Scenario: Output progress
     When I run "grater config.yml"
-    Then I should see "Loading config.yml"
-	And I should see "Running TestScrape::FileOne"
+    Then I should see "Loaded config.yml"
+	And I should see "Running GroupOne::ScraperOne"
 	And I should see "Yielded Event" 2 times
-	And I should see "Running TestScrape::FileTwo"
+	And I should see "Running GroupOne::ScraperTwo"
 	And I should see "Yielded Event" 1 times
 	
 Feature: Inform me of errors
@@ -35,18 +35,3 @@ Feature: Inform me of errors
     Given I run "grater less-than-normal.yml -l Log4r scraper.log"
 	And file "scraper.log" contains "LessThanNormal: 14 Events"
 	Then I should see "Notice: LessThanNormal finds 14 Events on average, found 1"
-	
-Feature: Control logging
-  In order to see how the scrapers are doing over long periods
-  As a cothinker
-  I want to set a logging strategy to be used by the scraper
-
-  Scenario: Accept logging option
-    Given I run "grater config.yml -l Log4r"
-    Then I should see "Loading config.yml, logging with Log4r"
-
-  Scenario: Log to file
-    Given I run "grater config.yml -l Log4r scraper-log.log"
-    Then I should see "Loading config.yml, logging with Log4r"
-	When I see "Grating finished, enjoy the cheese!"
-	Then file "scraper-log.txt" should contain "Yielded Event" 3 times

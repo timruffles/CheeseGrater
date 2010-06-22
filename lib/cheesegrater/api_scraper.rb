@@ -41,7 +41,7 @@ class ApiScraperL2
           hash[field.to_sym] = jsonpath(item,graph)
         end
       end
-      yield @config[:model].new model_hash
+      yield @config[:model].new(model_hash)
   end
    
    def setup_pager!(config)
