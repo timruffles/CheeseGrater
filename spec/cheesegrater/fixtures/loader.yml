@@ -1,0 +1,27 @@
+simple_scrape:
+    TheGroup:
+      request:
+        format: not wanted
+      AScraper:
+        root: true
+        request:
+          format: http
+        response:
+          format: xpath
+      Another:
+        request:
+          format: http
+        response:
+          format: xpath
+scraper_setup:
+    Observer:
+      presetup: should also be present
+      even:
+        nested: should be mixed
+        so: this should be present, when the others key is overridden
+dependency_setup:
+    fields:
+      Observer:
+        even:
+          nested: should be overridden
+        id: [/]

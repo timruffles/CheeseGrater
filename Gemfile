@@ -25,9 +25,6 @@ end
 require 'yaml'
 
 # scraper
-require 'net/http'
-require 'open-uri'
-require 'cgi'
 gem 'json_pure'
 gem 'nokogiri' 
 gem 'log4r'

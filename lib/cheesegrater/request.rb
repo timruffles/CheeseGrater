@@ -1,3 +1,7 @@
+require 'net/http'
+require 'open-uri'
+require 'cgi'
+
 #require 'active_support' constantize doesn't find names right now
 module CheeseGrater
   module Request

@@ -1,0 +1,153 @@
+## uses JSON path
+topics: &id1
+    - Small Business
+    - Business
+    - Entrepreneurship
+    - Lean Startup
+    - Agile Methods
+    - Visual Communication
+    - Small Business
+    - Entrepreneur
+    - Design Thinking
+    - Customer Development
+    - Marketing Strategy
+    - Visual Thinking
+    - Marketing
+    - Networking
+    - Finance
+    - MBA
+    - Strategy
+    - Sales
+countries: &id2
+    - gb
+cities: &id3
+    - london
+    - manchester
+# Format:
+#   APIName
+#     Endpoints
+#         endpoint
+#           request
+#               format
+#               fields
+#           response
+#               [RailsModel|APIName/Endpoint  -  either a rails model to create with scraped fields, or another endpoint request to spawn, which will be passed any containing entities
+#                   item_path                 -  path to select all items
+#                   fields                    -  fields within each item
+#               , ///]
+#           pager
+#             request
+#             response
+api_scrapers:
+    EventBrite:
+        
+        request:
+            format: Querystring
+            fields:
+                app_key: MWY0YWRmMjNhZjFl
+                
+        Events: 
+            request:
+                endpoint: https://www/eventbrite/com/json/event_search
+                fields:
+                    country: GB
+                    keywords:
+                        type: csv
+                        values: *id1
+            response:
+                format: xpath
+                Event:
+                    item_path: [//event]
+                    handler: RailsModel
+                    fields:
+                        title: /title
+                        description: /description
+                        location: [/venue/name,/venue/address,/venue/address_2,/venue/city,/venue/postal_code]
+                        start_date: /start_date
+                        url: /url
+                        people: Unknown
+                        notes: Unknown
+                    related_to:
+                        EventBrite::Organiser:
+                            fields: # these fields are used to power the Organiser's request
+                                id: [/organiser/id]
+            pager:
+                request:
+                    per_page:
+                        name: max
+                        amount: 100
+                    page: page
+                response:
+                    total_results: total_items
+                    page_results: num_showing
+        Organiser:
+            response:
+                format: xpath
+                Organiser:
+                    type: RailsModel
+                    item_path: [//organiser]
+                    fields:
+                        telephone: /telephone
+                        email: /email
+            request: 
+                fields:
+                    id:
+            pager:
+                request:
+                    per_page:
+                        name: max
+                        amount: 100
+                    page: page
+                response:
+                    total_results: total_items
+                    page_results: num_showing
+    Meetup:
+        endpoint: http://api/meetup/com/2/events/json/
+        request:
+            format: Querystring
+            fields:
+                key: 601b6869351a5d69521e40232f4a1a65
+                country: gb
+                topic:
+                    type: one_per_request
+                    values: *id1
+        response:
+            format: xpath
+            Event:
+                item_path: [//results]
+                fields:
+                    title: /name
+                    description: /description
+                    location: [/venue/name,/venue/address_1,/venue/address_2,/venue/address_3,/venue/city,/venue/zip]
+                    start_date: /start_date
+                    url: /event_url
+                    telephone: Unknown
+                    email: Unknown
+                    people: Unknown
+                    notes: Unknown
+        pager:
+            request:
+                per_page:
+                    name: page
+                    amount: 100
+                page: offset
+            response:
+                total_results: total_count
+                page_results: count
+http_scrapers:
+    BusinessLink:
+        request:
+            format: Querystring
+        EventDateSearch:
+            endpoint: http://www.businesslink.gov.uk/bdotg/action/event?site=210
+            response:
+                format: xpath::html
+                Event:
+                    item_path: date: id('eventDate')//option[value!=99]
+                    fields:
+                        BusinessLink::EventsOnDate:
+                            fields:
+                                date: @value
+        EventsOnDate:
+            endpoint:http://online.businesslink.gov.uk/bdotg/action/eventsearch?keywords=&location=-999&date=#{option['value']}&submit=Go&page=1
+    
