@@ -30,7 +30,6 @@ require 'open-uri'
 require 'cgi'
 gem 'json_pure'
 gem 'nokogiri' 
+gem 'log4r'
 
 # cli
-require 'ostruct'
-require 'optparse'
