@@ -22,14 +22,6 @@ module CheeseGrater
          end
       end
   
-      def make_request uri
-    
-        path = uri.path != '' ? uri.path : '/'
-        query = uri.query ? "?#{uri.query}" : ''
-        request = path + query
-    
-      end
-  
       define_exception :InvalidOrMissingRequestMethod
   
     end
