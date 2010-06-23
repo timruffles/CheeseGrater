@@ -4,10 +4,10 @@ module CheeseGrater
     class << self
       def create setup, related_scrapers = {}
         Scraper.new Request.create_all(setup[:request]),
-        Response.create(setup[:response]),
-        Vo.create_all(setup[:vos]),
-        Pager.create(setup[:pager]),
-        related_scrapers
+                    Response.create(setup[:response]),
+                    Vo.create_all(setup[:vos]),
+                    Pager.create(setup[:pager]),
+                    related_scrapers
       end
     end
 
