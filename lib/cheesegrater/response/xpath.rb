@@ -4,8 +4,8 @@ module CheeseGrater
     class Xpath < Base
       
       def initialize doc, is_html = false
-        @is_html = is_html
         @doc = make_doc(doc)
+        @is_html = is_html
       end
       
       def make_doc raw
@@ -18,14 +18,14 @@ module CheeseGrater
           when Nokogiri::XML::Attr
             noko_result.value
           when Nokogiri::XML::Node
-            noko_result.content
+            @is_html ? noko_result.inner_html : noko_result.inner_text
           when Nokogiri::XML::NodeList
             raise RuntimeError "Xpath expression #{path} didn't result in a single item result"
         end
       end
       
       def items path
-        @doc.xpath path
+        @doc.xpath(path)
       end
       
     end
