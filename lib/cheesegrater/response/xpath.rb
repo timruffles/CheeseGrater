@@ -12,20 +12,25 @@ module CheeseGrater
         @is_html ? ::Nokogiri::HTML(raw) : ::Nokogiri::XML(raw)
       end
       
-      def field path, item
-        noko_result = make_doc(item).at_xpath(path) 
-        case noko_result
-          when Nokogiri::XML::Attr
-            noko_result.value
-          when Nokogiri::XML::Node
-            @is_html ? noko_result.inner_html : noko_result.inner_text
-          when Nokogiri::XML::NodeList
-            raise RuntimeError "Xpath expression #{path} didn't result in a single item result"
+      def items path, fields
+        @doc.xpath(path).each do |item|
+          filled_in_fields = {}
+          fields.each_pair do |field, field_path|
+            selected = item.at_xpath field_path
+            result = case selected
+                     when Nokogiri::XML::Attr                         then selected.value
+                     when Nokogiri::XML::NodeSet, Nokogiri::XML::Node then node_or_set_value(selected)
+                     end
+            filled_in_fields[field] = result
+          end
+          yield filled_in_fields
         end
       end
       
-      def items path
-        @doc.xpath(path)
+      protected
+      
+      def node_or_set_value node
+        @is_html ? node.inner_html : node.inner_text
       end
       
     end

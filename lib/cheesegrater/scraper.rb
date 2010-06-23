@@ -56,13 +56,9 @@ module CheeseGrater
     def read_response vos, response
       # retrieve all items and yield vos, and any related vos
       vos.each do |vo|
-        response.items(vo.item_path) do |item|
-
-          # setup all data
-          vo.fields.each do |field|
-            vo.fields[field] = response.field(field, item)
-          end
-
+        response.items(vo.item_path, fields) do |fields|
+          
+          vo.fields = fields
           yield vo
 
         end
