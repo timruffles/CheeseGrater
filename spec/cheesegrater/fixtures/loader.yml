@@ -21,6 +21,8 @@ scraper_setup:
         so: this should be present, when the others key is overridden
 dependency_setup:
     fields:
+        blah: foo
+    related_to:
       Observer:
         even:
           nested: should be overridden

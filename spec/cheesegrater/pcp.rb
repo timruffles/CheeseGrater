@@ -5,7 +5,7 @@ Loader loads config(s),
   
 root scrapers are run:
   Request sends fields, passes raw response to Response
-  Response pulls out all fields, and all new Scrapers that are contained within the fields
+  Scraper pulls out fields from Response, and does the same for dependent Scrapers
   Vo and Scraper objects are yielded to the Runner, which passes them off to Handlers
   Scraper that are adding content to an existing VO are either:
     - passed up with a relates_to: field, with the original Vo

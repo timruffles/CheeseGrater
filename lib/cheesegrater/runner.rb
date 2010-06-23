@@ -30,7 +30,7 @@ module CheeseGrater
           
           task = que.shift
           
-          handle task do yielded
+          task.run do yielded
             que << yielded
           end
           

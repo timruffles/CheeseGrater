@@ -67,7 +67,7 @@ module CheeseGrater
     # create dependent scrapers found in query
     def prepare_dependent_scraper_setups setup, scraper_setups
       
-      dependents = (setup[:related] || {})
+      dependents = (setup[:related_to] || {})
       
       prepared = {}
       dependents.each_pair do |name, setup|

@@ -56,21 +56,22 @@ api_scrapers:
                         values: *id1
             response:
                 format: xpath
-                Event:
-                    item_path: [//event]
-                    handler: RailsModel
-                    fields:
-                        title: /title
-                        description: /description
-                        location: [/venue/name,/venue/address,/venue/address_2,/venue/city,/venue/postal_code]
-                        start_date: /start_date
-                        url: /url
-                        people: Unknown
-                        notes: Unknown
-                    related_to:
-                        EventBrite::Organiser:
-                            fields: # these fields are used to power the Organiser's request
-                                id: [/organiser/id]
+                vos:
+                    Event:
+                        item_path: [//event]
+                        handler: RailsModel
+                        fields:
+                            title: /title
+                            description: /description
+                            location: [/venue/name,/venue/address,/venue/address_2,/venue/city,/venue/postal_code]
+                            start_date: /start_date
+                            url: /url
+                            people: Unknown
+                            notes: Unknown
+                        related_to:
+                            EventBrite::Organiser::Organiser
+                                fields: # these fields are used to power the Organiser's request
+                                    id: [/organiser/id]
             pager:
                 request:
                     per_page:
@@ -83,12 +84,13 @@ api_scrapers:
         Organiser:
             response:
                 format: xpath
-                Organiser:
-                    type: RailsModel
-                    item_path: [//organiser]
-                    fields:
-                        telephone: /telephone
-                        email: /email
+                vos:
+                    Organiser:
+                        type: RailsModel
+                        item_path: [//organiser]
+                        fields:
+                            telephone: /telephone
+                            email: /email
             request: 
                 fields:
                     id:
@@ -113,18 +115,19 @@ api_scrapers:
                     values: *id1
         response:
             format: xpath
-            Event:
-                item_path: [//results]
-                fields:
-                    title: /name
-                    description: /description
-                    location: [/venue/name,/venue/address_1,/venue/address_2,/venue/address_3,/venue/city,/venue/zip]
-                    start_date: /start_date
-                    url: /event_url
-                    telephone: Unknown
-                    email: Unknown
-                    people: Unknown
-                    notes: Unknown
+            vos:
+                Event:
+                    item_path: [//results]
+                    fields:
+                        title: /name
+                        description: /description
+                        location: [/venue/name,/venue/address_1,/venue/address_2,/venue/address_3,/venue/city,/venue/zip]
+                        start_date: /start_date
+                        url: /event_url
+                        telephone: Unknown
+                        email: Unknown
+                        people: Unknown
+                        notes: Unknown
         pager:
             request:
                 per_page:
