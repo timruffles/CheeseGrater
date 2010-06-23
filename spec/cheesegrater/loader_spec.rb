@@ -16,7 +16,7 @@ describe CheeseGrater::Loader do
     end
   
     it "should accept a hash of scrapers and turn them into runnable scrapers" do
-      CheeseGrater::Scraper.should_receive(:create).and_return({})
+      CheeseGrater::Scraper.should_receive(:create)
       @thecheese.load_scrapers @setup[:simple_scrape]
       @thecheese.scrapers[:TheGroup].length.should == 2
     end
@@ -33,7 +33,7 @@ describe CheeseGrater::Loader do
     
     it "should recognize and provide the setup to all dependent scrapes in a given set of fields" do
       
-      dependents = @thecheese.send(:prepare_dependent_scraper_setups, @setup[:dependency_setup],@setup[:scraper_setup])
+      dependents = @thecheese.send(:prepare_related_scraper_setups, @setup[:related_setup],@setup[:scraper_setup])
       
       dependents.length.should == 1
       dependents[:Observer][:id].should == ['/']

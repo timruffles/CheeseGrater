@@ -30,4 +30,5 @@ describe "Core extensions defined by CheeseGrater" do
       
     end
   end
+  
 end

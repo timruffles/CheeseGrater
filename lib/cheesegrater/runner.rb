@@ -1,6 +1,14 @@
 module CheeseGrater
   module Runner
     
+    class << self
+      
+      def create runner
+        const_get(runner.capitalize).new
+      end
+      
+    end
+    
     class Base
       
       def handle task

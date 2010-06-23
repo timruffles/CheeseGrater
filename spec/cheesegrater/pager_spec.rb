@@ -3,6 +3,21 @@ require root + '/spec_helper'
 
 describe CheeseGrater::Pager do
   
+  context "given an empty setup" do
+    it "should yield a null page fields" do
+      
+      pager = CheeseGrater::Pager.create({})
+      yielded = []
+      pager.each_page_fields do |fields|
+        fields.should == {}
+        yielded << fields 
+      end
+      
+      yielded.length.should == 1
+      
+    end
+  end
+  
   context "only given a next page url" do
     it "should be able to yield requests until no url is given"
   end

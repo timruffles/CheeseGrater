@@ -1,9 +1,8 @@
-require 'net/http'
-require 'open-uri'
-require 'cgi'
-
 #require 'active_support' constantize doesn't find names right now
 module CheeseGrater
+  
+  # Abstracts the process of making a request to any type of data source with a set
+  # of paramters.
   module Request
 
     Csv = 'csv'
@@ -23,7 +22,7 @@ module CheeseGrater
       end
 
       # create all requsts required, formatting fields
-      def create_requests config
+      def create_all config
 
         field_overrides = []
 

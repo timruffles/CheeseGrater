@@ -19,7 +19,7 @@ scraper_setup:
       even:
         nested: should be mixed
         so: this should be present, when the others key is overridden
-dependency_setup:
+related_setup:
     fields:
         blah: foo
     related_to:

@@ -1,3 +1,7 @@
+require 'net/http'
+require 'open-uri'
+require 'cgi'
+
 module CheeseGrater
   module Request
     class Http < Base

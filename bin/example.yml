@@ -1,1 +1,62 @@
-demo: config
+EventBrite:
+    request:
+        format: Querystring
+        fields:
+            app_key: MWY0YWRmMjNhZjFl
+    Events: 
+        request:
+            endpoint: https://www/eventbrite/com/json/event_search
+            fields:
+                country: GB
+                keywords:
+                    type: csv
+                    values: *id1
+        response:
+            format: xpath
+            vos:
+                Event:
+                    item_path: [//event]
+                    handler: RailsModel
+                    fields:
+                        title: /title
+                        description: /description
+                        location: [/venue/name,/venue/address,/venue/address_2,/venue/city,/venue/postal_code]
+                        start_date: /start_date
+                        url: /url
+                        people: Unknown
+                        notes: Unknown
+                    related_to:
+                        EventBrite::Organiser::Organiser
+                            fields: # these fields are used to power the Organiser's request
+                                id: [/organiser/id]
+        pager:
+            request:
+                per_page:
+                    name: max
+                    amount: 100
+                page: page
+            response:
+                total_results: total_items
+                page_results: num_showing
+    Organiser:
+        response:
+            format: xpath
+            vos:
+                Organiser:
+                    type: RailsModel
+                    item_path: [//organiser]
+                    fields:
+                        telephone: /telephone
+                        email: /email
+        request: 
+            fields:
+                id:
+        pager:
+            request:
+                per_page:
+                    name: max
+                    amount: 100
+                page: page
+            response:
+                total_results: total_items
+                page_results: num_showing

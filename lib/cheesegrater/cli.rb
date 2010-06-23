@@ -1,12 +1,11 @@
 require 'ostruct'
 require 'optparse'
-require 'log4r'
 
 module CheeseGrater
   
   class Cli
     
-    include Log4r
+    include Logging
     
     define_exception :CliError
     
@@ -16,13 +15,18 @@ module CheeseGrater
       
       begin
       
-        options = read_options args
+        @options = read_options args
+        
+        loader = Loader.new
       
         (files = args).each do |file|
           path = Pathname.new(file)
           config = YAML.load_file(path.absolute? ? path.realpath : "#{Dir.getwd}/#{path}")
           logger.info "Loaded #{file.split('/').pop}" if config
+          loader.load_scrapers config
         end
+        
+        logger.info "Found #{loader.root_scrapers.length} root scrapers, running  with"
       
         raise CliError.new("No config file specified") if files.length == 0 
         
@@ -34,12 +38,17 @@ module CheeseGrater
       
     end
     
+    protected
+    
+    def runner
+      @runner ||= Runner.create(@options[:runner])
+    end
+    
     def logger
-      unless @logger
-        logger = Logger.new 'grater_cli' 
-        logger.outputters = Outputter.stdout
-      end
-      @logger ||= logger
+      # ensure root logger also logs to stdout
+      super
+      @logger.add Outputter.stdout unless @logger.outputters.include? Outputter.stdout
+      @logger
     end
     
     def read_options args

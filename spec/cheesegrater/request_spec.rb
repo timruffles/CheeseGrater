@@ -12,14 +12,14 @@ describe CheeseGrater::Request do
   it "should raise an error if any required constructor args are missing" do
        lambda {
          @request.delete(:endpoint)
-         CheeseGrater::Request.create @request
+         CheeseGrater::Request.create_all @request
        }.should(raise_error(CheeseGrater::Request::MissingRequestField))
   end
   
   it "should raise an error if an invliad or null request format are missing" do
        lambda {
          @request.delete(:format)
-         CheeseGrater::Request.create @request
+         CheeseGrater::Request.create_all @request
        }.should(raise_error(CheeseGrater::Request::InvalidRequestFormat))
   end
   

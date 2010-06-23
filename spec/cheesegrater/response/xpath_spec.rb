@@ -16,8 +16,8 @@ describe CheeseGrater::Response::Xpath do
   # end
   
   it "should allow querying of an html document by an xpath, and return the field" do
-    xpath = Xpath.new @html, true
-    xpath.query("id('location)@name").should == 'location'
+    xpath = Xpath.new '', true
+    xpath.field("//*[@id='location']/@name",@html).should == 'location'
   end
 
 end
