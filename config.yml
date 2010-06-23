@@ -40,12 +40,10 @@ cities: &id3
 #             response
 api_scrapers:
     EventBrite:
-        
         request:
-            format: Querystring
+            format: querystring
             fields:
                 app_key: MWY0YWRmMjNhZjFl
-                
         Events: 
             request:
                 endpoint: https://www/eventbrite/com/json/event_search
@@ -61,17 +59,17 @@ api_scrapers:
                         item_path: [//event]
                         handler: RailsModel
                         fields:
-                            title: /title
-                            description: /description
-                            location: [/venue/name,/venue/address,/venue/address_2,/venue/city,/venue/postal_code]
-                            start_date: /start_date
-                            url: /url
+                            title: ./title
+                            description: ./description
+                            location: [./venue/name,./venue/address,./venue/address_2,./venue/city,./venue/postal_code]
+                            start_date: ./start_date
+                            url: ./url
                             people: Unknown
                             notes: Unknown
                         related_to:
                             EventBrite::Organiser::Organiser
                                 fields: # these fields are used to power the Organiser's request
-                                    id: [/organiser/id]
+                                    id: [./organiser/id]
             pager:
                 request:
                     per_page:
@@ -87,10 +85,10 @@ api_scrapers:
                 vos:
                     Organiser:
                         type: RailsModel
-                        item_path: [//organiser]
+                        item_path: [.//organiser]
                         fields:
-                            telephone: /telephone
-                            email: /email
+                            telephone: ./telephone
+                            email: ./email
             request: 
                 fields:
                     id:
@@ -106,7 +104,7 @@ api_scrapers:
     Meetup:
         endpoint: http://api/meetup/com/2/events/json/
         request:
-            format: Querystring
+            format: querystring
             fields:
                 key: 601b6869351a5d69521e40232f4a1a65
                 country: gb
@@ -117,13 +115,13 @@ api_scrapers:
             format: xpath
             vos:
                 Event:
-                    item_path: [//results]
+                    item_path: [.//results]
                     fields:
-                        title: /name
-                        description: /description
-                        location: [/venue/name,/venue/address_1,/venue/address_2,/venue/address_3,/venue/city,/venue/zip]
-                        start_date: /start_date
-                        url: /event_url
+                        title: ./name
+                        description: ./description
+                        location: [./venue/name,./venue/address_1,./venue/address_2,./venue/address_3,./venue/city,./venue/zip]
+                        start_date: ./start_date
+                        url: ./event_url
                         telephone: Unknown
                         email: Unknown
                         people: Unknown
@@ -140,17 +138,25 @@ api_scrapers:
 http_scrapers:
     BusinessLink:
         request:
-            format: Querystring
+            format: querystring
         EventDateSearch:
-            endpoint: http://www.businesslink.gov.uk/bdotg/action/event?site=210
+            request:
+                endpoint: http://www.businesslink.gov.uk/bdotg/action/event
+                fields:
+                    site: 210
             response:
                 format: xpath::html
-                Event:
-                    item_path: date: id('eventDate')//option[value!=99]
-                    fields:
-                        BusinessLink::EventsOnDate:
-                            fields:
-                                date: @value
+                scrapers:
+                    BusinessLink::EventsOnDate:
+                        item_path: //*[@id='eventDate']//option[value!=99]
+                        fields:
+                            date: ./@value
         EventsOnDate:
+            request:
+                endpoint: http://www.businesslink.gov.uk/fill/in/here
+                fields:
+                    all: the fields needed by default in query string
+                
+            
             endpoint:http://online.businesslink.gov.uk/bdotg/action/eventsearch?keywords=&location=-999&date=#{option['value']}&submit=Go&page=1
     

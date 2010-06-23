@@ -7,7 +7,7 @@ describe CheeseGrater::Scraper do
     @scraper = CheeseGrater::Scraper.new 1,2,3,4
   end
   
-  it "should successfully run requests and yield the raw responses" do
+  it "should run requests and yield the raw responses" do
 
     fields = {}
     response_msg = 'Response read!'
@@ -24,6 +24,14 @@ describe CheeseGrater::Scraper do
     responses.length.should == 1
     responses[0].should == response_msg
 
+  end
+  
+  context "integration"
+  
+    it "should yield vos and scrapers" do
+      
+    end
+    
   end
     
   

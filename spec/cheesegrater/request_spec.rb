@@ -46,8 +46,8 @@ describe CheeseGrater::Request do
     
     # should yield an override for the second two: the first value is used in the main request
     additional.length.should == 2
-   %w[mustapha ghandi].each do | expected_arg |
-   (additional.select do       | hash         |
+    %w[mustapha ghandi].each do | expected_arg |
+      (additional.select do |hash|
         hash[:keywords] == expected_arg
       end).length.should == 1 # one and only one request should have each of the per-request values
     end
