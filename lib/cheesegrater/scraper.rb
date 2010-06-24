@@ -84,7 +84,16 @@ module CheeseGrater
 
       end
       
-     
+       # create and yield all related scrapers
+      response[:scrapers].each_pair do |name, related_setup|
+        scraper = related_scrapers[name]
+
+        related_setup[:fields].each do |field|
+          scraper.request.fields[field] = response.query(field)
+        end
+
+        yield scraper
+      end
     end
 
   end
