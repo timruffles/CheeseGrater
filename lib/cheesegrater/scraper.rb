@@ -72,6 +72,7 @@ module CheeseGrater
         
         # setup all related Vo scrapes
         vo.related_to.each_pair do |name, related_setup|
+         
           scraper = related_scrapers[name]
           #scraper.setup(scraper)
           related_setup[:fields].each do |field|
@@ -86,6 +87,7 @@ module CheeseGrater
       
        # create and yield all related scrapers
       response[:scrapers].each_pair do |name, related_setup|
+        
         scraper = related_scrapers[name]
 
         related_setup[:fields].each do |field|
