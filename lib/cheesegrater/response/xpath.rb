@@ -7,7 +7,6 @@ module CheeseGrater
       
       def raw= doc
         @doc = make_doc(doc)
-        @is_html = true # TODO DI for this
       end
       
       def make_doc raw
@@ -15,9 +14,8 @@ module CheeseGrater
       end
       
       def items item_path, fields
-        
         items = @doc.xpath(item_path)
-        logger.info "#{self.class} got #{items.length} items"
+        logger.info "#{self.class} got #{items.length} items with xpath #{item_path}"
         
         items.each do |item|
           

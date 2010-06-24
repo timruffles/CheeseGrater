@@ -29,9 +29,31 @@ describe CheeseGrater::Scraper do
 
   end
   
-  context "integration" do
+    
+    
+  end
   
-    it "should yield vos and scrapers" do
+  context "integration" do
+    
+    it "should yield scrapers" do
+      
+      response = Response::Xpath.new
+      response.raw = @fixtures[:scrapers]
+      
+      results = []
+      @scraper.send(:read_response, vos, response, {}) do |scraped|
+        results << scraped
+      end
+      
+      total_of_vals = results.inject(0) do |acc, vo|
+        acc += vo.fields[:location_code].to_i
+      end
+      
+      results.length.should > 0
+      total_of_vals.should == 110
+    end
+  
+    it "should yield vos" do
       
       vos = []
       vos << Vo.new({:fields => {:location_code => "./@value"},:related_to => {},:item_path => "//*[@id='location']/*[@value!='-999']"})

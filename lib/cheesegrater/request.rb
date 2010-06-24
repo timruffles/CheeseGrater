@@ -21,7 +21,7 @@ module CheeseGrater
 
       # create all requsts required, formatting fields
       def create_all config
-
+        
         field_overrides = []
 
         fields = prepare_fields_and_override_hashes(config[:fields]) do |overridden_fields_for_request|

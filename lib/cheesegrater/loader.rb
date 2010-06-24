@@ -27,7 +27,7 @@ module CheeseGrater
         end
         
         # create each scraper when whole setup is present
-       scrapers[group] = setup_scrapers(scraper_setups, shared_setup)
+       scrapers[group] = setup_scrapers(scraper_setups, shared_setup);
       end
     end
     

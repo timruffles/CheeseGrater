@@ -5,8 +5,8 @@ require 'cgi'
 module CheeseGrater
   module Request
     class Http < Base
-    
-      include Net
+      
+      include Net, Logging
   
       @@supported_methods = ['get']
 
@@ -22,6 +22,7 @@ module CheeseGrater
   
       def load endpoint
          open(endpoint) do |response|
+           logger.info "#{self.class} received a response #{response.length} characters long from #{endpoint}"
            yield response.read
          end
       rescue StandardError => e

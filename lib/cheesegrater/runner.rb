@@ -32,7 +32,8 @@ module CheeseGrater
         
         while task = que.shift
           
-          p task
+          #puts task.to_yaml if task.respond_to? :fields
+          #next if task.respond_to? :fields
           
           task.run do |yielded|
             que << yielded
