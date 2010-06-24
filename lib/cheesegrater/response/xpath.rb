@@ -3,6 +3,8 @@ module CheeseGrater
   module Response
     class Xpath < Base
       
+      include Logging
+      
       def raw= doc
         @doc = make_doc(doc)
         @is_html = true # TODO DI for this
@@ -13,7 +15,13 @@ module CheeseGrater
       end
       
       def items item_path, fields
-        @doc.xpath(item_path).each do |item|
+        
+        items = @doc.xpath(item_path)
+        logger.info "#{self.class} got #{items.length} items"
+        
+        items.each do |item|
+          
+          # yield each set of filled fields
           filled_in_fields = {}
           fields.each_pair do |field, field_path|
             selected = item.at_xpath field_path
@@ -21,10 +29,13 @@ module CheeseGrater
                      when Nokogiri::XML::Attr                         then selected.value
                      when Nokogiri::XML::NodeSet, Nokogiri::XML::Node then node_or_set_value(selected)
                      end
+                     
             filled_in_fields[field] = result
           end
           yield filled_in_fields
+          
         end
+        
       end
       
       protected

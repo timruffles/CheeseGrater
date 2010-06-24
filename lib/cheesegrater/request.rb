@@ -12,13 +12,11 @@ module CheeseGrater
 
       # create a scraper with a prepared config hash (all fields expanded/formatted etc)
       def create config
-        clazz = if config[:format] == 'querystring'
-          Querystring
-        end
-
-        return clazz.new(config) if clazz
-        raise InvalidRequestFormat.new("Unrecognised Request format #{config[:format]}")
-
+        type = const_get(config[:format].capitalize).new(config)
+      rescue MissingRequestField => e
+        raise e
+      rescue
+        raise InvalidRequestFormat.new("Unrecognised or erroneous Request format '#{config[:format]}'")
       end
 
       # create all requsts required, formatting fields
@@ -66,6 +64,8 @@ module CheeseGrater
 
             end
           end
+          
+          fields
         end
       end
 

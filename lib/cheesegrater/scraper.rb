@@ -3,30 +3,29 @@ module CheeseGrater
 
     class << self
       def create setup, related_scrapers = {}
-        Scraper.new Request.create_all(setup[:request]),
-                    Response.create(setup[:response]),
-                    Vo.create_all(setup[:vos]),
-                    Pager.create(setup[:pager]),
-                    setup[:root],
-                    related_scrapers
+        Scraper.new :requests         => Request.create_all(setup[:request]),
+                    :response         => Response.create(setup[:response]),
+                    :vos              => Vo.create_all(setup[:response][:vos]),
+                    :pager            => Pager.create(setup[:pager]),
+                    :is_root          => setup[:root],
+                    :related_scrapers => related_scrapers
       end
     end
 
-    def initialize requests, response, vos, pager, root, related_scrapers = {}
-      @requests         = requests
-      @response         = response
-      @vos              = vos
-      @related_scrapers = related_scrapers
-      @root             = root
-      @pager            = pager
+    def initialize setup
+      @requests         = setup[:requests]
+      @response         = setup[:response]
+      @vos              = setup[:vos]
+      @related_scrapers = setup[:related_scrapers]
+      @is_root          = setup[:is_root]
+      @pager            = setup[:pager]
     end
 
     def run
 
       make_requests @requests, @pager do |raw_response|
-
         @response.raw = raw_response
-        s
+        
         read_response @vos, @response, @related_scrapers do |scraped|
           yield scraped
         end
@@ -35,12 +34,11 @@ module CheeseGrater
 
     end
     
-    def root?
-      @root
+    def is_root?
+      @is_root
     end
-
-
-
+    
+    
     protected
 
     # make all paged requests, yielding the raw results from each
@@ -50,7 +48,7 @@ module CheeseGrater
 
         # setup the request with the fields required to page
         pager.each_page_fields do |page_fields|
-
+          
           request.fields.merge!(page_fields)
           request.run do |raw_response|
             yield raw_response
@@ -71,18 +69,18 @@ module CheeseGrater
           yield to_yield
 
         end
-
+        
         # setup all related scrapers
-        vo.related_to.each_pair do |name, related_setup|
-          scraper = related_scrapers[name]
-          #scraper.setup(scraper)
-          related_setup[:fields].each do |field|
-            scraper.request.fields[field] = response.query(field)
-          end
-          scraper.related_to = vo
-
-          yield scraper
-        end
+        # vo.related_to.each_pair do |name, related_setup|
+        #           scraper = related_scrapers[name]
+        #           #scraper.setup(scraper)
+        #           related_setup[:fields].each do |field|
+        #             scraper.request.fields[field] = response.query(field)
+        #           end
+        #           scraper.related_to = vo
+        # 
+        #           yield scraper
+        #         end
 
       end
     end

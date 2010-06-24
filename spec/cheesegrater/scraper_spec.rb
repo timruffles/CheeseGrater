@@ -6,7 +6,7 @@ include CheeseGrater
 describe CheeseGrater::Scraper do
   
   before :each do
-    @scraper = CheeseGrater::Scraper.new 1,2,3,4
+    @scraper = CheeseGrater::Scraper.new({})
     @fixtures = YAML.load_file(root + '/fixtures/scraper.yml').keys_to_symbols
   end
   

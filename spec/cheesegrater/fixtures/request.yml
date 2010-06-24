@@ -6,6 +6,14 @@ csv:
         keywords:
             type: csv
             value: [hippo, mustapha, ghandi]
+csv2:
+    format: querystring
+    endpoint: http://www.eventbrite.com/json/event_search
+    fields:
+        country: GB
+        keywords:
+            type: csv
+            value: [one, two, three]
 one_per_request:
   format: querystring
   endpoint: http://blah.com

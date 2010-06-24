@@ -24,6 +24,8 @@ module CheeseGrater
          open(endpoint) do |response|
            yield response.read
          end
+      rescue StandardError => e
+        raise e.class.new "Could not load endpoint #{endpoint}, got #{e}"
       end
   
       define_exception :InvalidOrMissingRequestMethod

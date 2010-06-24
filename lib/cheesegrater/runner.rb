@@ -30,11 +30,11 @@ module CheeseGrater
       
       def run que
         
-        while que.length
+        while task = que.shift
           
-          task = que.shift
+          p task
           
-          task.run do yielded
+          task.run do |yielded|
             que << yielded
           end
           

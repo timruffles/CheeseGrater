@@ -4,22 +4,23 @@ describe CheeseGrater::Request do
   fixtures = YAML.load_file(File.dirname(__FILE__) + '/fixtures/request.yml').keys_to_symbols
   
   before :each do
-    @request = fixtures[:csv].dup
-    @per_request =  fixtures[:one_per_request].dup
+    @csv                  = fixtures[:csv].dup
+    @csv2                 = fixtures[:csv2].dup
+    @per_request          = fixtures[:one_per_request].dup
     @multiple_per_request = fixtures[:multiple_one_per_request].dup
   end
   
   it "should raise an error if any required constructor args are missing" do
        lambda {
-         @request.delete(:endpoint)
-         CheeseGrater::Request.create_all @request
+         @csv.delete(:endpoint)
+         CheeseGrater::Request.create_all @csv
        }.should(raise_error(CheeseGrater::Request::MissingRequestField))
   end
   
   it "should raise an error if an invliad or null request format are missing" do
        lambda {
-         @request.delete(:format)
-         CheeseGrater::Request.create_all @request
+         @csv.delete(:format)
+         CheeseGrater::Request.create_all @csv
        }.should(raise_error(CheeseGrater::Request::InvalidRequestFormat))
   end
   
@@ -27,14 +28,24 @@ describe CheeseGrater::Request do
     
     additional = []
     
-   fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@request[:fields]) do | yielded |
+    fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@csv[:fields]) do | yielded |
       additional << yielded
     end
     
     fields[:keywords].should == %w[hippo mustapha ghandi].join(',')
     additional.length.should == 0
     
+    additional = []
+    
+    fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@csv2[:fields]) do | yielded |
+      additional << yielded
+    end
+    
+    fields[:keywords].should == %w[one two three].join(',')
+    additional.length.should == 0
+    
   end
+  
 
   it "should be able to generated the required overrides for per-request field type" do
     
@@ -63,8 +74,7 @@ describe CheeseGrater::Request do
   end
   
   it "should create a request of the correct type with all fields" do
-    
-    request = CheeseGrater::Request.create @request
+    request = CheeseGrater::Request.create @csv
     request.instance_eval do
       CheeseGrater::Request::Querystring.should === self
       fields[:country].should == 'GB'
