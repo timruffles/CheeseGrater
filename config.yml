@@ -28,7 +28,7 @@ cities: &id3
 #     Endpoints
 #         endpoint
 #           request
-#               format
+#               type
 #               fields
 #           response
 #               [RailsModel|APIName/Endpoint  -  either a rails model to create with scraped fields, or another endpoint request to spawn, which will be passed any containing entities
@@ -53,7 +53,7 @@ api_scrapers:
                         type: csv
                         values: *id1
             response:
-                format: xpath
+                type: xpath
                 vos:
                     Event:
                         item_path: [//event]
@@ -81,7 +81,7 @@ api_scrapers:
                     page_results: num_showing
         Organiser:
             response:
-                format: xpath
+                type: xpath
                 vos:
                     Organiser:
                         type: RailsModel
@@ -112,7 +112,7 @@ api_scrapers:
                     type: one_per_request
                     values: *id1
         response:
-            format: xpath
+            type: xpath
             vos:
                 Event:
                     item_path: [.//results]
@@ -145,7 +145,7 @@ http_scrapers:
                 fields:
                     site: 210
             response:
-                format: xpath::html
+                type: xpath::html
                 scrapers:
                     BusinessLink::EventsOnDate:
                         item_path: //*[@id='eventDate']//option[value!=99]

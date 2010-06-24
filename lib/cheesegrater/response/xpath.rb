@@ -3,17 +3,17 @@ module CheeseGrater
   module Response
     class Xpath < Base
       
-      def initialize doc, is_html = false
+      def raw= doc
         @doc = make_doc(doc)
-        @is_html = is_html
+        @is_html = true # TODO DI for this
       end
       
       def make_doc raw
         @is_html ? ::Nokogiri::HTML(raw) : ::Nokogiri::XML(raw)
       end
       
-      def items path, fields
-        @doc.xpath(path).each do |item|
+      def items item_path, fields
+        @doc.xpath(item_path).each do |item|
           filled_in_fields = {}
           fields.each_pair do |field, field_path|
             selected = item.at_xpath field_path

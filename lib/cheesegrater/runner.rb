@@ -28,11 +28,7 @@ module CheeseGrater
     # single threaded - will have to load db enviroment to save found VOs
     class Single < Base
       
-      def run config
-        
-        loader = Loader.load_scrapers config
-        
-        que = loader.root_scrapers
+      def run que
         
         while que.length
           

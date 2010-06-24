@@ -4,6 +4,7 @@ module CheeseGrater
     
     class << self
       def create_all config
+        return {} unless Hash === config
         config.each_pair.inject([]) do |vos, (name, setup)|
           vos << Vo.new(config.merge({:name => name}))
         end

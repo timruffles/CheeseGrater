@@ -8,7 +8,8 @@ describe CheeseGrater::Response::Xpath do
   before :each do
     setup = YAML.load_file(root + 'fixtures/xpath.yml').keys_to_symbols
     @html = setup[:one]
-    @xpath = Xpath.new @html, true
+    @xpath = Xpath.new
+    @xpath.raw = @html
   end
   
   it "should return items in a way they can be queried" do

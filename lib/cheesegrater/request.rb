@@ -46,7 +46,7 @@ module CheeseGrater
         one_per_request_count = 0
 
         fields.each_pair do |field, setup|
-          if setup.respond_to? :[]
+          if Hash === setup
             value = setup[:value]
             case setup[:type]
 

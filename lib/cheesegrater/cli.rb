@@ -26,7 +26,8 @@ module CheeseGrater
           loader.load_scrapers config
         end
         
-        logger.info "Found #{loader.root_scrapers.length} root scrapers, running  with"
+        logger.info "Found #{loader.root_scrapers.length} root scrapers"
+        runner.run loader.root_scrapers
       
         raise CliError.new("No config file specified") if files.length == 0 
         
@@ -41,7 +42,7 @@ module CheeseGrater
     protected
     
     def runner
-      @runner ||= Runner.create(@options[:runner])
+      @runner ||= Runner.create(@options.runner || 'single')  # todo, why isn't this setting in options?
     end
     
     def logger

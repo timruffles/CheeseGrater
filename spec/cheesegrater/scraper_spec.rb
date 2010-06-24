@@ -35,7 +35,8 @@ describe CheeseGrater::Scraper do
       
       vos = []
       vos << Vo.new({:fields => {:location_code => "./@value"},:related_to => {},:item_path => "//*[@id='location']/*[@value!='-999']"})
-      response = Response::Xpath.new(@fixtures[:one],true)
+      response = Response::Xpath.new
+      response.raw = @fixtures[:one]
       
       results = []
       @scraper.send(:read_response, vos, response, {}) do |scraped|

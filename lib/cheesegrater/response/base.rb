@@ -3,16 +3,11 @@ module CheeseGrater
     class Base
       
       # return items selected by query
-      def items query
+      def items item_path, fields
         
       end
       
-      # return the single value for field in item
-      def field field, item
-        
-      end
-      
-      attr_reader :fields
+      attr_reader :raw
       
     end
   end

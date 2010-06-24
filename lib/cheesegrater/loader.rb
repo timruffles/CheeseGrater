@@ -36,7 +36,7 @@ module CheeseGrater
       roots = []
       scrapers.each_pair do |group, scrapers_in_group|
         scrapers_in_group.each_pair do |key, val|
-          roots << val if val.root
+          roots << val if val.root?
         end
       end
       roots

@@ -7,15 +7,17 @@ module CheeseGrater
                     Response.create(setup[:response]),
                     Vo.create_all(setup[:vos]),
                     Pager.create(setup[:pager]),
+                    setup[:root],
                     related_scrapers
       end
     end
 
-    def initialize requests, response, vos, pager, related_scrapers = {}
+    def initialize requests, response, vos, pager, root, related_scrapers = {}
       @requests         = requests
       @response         = response
       @vos              = vos
       @related_scrapers = related_scrapers
+      @root             = root
       @pager            = pager
     end
 
@@ -23,13 +25,18 @@ module CheeseGrater
 
       make_requests @requests, @pager do |raw_response|
 
-        @response.read(raw_response)
+        @response.raw = raw_response
+        s
         read_response @vos, @response, @related_scrapers do |scraped|
           yield scraped
         end
 
       end
 
+    end
+    
+    def root?
+      @root
     end
 
 
