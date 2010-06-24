@@ -15,7 +15,7 @@ module CheeseGrater
         raise "Run needs to be implemented by subclass"
       end
 
-      attr_accessor :fields, :endpoint
+      attr_accessor :endpoint, :fields
 
     end
   end

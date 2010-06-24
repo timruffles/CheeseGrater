@@ -5,7 +5,7 @@ module CheeseGrater
     class << self
       def create_all config
         config.each_pair.inject([]) do |vos, (name, setup)|
-          vos << Vo.new config.merge({:name => name})
+          vos << Vo.new(config.merge({:name => name}))
         end
       end
     end
@@ -15,9 +15,10 @@ module CheeseGrater
       @fields     = setup[:fields]
       @name       = setup[:name]
       @handler    = setup[:handler]
+      @item_path  = setup[:item_path]
     end
     
-    attr_reader :name, :handler
+    attr_reader :name, :handler, :item_path
     attr_accessor :fields, :related_to
   end
 end

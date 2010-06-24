@@ -58,10 +58,10 @@ module CheeseGrater
     def read_response vos, response, related_scrapers
       # retrieve all items and yield vos, and any related vos
       vos.each do |vo|
-        response.items(vo.item_path, fields) do |fields|
-
-          vo.fields = fields
-          yield vo
+        response.items(vo.item_path, vo.fields) do |fields|
+          to_yield = vo.dup
+          to_yield.fields = fields
+          yield to_yield
 
         end
 

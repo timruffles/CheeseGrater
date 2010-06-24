@@ -1,10 +1,13 @@
 root = File.dirname(__FILE__) 
 require root + '/spec_helper'
 
+include CheeseGrater
+
 describe CheeseGrater::Scraper do
   
   before :each do
     @scraper = CheeseGrater::Scraper.new 1,2,3,4
+    @fixtures = YAML.load_file(root + '/fixtures/scraper.yml').keys_to_symbols
   end
   
   it "should run requests and yield the raw responses" do
@@ -26,10 +29,25 @@ describe CheeseGrater::Scraper do
 
   end
   
-  context "integration"
+  context "integration" do
   
     it "should yield vos and scrapers" do
       
+      vos = []
+      vos << Vo.new({:fields => {:location_code => "./@value"},:related_to => {},:item_path => "//*[@id='location']/*[@value!='-999']"})
+      response = Response::Xpath.new(@fixtures[:one],true)
+      
+      results = []
+      @scraper.send(:read_response, vos, response, {}) do |scraped|
+        results << scraped
+      end
+      
+      total_of_vals = results.inject(0) do |acc, vo|
+        acc += vo.fields[:location_code].to_i
+      end
+      
+      results.length.should > 0
+      total_of_vals.should == 110
     end
     
   end
