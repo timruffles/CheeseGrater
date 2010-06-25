@@ -6,6 +6,7 @@ module CheeseGrater
       include Logging
       
       def raw= doc
+        @raw = doc.dup
         @doc = make_doc(doc)
       end
       

@@ -23,3 +23,4 @@ module CheeseGrater
     attr_accessor :fields, :related_to
   end
 end
+

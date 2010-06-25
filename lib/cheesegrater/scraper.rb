@@ -40,6 +40,8 @@ module CheeseGrater
       @is_root
     end
     
+    attr_accessor :requests, :response, :vos, :pager, :is_root, :related_scrapers, :scrapers
+    
     
     protected
 
@@ -63,6 +65,7 @@ module CheeseGrater
 
     # read all items from response
     def read_response vos, response, related_scrapers, scrapers
+      
       # retrieve all items and yield vos, and any related vos
       vos.each do |vo|
         response.items(vo.item_path, vo.fields) do |fields|
@@ -89,13 +92,18 @@ module CheeseGrater
       
       # TODO this is an interesting bit - how should this scraper be setup and run,
       # at the mo, a hash is passed in and the scraper sets it up
-       # create and yield all related scrapers
+      # create and yield all related scrapers
+      
+      # TODO the way the requests are made is making this a big fugly - the requests.each etc, is it
+      # okay to assume it's appropriate to do that? probably in this context: request with multiple 
+      # dates, for instance, will still need to request all dates to access the full dataset with the
+      # additional filter scraped from the response
       scrapers.each_pair do |name, scraper_setup|
         
-        scraper = related_scrapers[name]
+        scraper = related_scrapers[name].dup
         
         response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|
-          scraper.request.fields.merge!(fields)
+          scraper.requests.each {|request| request.fields.merge!(fields)}
           yield scraper
         end
 

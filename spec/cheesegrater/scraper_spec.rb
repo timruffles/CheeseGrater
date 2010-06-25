@@ -33,12 +33,12 @@ describe CheeseGrater::Scraper do
     
     it "should yield scrapers" do
       
-      response = Response::Xpath.new
+      response = Response::XpathHtml.new
       response.raw = @fixtures[:scrapers]
       
       related_scrapers = {
-        'ScraperOne' => Scraper.new(:requests         => Request::Base.new({:fields=>{},:endpoint=>'x'}),
-                                    :response         => Response::Base.new,
+        'ScraperOne' => Scraper.new(:requests         => [Request::Base.new({:fields=>{},:endpoint=>'x'})],
+                                    :response         => Response::XpathHtml.new,
                                     :vos              => Vo.new({}),
                                     :pager            => Pager.new,
                                     :is_root          => true,
@@ -47,7 +47,7 @@ describe CheeseGrater::Scraper do
       }
       
       scrapers = {
-        'ScraperOne' => {:item_path => '//div', :fields => {:a=>'./@name'}}
+        'ScraperOne' => {:item_path => "//*[@id='eventDate']//*[@value!=99]", :fields => {:date=>"./@value"}}
       }
       
       results = []
@@ -56,11 +56,13 @@ describe CheeseGrater::Scraper do
       end
       
       total_of_vals = results.inject(0) do |acc, vo|
-        acc += vo.fields[:location_code].to_i
+        acc += vo.requests.inject(0) {|acc, r| acc += r.fields[:date].to_i}
       end
       
-      results.length.should > 0
-      total_of_vals.should == 110
+      results.length.should == 18
+      total_of_vals.should == 153
+      
+      
     end
   
     it "should yield vos" do
