@@ -12,7 +12,7 @@ module CheeseGrater
     end
     
     def initialize setup
-      @related_to = setup[:related_to]
+      @related_to = setup[:related_to] || {}
       @fields     = setup[:fields]
       @name       = setup[:name]
       @handler    = setup[:handler]

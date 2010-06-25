@@ -1,15 +1,17 @@
 module CheeseGrater
   class Scraper
+    
+    include Logging
 
     class << self
       def create setup, related_scrapers = {}
-        Scraper.new :requests         => Request.create_all(setup[:request]),
-                    :response         => Response.create(setup[:response]),
-                    :vos              => Vo.create_all(setup[:response][:vos]),
-                    :pager            => Pager.create(setup[:pager]),
-                    :is_root          => setup[:root],
-                    :related_scrapers => related_scrapers,
-                    :scrapers         => setup[:scrapers]
+          Scraper.new :requests         => Request.create_all(setup[:request]),
+                      :response         => Response.create(setup[:response]),
+                      :vos              => Vo.create_all(setup[:response][:vos]),
+                      :pager            => Pager.create(setup[:pager]),
+                      :is_root          => setup[:root],
+                      :related_scrapers => related_scrapers,
+                      :scrapers         => setup[:scrapers]
       end
     end
 
@@ -17,14 +19,16 @@ module CheeseGrater
       @requests         = setup[:requests]
       @response         = setup[:response]
       @vos              = setup[:vos]
-      @related_scrapers = setup[:related_scrapers]
-      @is_root          = setup[:is_root]
-      @pager            = setup[:pager]
-      @scrapers         = setup[:scrapers]
+      @related_scrapers = setup[:related_scrapers] || {}
+      @is_root          = setup[:is_root] 
+      @pager            = setup[:pager] || {}
+      @scrapers         = setup[:scrapers] || {}
     end
 
     def run
-
+      
+      logger.info "#{self.class} running"
+      
       make_requests @requests, @pager do |raw_response|
         @response.raw = raw_response
         
@@ -98,11 +102,20 @@ module CheeseGrater
       # okay to assume it's appropriate to do that? probably in this context: request with multiple 
       # dates, for instance, will still need to request all dates to access the full dataset with the
       # additional filter scraped from the response
+      
       scrapers.each_pair do |name, scraper_setup|
         
         response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|
-          scraper = related_scrapers[name].deep_clone
-          scraper.requests.each {|request| request.fields.merge!(fields)}
+          # because we can't deep clone the scraper (it has a class method from somewhere), we need to make 
+          # a shallow copy and shallow copy lots of bits we need to change
+          scraper = related_scrapers[name].dup
+          scraper.requests = scraper.requests.map {|s| s.dup}
+          
+          # TODO it should make request fields into sets (eg, no repeated fields)
+          scraper.requests.each do |request| 
+            tmp = request.fields.dup
+            request.fields = tmp.merge(fields)
+          end
           yield scraper
         end
 

@@ -29,17 +29,19 @@ module CheeseGrater
     class Single < Base
       
       def run que
-        
+        vos = []
         while task = que.shift
           
-          #puts task.to_yaml if task.respond_to? :fields
-          #next if task.respond_to? :fields
+          vos << task if task.respond_to? :fields
+          next if task.respond_to? :fields
           
           task.run do |yielded|
             que << yielded
           end
           
         end
+        
+        puts vos.to_yaml
       end
       
     end

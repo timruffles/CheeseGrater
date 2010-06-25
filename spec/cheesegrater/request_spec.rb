@@ -24,6 +24,8 @@ describe CheeseGrater::Request do
        }.should(raise_error(CheeseGrater::Request::InvalidRequestFormat))
   end
   
+  it "should make request fields into sets (eg, no repeated fields)"
+  
   it "should format csv type fields correctly" do
     
     additional = []

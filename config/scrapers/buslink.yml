@@ -1,7 +1,7 @@
 BusinessLink:
     request:
         # format
-        format: querystring
+        format: Querystring
     EventDateSearch:
         #should run before other scrapers:
         root: root
@@ -10,19 +10,18 @@ BusinessLink:
             fields:
                 site: 210
         response:
-            type: xpathhtml
-            scrapers:
-                BusinessLink::EventsOnDate:
-                    # used * not option as for some reason it can't find the dev tags
-                    item_path: //*[@id='eventDate']//*[value!=99]
-                    # fields relative to item xpath (use . to query from that node, .. from one up etc)
-                    fields:
-                        date: ./@value
-                    
+            type: XpathHtml
+        scrapers:
+            EventsOnDate:
+                # used * not option as for some reason it can't find the dev tags
+                item_path: //*[@id='eventDate']//*[@value!=99]
+                # fields relative to item xpath (use . to query from that node, .. from one up etc)
+                fields:
+                    date: ./@value
     # Scrape all events on specific date (spawened by EventDateSearch)
     EventsOnDate:
         request:
-            format: querystring
+            format: Querystring
             endpoint: http://online.businesslink.gov.uk/bdotg/action/eventsearch
             fields:
                 keywords:
@@ -30,7 +29,7 @@ BusinessLink:
                 submit: Go
                 date: 1 # mixed in from EventDateSearch scraper
         response:
-            type: xpathhtml
+            type: XpathHtml
             vos:
                 Event:
                     item_path: //*[@id='add_maincontent']/div[1]/h3

@@ -1,0 +1,1869 @@
+ INFO graterlog: Loaded buslink.yml
+ INFO graterlog: Loading scraper BusinessLink::EventDateSearch
+ INFO graterlog: Loading scraper BusinessLink::EventsOnDate
+ INFO graterlog: Found 1 root scrapers
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 29704 characters long from http://www.businesslink.gov.uk/bdotg/action/event?site=210
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 23 items with xpath //*[@id='eventDate']//*[@value!=99]
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 36102 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=0&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 10 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 35859 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=1&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 10 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 35154 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=2&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 10 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 35244 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=3&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 10 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 35224 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=4&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 10 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 35475 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=5&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 10 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 34608 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=6&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 10 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 27172 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=7&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 7 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 27116 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=8&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 7 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 28580 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=9&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 8 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 15825 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=10&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 15823 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=11&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 15824 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=12&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 15824 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=13&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 15826 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=14&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 15829 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=15&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 15827 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=16&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 15828 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=17&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 35475 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=5&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 10 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 15825 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=10&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 15829 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=15&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 3013 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=20&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+ INFO graterlog: CheeseGrater::Scraper running
+ INFO graterlog: CheeseGrater::Request::Querystring received a response 3013 characters long from http://online.businesslink.gov.uk/bdotg/action/eventsearch?date=30&submit=Go&keywords=&location=-999
+ INFO graterlog: CheeseGrater::Response::XpathHtml got 0 items with xpath //*[@id='add_maincontent']/div[1]/h3
+--- 
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Business for Breakfast helps you to uncover your hidden network and nurture and build it to a new level of support,action and results. The secrets of success lie not in what you do but how you do it and how well you work with others along the way.
+    :people: 
+    :start_date: 1 Jun 2010 - 1 Jun 2012
+    :url: http://www.bforb.com/index.php?pag=group_details&group_id=70&p=the-abbey-hill-hotel.html
+    :telephone: 
+    :cost: You are advised to contact the group to confirm venue, costs and availability
+    :title: "Milton Keynes Networking:  Business for Breakfast"
+    :notes: All industries
+    :email: 
+    :location: "Monks Way,  Two Mile Ash, Milton Keynes "
+    :target_audience: Business owners and representatives
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: &id001 {}
+
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 28 Jun 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: London Road, Twickenham
+    :target_audience: New employers or new/inexperienced payroll staff
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 29 Jun 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/central.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Crown Gate, Harlow
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 29 Jun 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Regent Hill, Brighton
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Hosted by experienced advisers, these friendly sessions take place regularly at key locations throughout the South West. Sessions cover many of the main issues involved in running a business, as well as answer your questions and point you in the right direction for further help and information - including training opportunities.
+    :people: 
+    :start_date: 17 Jun - 15 Sep 2010
+    :url: http://online.businesslink.gov.uk/bdotg/action/eventDescription?site=106&r.lc=en&type=EVENTS&itemId=5000979339
+    :telephone: 
+    :cost: Fully Subsidised
+    :title: Start up awareness session - South West
+    :notes: 
+    :email: 
+    :location: South West
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |+
+      Products and services are seldom unique, business owners must now differentiate themselves through the delivery of exceptional customer experience. This interactive half-day session is designed to help businesses understand their customers better and what can be done to improve their service offer and subsequently their own sales and profit performance  
+      
+      
+      
+    :people: 
+    :start_date: 29 Jun 2010
+    :url: http://apps.rebsis.com/evocos/ClientApps/Silverbear.Web.EDMS/public/default.aspx?tabid=36&id=1765&p=&orgId=1&guid=6709c307-4583-4de2-9410-362686c912c4
+    :telephone: 
+    :cost: Free
+    :title: Customer engagement and retention
+    :notes: 
+    :email: 
+    :location: The Lion Hotel, Bridge Street, Belper, Derbyshire
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Anyone who has some control over premises must take reasonable steps to reduce the risk from fire and make sure people can safely escape if there is a fire.  Speakers from the Fire Service will explain the requirements of Fire safety legislation and give practical information on how to help comply with this
+    :people: 
+    :start_date: 29 Jun 2010
+    :url: http://www.business-sustain.com/seminars-workshops/index.aspx
+    :telephone: 
+    :cost: Free
+    :title: Health and Safety Legislation - Half Day
+    :notes: 
+    :email: 
+    :location: The Methodist Church, Coventry Central Hall
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |+
+      Products and services are seldom unique, business owners must now differentiate themselves through the delivery of exceptional customer experience. This interactive half-day session is designed to help businesses understand their customers better and what can be done to improve their service offer and subsequently their own sales and profit performance  
+      
+      
+      
+      
+    :people: 
+    :start_date: 30 Jun 2010
+    :url: http://apps.rebsis.com/evocos/ClientApps/Silverbear.Web.EDMS/public/default.aspx?tabid=36&id=1766&p=&orgId=1&guid=6903b409-878d-4491-92ae-b46f8f7657c3
+    :telephone: 
+    :cost: Free
+    :title: Customer engagement and retention
+    :notes: 
+    :email: 
+    :location: Rosliston Forestry Centre, Burton Road, Rosliston, Swadlincote, Derbyshire
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 28 Jun 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: London Road, Twickenham
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 30 Jun 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: New North Road, Exeter
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 1 Jul 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Barrington Road, Worthing
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop will take you through the process of preparing and analysing financial statements and provides information on how to prepare cash flow forecasts, profit &amp; loss accounts and balance sheets.
+      
+      The workshop demonstrates how using and understanding these tools can help you to control your business finances.
+    :people: 
+    :start_date: 2 Jul 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W5_-_EVT8153_-_VW_-_020710.aspx
+    :telephone: 
+    :cost: Free
+    :title: Financial Planning for Start-Ups
+    :notes: 
+    :email: 
+    :location: Beechwood HouseLocated Inside Beechwood ParkChristchurch RoadNewport, Newport,
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop will take you through the process of preparing and analysing financial statements and provides information on how to prepare cash flow forecasts, profit &amp; loss accounts and balance sheets.
+      
+      The workshop demonstrates how using and understanding these tools can help you to control your business finances.
+    :people: 
+    :start_date: 2 Jul 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W5_-_EVT8445_-_VW_-_020710.aspx
+    :telephone: 
+    :cost: Free
+    :title: Financial Planning for Start-Ups
+    :notes: 
+    :email: 
+    :location: 23 Park PlaceCardiff, Cardiff,
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop will take you through the process of preparing and analysing financial statements and provides information on how to prepare cash flow forecasts, profit &amp; loss accounts and balance sheets.
+      
+      The workshop demonstrates how using and understanding these tools can help you to control your business finances.
+    :people: 
+    :start_date: 6 Jul 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W5_-_EVT8237_-_BCNPT_-_060710.aspx
+    :telephone: 
+    :cost: Free
+    :title: Financial Planning for Start-Ups
+    :notes: 
+    :email: 
+    :location: Britannic Way, Llandarcy, Neath, Neath Port Talbot
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop will take you through the process of preparing and analysing financial statements and provides information on how to prepare cash flow forecasts, profit &amp; loss accounts and balance sheets.
+      
+      The workshop demonstrates how using and understanding these tools can help you to control your business finances.
+    :people: 
+    :start_date: 9 Jul 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W5_-_EVT8262_-_VW_-_090710.aspx
+    :telephone: 
+    :cost: Free
+    :title: Financial Planning for Start-Ups
+    :notes: 
+    :email: 
+    :location: Tredomen Business &amp; Technology Centre, Tredomen Business Park, Tredomen
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 12 Jul 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Watlington Street, Reading
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop provides key information on the operations of a business including the resources required, systems and procedures, production, health and safety and quality.
+      
+      This workshop also provides guidance on other areas such as the advantages and disadvantages of working from home and environmental issues.
+    :people: 
+    :start_date: 14 Jul 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W3_-_EVT8233_-_ACM_-_140710.aspx
+    :telephone: 
+    :cost: Free
+    :title: Business Operations for Start-Ups
+    :notes: 
+    :email: 
+    :location: Llys Goferydd, Llangefni, Anglesey
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop will take you through the process of preparing and analysing financial statements and provides information on how to prepare cash flow forecasts, profit &amp; loss accounts and balance sheets.
+      
+      The workshop demonstrates how using and understanding these tools can help you to control your business finances.
+    :people: 
+    :start_date: 15 Jul 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W5_-_EVT8239_-_ACM_-_150710.aspx
+    :telephone: 
+    :cost: Free
+    :title: Financial Planning for Start-Ups
+    :notes: 
+    :email: 
+    :location: Llys Goferydd, Llangefni, Anglesey
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 15 Jul 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Thames Street, Staines
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop provides key information on the operations of a business including the resources required, systems and procedures, production, health and safety and quality.
+      
+      This workshop also provides guidance on other areas such as the advantages and disadvantages of working from home and environmental issues.
+    :people: 
+    :start_date: 20 Jul 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W3_-_EVT8298_-_BCNPT_-_200710.aspx
+    :telephone: 
+    :cost: Free
+    :title: Business Operations for Start-Ups
+    :notes: 
+    :email: 
+    :location: Britannic Way, Llandarcy, Neath, Neath Port Talbot
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop provides key information on the operations of a business including the resources required, systems and procedures, production, health and safety and quality.
+      
+      This workshop also provides guidance on other areas such as the advantages and disadvantages of working from home and environmental issues.
+    :people: 
+    :start_date: 2 Aug 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W3_-_EVT8180_-_PBI_-_020810.aspx
+    :telephone: 
+    :cost: Free
+    :title: Business Operations for Start-Ups
+    :notes: 
+    :email: 
+    :location: Unit 3  Victory House, Milford Haven, Pembrokeshire
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 5 Aug 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Station Road, Redruth
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop will take you through the process of preparing and analysing financial statements and provides information on how to prepare cash flow forecasts, profit &amp; loss accounts and balance sheets.
+      
+      The workshop demonstrates how using and understanding these tools can help you to control your business finances.
+    :people: 
+    :start_date: 6 Aug 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W5_-_EVT8393_-_VW_-_060810.aspx
+    :telephone: 
+    :cost: Free
+    :title: Financial Planning for Start-Ups
+    :notes: 
+    :email: 
+    :location: Tredomen Business &amp; Technology CentreTredomen Business Park, Caerphilly
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop provides key information on the operations of a business including the resources required, systems and procedures, production, health and safety and quality.
+      
+      This workshop also provides guidance on other areas such as the advantages and disadvantages of working from home and environmental issues.
+    :people: 
+    :start_date: 12 Aug 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W3_-_EVT8397_-_VW_-_120810.aspx
+    :telephone: 
+    :cost: Free
+    :title: Business Operations for Start-Ups
+    :notes: 
+    :email: 
+    :location: 23 Park PlaceCardiff, Cardiff,
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop provides key information on the operations of a business including the resources required, systems and procedures, production, health and safety and quality.
+      
+      This workshop also provides guidance on other areas such as the advantages and disadvantages of working from home and environmental issues.
+    :people: 
+    :start_date: 16 Aug 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W3_-_EVT8195_-_BCS_-_160810.aspx
+    :telephone: 
+    :cost: Free
+    :title: Business Operations for Start-Ups
+    :notes: 
+    :email: 
+    :location: 11b St Mary's Square, Swansea,
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop provides key information on the operations of a business including the resources required, systems and procedures, production, health and safety and quality.
+      
+      This workshop also provides guidance on other areas such as the advantages and disadvantages of working from home and environmental issues.
+    :people: 
+    :start_date: 16 Aug 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W3_-_EVT8186_-_PBI_-_160810.aspx
+    :telephone: 
+    :cost: Free
+    :title: Business Operations for Start-Ups
+    :notes: 
+    :email: 
+    :location: Unit 3  Victory House, Milford Haven, Pembrokeshire
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop provides key information on the operations of a business including the resources required, systems and procedures, production, health and safety and quality.
+      
+      This workshop also provides guidance on other areas such as the advantages and disadvantages of working from home and environmental issues.
+    :people: 
+    :start_date: 17 Aug 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W3_-_EVT8436_-_NGE_-_170810.aspx
+    :telephone: 
+    :cost: Free
+    :title: Business Operations for Start-Ups
+    :notes: 
+    :email: 
+    :location: Panteg Way, Pontypool, Torfaen
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop will take you through the process of preparing and analysing financial statements and provides information on how to prepare cash flow forecasts, profit &amp; loss accounts and balance sheets.
+      
+      The workshop demonstrates how using and understanding these tools can help you to control your business finances.
+    :people: 
+    :start_date: 17 Aug 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W5_-_EVT8306_-_TGAL_-_170810.aspx
+    :telephone: 
+    :cost: Free
+    :title: Financial Planning for Start-Ups
+    :notes: 
+    :email: 
+    :location: Market Approach, Brecon, Powys
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop provides key information on the operations of a business including the resources required, systems and procedures, production, health and safety and quality.
+      
+      This workshop also provides guidance on other areas such as the advantages and disadvantages of working from home and environmental issues.
+    :people: 
+    :start_date: 18 Aug 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W3_-_EVT8246_-_ACM_-_180810.aspx
+    :telephone: 
+    :cost: Free
+    :title: Business Operations for Start-Ups
+    :notes: 
+    :email: 
+    :location: Llys Goferydd, Llangefni, Anglesey
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: |-
+      This workshop will take you through the process of preparing and analysing financial statements and provides information on how to prepare cash flow forecasts, profit &amp; loss accounts and balance sheets.
+      
+      The workshop demonstrates how using and understanding these tools can help you to control your business finances.
+    :people: 
+    :start_date: 18 Aug 2010
+    :url: http://ms.fs4b.wales.gov.uk/business_events_wales/events/w-1/W5_-_EVT8307_-_TGAL_-_180810.aspx
+    :telephone: 
+    :cost: Free
+    :title: Financial Planning for Start-Ups
+    :notes: 
+    :email: 
+    :location: Market Approach, Brecon, Powys
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 2 Sep 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Corporation Street, Taunton
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 3 Sep 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Regent Hill, Brighton
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 8 Sep 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Kingsteignton Road, Newton Abbot
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 10 Sep 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Duke Street, Woking
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 14 Sep 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Station Road, Redruth
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 23 Sep 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Barrington Road, Worthing
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 30 Sep 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Oxford Road, Bournemouth
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Social Media is fundamentally changing the internet and the way we use it. The technologies are old however the applications and adoptions are new. These changes are as important for business as for anyone else. Social Media offers businesses a whole new way of reaching and interacting with your customers.
+    :people: 
+    :start_date: 16 Sep 2010
+    :url: http://www.businesslink.gov.uk/bdotg/action/eventDescription?site=202&r.lc=en&type=EVENTS&itemId=5001598086
+    :telephone: 
+    :cost: Free
+    :title: Introduction to Social Media
+    :notes: 
+    :email: 
+    :location: George House, 36 North Hanover Street, GLASGOW G1 2AD
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 6 Sep 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/central.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: St George's Way, Stevenage
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 10 Sep 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: Brest Road, Plymouth
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 4 Oct 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Castle Street, High Wycombe
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 6 Oct 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Barrington Road, Worthing
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 7 Oct 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Northern Road, Cosham
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 8 Oct 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Romsey Road, Southampton
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 14 Oct 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Southgate Street, Gloucester
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 20 Oct 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Oxford Road, Bournemouth
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 22 Oct 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: London Road, Twickenham
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 26 Oct 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Temple Back, Bristol
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 4 Oct 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: Romsey Road, Southampton
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 6 Oct 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: Temple Back, Bristol
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 1 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: London Road, Twickenham
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 4 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Oxford Road, Bournemouth
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 4 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Castle Street, High Wycombe
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 23 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Northern Road, Cosham
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 5 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: London Road, Twickenham
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 11 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: Castle Street, High Wycombe
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 25 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: Northern Road, Cosham
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 25 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: Oxford Road, Bournemouth
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event covers how to register for HMRC online services, an introduction to what you can do online and how to get the best from the service. It will explain how to file employee starter and leaver forms and employer annual returns online. Please note this event does not cover online services for self assesment.
+    :people: 
+    :start_date: 23 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Do it Online for Employers
+    :notes: All industries
+    :email: 
+    :location: Oxford Road, Bournemouth
+    :target_audience: Employers and payroll staff dealing with online PAYE and/or VAT returns
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop will help you use VAT correctly in your business.  It explains what VAT is, how it works and what to do once you are registered for VAT. You will learn how to account for VAT with the standard method, correct mistakes, claim back VAT on expenses before registration, and complete a VAT return online.  The other VAT schemes available will also be explained.
+    :people: 
+    :start_date: 4 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: How VAT Works
+    :notes: All industries
+    :email: 
+    :location: Duke Street, Woking
+    :target_audience: Newly registered businesses and those intending to register for VAT
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 6 Dec 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Castle Street, High Wycombe
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 13 Dec 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: Castle Street, High Wycombe
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: ""
+    :people: 
+    :start_date: 2 Dec 2010
+    :url: http://online.businesslink.gov.uk/bdotg/action/eventDescription?site=106&r.lc=en&type=EVENTS&itemId=5001587345
+    :telephone: 
+    :cost: Free
+    :title: Business Finance Options - the choices simplified - 02 Dec
+    :notes: 
+    :email: 
+    :location: "The Corsley Centre, Corsley nr Warminster BA12 7QF "
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: ""
+    :people: 
+    :start_date: 9 Dec 2010
+    :url: http://online.businesslink.gov.uk/bdotg/action/eventDescription?site=106&r.lc=en&type=EVENTS&itemId=5001587367
+    :telephone: 
+    :cost: Free
+    :title: Business Finance Options - the choices simplified - 09 Dec
+    :notes: 
+    :email: 
+    :location: Chewton Place, Chewton Road, Keynsham, Bristol BS31 2SX
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop will help you use VAT correctly in your business.  It explains what VAT is, how it works and what to do once you are registered for VAT. You will learn how to account for VAT with the standard method, correct mistakes, claim back VAT on expenses before registration, and complete a VAT return online.  The other VAT schemes available will also be explained.
+    :people: 
+    :start_date: 1 Dec 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: How VAT Works
+    :notes: All industries
+    :email: 
+    :location: Romsey Road, Southampton
+    :target_audience: Newly registered businesses and those intending to register for VAT
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop will help you use VAT correctly in your business.  It explains what VAT is, how it works and what to do once you are registered for VAT. You will learn how to account for VAT with the standard method, correct mistakes, claim back VAT on expenses before registration, and complete a VAT return online.  The other VAT schemes available will also be explained.
+    :people: 
+    :start_date: 9 Dec 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: How VAT Works
+    :notes: All industries
+    :email: 
+    :location: Duke Street, Woking
+    :target_audience: Newly registered businesses and those intending to register for VAT
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: ""
+    :people: 
+    :start_date: 7 Dec 2010
+    :url: http://online.businesslink.gov.uk/bdotg/action/eventDescription?site=106&r.lc=en&type=EVENTS&itemId=5001538105
+    :telephone: 
+    :cost: "\xC2\xA310 per person"
+    :title: Salisbury Breakfast Club - 7 Dec
+    :notes: 
+    :email: 
+    :location: Grasmere House Hotel, Salisbury SP2 8JN
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: It is essential to have a realistic, working business plan when you're starting up a business. This workshop shows you how to create a robust business plan
+    :people: 
+    :start_date: 1 Dec 2010
+    :url: http://www.businesslink.gov.uk/bdotg/action/eventDescription?site=202&r.lc=en&type=EVENTS&itemId=5001593600
+    :telephone: 
+    :cost: Free
+    :title: Personal and Business Planning - Start Up Workshop
+    :notes: 
+    :email: 
+    :location: The Byre Theatre of St. Andrews, Abbey Street, ST. ANDREWS KY16 9LA
+    :target_audience: All industries
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will show you what business expenses you can claim and explain about Capital Allowances and how they give your business tax relief.
+    :people: 
+    :start_date: 1 Dec 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Business Expenses and Capital Allowances for the Self-Employed
+    :notes: All industries
+    :email: 
+    :location: Castle Street, High Wycombe
+    :target_audience: Anyone who has just started their own business and is self-employed
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This is a comprehensive one day introduction on effectively managing health and safety in the workplace.
+    :people: 
+    :start_date: 2 Dec 2010
+    :url: http://www.cosensa.co.uk/CourseInformation.php?CourseID=9&CourseTypeID=3
+    :telephone: 
+    :cost: "\xC2\xA3275 + VAT per person"
+    :title: Managing Safety
+    :notes: All industries
+    :email: 
+    :location: Holiday Inn, Ormeau Ave, Belfast
+    :target_audience: Managers and supervisors throughout public and private sector organisations.
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 11 Jan 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, 5th Floor, Timber Quay, 100-114 Strand Road, Londonderry
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 12 Jan 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, Drumalane Mill, The Quays, Newry
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 12 Jan 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, Bedford Square, Bedford Street, Belfast
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 13 Jan 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices Offices, Clarence House, 86 Mill Street, Ballymena
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 13 Jan 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, Kevlin Buildings, 47 Kevlin Avenue, Omagh
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop will cover concerns around a contract, what the law says about contracts and how contracts link to policies in a company handbook.
+    :people: 
+    :start_date: 20 Jan 2011
+    :url: http://www.totalhumanresources.com/employmentlawtraining.html
+    :telephone: 
+    :cost: Free
+    :title: Contracts of Employment
+    :notes: All industries
+    :email: 
+    :location: Aylesbury Enterprise and Innovation Centre
+    :target_audience: All businesses
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: If you are considering starting up a social enterprise and are looking for a clear understanding of why it is the business model of choice for socially- and environmentally-minded people, then the First Steps in Social Enterprise workshop is for you
+    :people: 
+    :start_date: 20 Jan 2011
+    :url: http://online.businesslink.gov.uk/bdotg/action/eventDescription?site=140&r.lc=en&type=EVENTS&itemId=5001559739
+    :telephone: 
+    :cost: Free
+    :title: First Steps in Social Enterprise
+    :notes: All industries
+    :email: 
+    :location: Voluntary Action Rutland, Rutland Volunteer Centre (Rear of The Rutland College)
+    :target_audience: People interested in social enterprise or thinking about setting one up
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 8 Feb 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, 5th Floor, Timber Quay, 100-114 Strand Road, Londonderry
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 9 Feb 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, Drumalane Mill, The Quays, Newry
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 9 Feb 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, Bedford Square, Bedford Street, Belfast
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 10 Feb 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, Kevlin Buildings, 47 Kevlin Avenue, Omagh
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 10 Feb 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices Offices, Clarence House, 86 Mill Street, Ballymena
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event brings together a team of experts who can provide advice and support on a range of subjects from starting a business through to growth and expansion.
+    :people: 
+    :start_date: 10 Feb 2011
+    :url: http://www.businesslink.gov.uk/advicedays
+    :telephone: 
+    :cost: Free
+    :title: Business Advice Open Day
+    :notes: All industries
+    :email: 
+    :location: Wetherby Racecourse
+    :target_audience: Anybody who is thinking of starting a business, or who wants to grow an existing business
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop will cover concerns around a contract, what the law says about contracts and how contracts link to policies in a company handbook.
+    :people: 
+    :start_date: 17 Feb 2011
+    :url: http://www.totalhumanresources.com/employmentlawtraining.html
+    :telephone: 
+    :cost: Free
+    :title: Contracts of Employment
+    :notes: All industries
+    :email: 
+    :location: Aylesbury Enterprise and Innovation Centre
+    :target_audience: All businesses
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event brings together a team of experts who can provide advice and support on a range of subjects from starting a business through to growth and expansion.
+    :people: 
+    :start_date: 3 Mar 2011
+    :url: http://www.businesslink.gov.uk/advicedays
+    :telephone: 
+    :cost: Free
+    :title: Business Advice Open Day
+    :notes: All industries
+    :email: 
+    :location: Ramada Hotel, Belfast
+    :target_audience: Anybody who is thinking of starting a business, or who wants to grow an existing business
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 8 Mar 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, 5th Floor, Timber Quay, 100-114 Strand Road, Londonderry
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 9 Mar 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, Bedford Square, Bedford Street, Belfast
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 9 Mar 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, Drumalane Mill, The Quays, Newry
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 10 Mar 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices Offices, Clarence House, 86 Mill Street, Ballymena
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: Monthly Design Clinics held in Invest Northern Ireland's Regional Offices. Open to all businesses free of charge.
+    :people: 
+    :start_date: 10 Mar 2011
+    :url: http://www.investni.com/design
+    :telephone: 
+    :cost: Free
+    :title: Design Advice Clinic
+    :notes: All industries
+    :email: 
+    :location: Invest NI Offices, Kevlin Buildings, 47 Kevlin Avenue, Omagh
+    :target_audience: All businesses interested in growing profits through design
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop will cover concerns around a contract, what the law says about contracts and how contracts link to policies in a company handbook.
+    :people: 
+    :start_date: 17 Mar 2011
+    :url: http://www.totalhumanresources.com/employmentlawtraining.html
+    :telephone: 
+    :cost: Free
+    :title: Contracts of Employment
+    :notes: All industries
+    :email: 
+    :location: Aylesbury Enterprise and Innovation Centre
+    :target_audience: All businesses
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event brings together a team of experts who can provide advice and support on a range of subjects from starting a business through to growth and expansion.
+    :people: 
+    :start_date: 24 Mar 2011
+    :url: http://www.businesslink.gov.uk/advicedays
+    :telephone: 
+    :cost: Free
+    :title: Business Advice Open Day
+    :notes: All industries
+    :email: 
+    :location: Norwich City Football Club
+    :target_audience: Anybody who is thinking of starting a business, or who wants to grow an existing business
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 1 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: London Road, Twickenham
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 4 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Oxford Road, Bournemouth
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 4 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Castle Street, High Wycombe
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :people: 
+    :start_date: 23 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Becoming an Employer - What You Need to Know
+    :notes: All industries
+    :email: 
+    :location: Northern Road, Cosham
+    :target_audience: "New employers or new/inexperienced payroll staff  "
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 5 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: London Road, Twickenham
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 11 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: Castle Street, High Wycombe
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 25 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: Northern Road, Cosham
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :people: 
+    :start_date: 25 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+    :notes: All industries
+    :email: 
+    :location: Oxford Road, Bournemouth
+    :target_audience: Employers and staff who will be running the payroll
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This event covers how to register for HMRC online services, an introduction to what you can do online and how to get the best from the service. It will explain how to file employee starter and leaver forms and employer annual returns online. Please note this event does not cover online services for self assesment.
+    :people: 
+    :start_date: 23 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: Do it Online for Employers
+    :notes: All industries
+    :email: 
+    :location: Oxford Road, Bournemouth
+    :target_audience: Employers and payroll staff dealing with online PAYE and/or VAT returns
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001
+- !ruby/object:CheeseGrater::Vo 
+  fields: 
+    :description: This workshop will help you use VAT correctly in your business.  It explains what VAT is, how it works and what to do once you are registered for VAT. You will learn how to account for VAT with the standard method, correct mistakes, claim back VAT on expenses before registration, and complete a VAT return online.  The other VAT schemes available will also be explained.
+    :people: 
+    :start_date: 4 Nov 2010
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :telephone: 
+    :cost: Free
+    :title: How VAT Works
+    :notes: All industries
+    :email: 
+    :location: Duke Street, Woking
+    :target_audience: Newly registered businesses and those intending to register for VAT
+  handler: 
+  item_path: //*[@id='add_maincontent']/div[1]/h3
+  name: :Event
+  related_to: *id001

@@ -10,6 +10,11 @@ describe CheeseGrater::Scraper do
     @fixtures = YAML.load_file(root + '/fixtures/scraper.yml').keys_to_symbols
   end
   
+  it "should be dumpable" do
+    s = CheeseGrater::Scraper.new({})
+    Marshal.dump(s)
+  end
+  
   it "should run requests and yield the raw responses" do
 
     fields = {}
@@ -87,6 +92,7 @@ describe CheeseGrater::Scraper do
       results.length.should > 0
       total_of_vals.should == 110
     end
+    
     
   end
   
