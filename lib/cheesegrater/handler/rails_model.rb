@@ -3,8 +3,9 @@ module CheeseGrater
     class RailsModel
       
       def run 
-        Event.reflect.relationships
-        Event.create Vo.fields
+        
+        model = const_get(Vo.name).build Vo.fields
+        
       end
       
       attr_accessor :vo
