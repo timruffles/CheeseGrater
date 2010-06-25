@@ -12,11 +12,11 @@ module CheeseGrater
     end
     
     def initialize setup
-      @related_to = setup[:related_to]
-      @fields     = setup[:fields]
-      @name       = setup[:name]
-      @handler    = setup[:handler]
-      @item_path  = setup[:item_path]
+      @related_to = setup[:related_to] # list of other VOs that need to be associated on save
+      @fields     = setup[:fields] # class attributes
+      @name       = setup[:name] # class name of VO
+      @handler    = setup[:handler] # what class name to save 
+      @item_path  = setup[:item_path] # xpath/other document query
     end
     
     attr_reader :name, :handler, :item_path
