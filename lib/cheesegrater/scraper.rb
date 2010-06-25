@@ -90,7 +90,7 @@ module CheeseGrater
 
       end
       
-      # TODO this is an interesting bit - how should this scraper be setup and run,
+      # TODO this is an interesting bit - how should this scraper be setup and run?
       # at the mo, a hash is passed in and the scraper sets it up
       # create and yield all related scrapers
       
@@ -101,7 +101,7 @@ module CheeseGrater
       scrapers.each_pair do |name, scraper_setup|
         
         response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|
-          scraper = related_scrapers[name].dup
+          scraper = related_scrapers[name].deep_clone
           scraper.requests.each {|request| request.fields.merge!(fields)}
           yield scraper
         end

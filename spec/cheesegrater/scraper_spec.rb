@@ -37,7 +37,7 @@ describe CheeseGrater::Scraper do
       response.raw = @fixtures[:scrapers]
       
       related_scrapers = {
-        'ScraperOne' => Scraper.new(:requests         => [Request::Base.new({:fields=>{},:endpoint=>'x'})],
+        'ScraperOne' => Scraper.new(:requests         => [Request::Base.new({:fields=>{:app_key => 'blah', :date => 'x'},:endpoint=>'x'})],
                                     :response         => Response::XpathHtml.new,
                                     :vos              => Vo.new({}),
                                     :pager            => Pager.new,
@@ -55,13 +55,16 @@ describe CheeseGrater::Scraper do
         results << scraped
       end
       
-      total_of_vals = results.inject(0) do |acc, vo|
-        acc += vo.requests.inject(0) {|acc, r| acc += r.fields[:date].to_i}
+      total_of_vals = results.inject(0) do |acc, scraper|
+        acc += scraper.requests.inject(0) {|acc, r| acc += r.fields[:date].to_i}
+      end
+      
+      results.select do |scraper|
+        scraper.requests[0].fields[:app_key].should == 'blah'
       end
       
       results.length.should == 18
       total_of_vals.should == 153
-      
       
     end
   

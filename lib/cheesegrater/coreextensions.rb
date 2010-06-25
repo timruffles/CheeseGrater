@@ -1,3 +1,10 @@
+class Object
+  def deep_clone
+    Marshal::load(Marshal.dump(self))
+  end
+  alias :deep_dup :deep_clone
+end
+
 class Hash
   # merge recursively, merging not overriding hash fields
   def deep_merge with_hash
