@@ -2,7 +2,7 @@ module CheeseGrater
   class Scraper
     
     include Logging
-
+    
     class << self
       def create setup, related_scrapers = {}
           Scraper.new :requests         => Request.create_all(setup[:request]),
@@ -106,9 +106,11 @@ module CheeseGrater
       scrapers.each_pair do |name, scraper_setup|
         
         response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|
+          
           # because we can't deep clone the scraper (it has a class method from somewhere), we need to make 
           # a shallow copy and shallow copy lots of bits we need to change
           scraper = related_scrapers[name].dup
+          # p scraper.singleton_methods - but this is empty!!
           scraper.requests = scraper.requests.map {|s| s.dup}
           
           # TODO it should make request fields into sets (eg, no repeated fields)

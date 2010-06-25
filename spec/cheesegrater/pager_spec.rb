@@ -19,7 +19,18 @@ describe CheeseGrater::Pager do
   end
   
   context "only given a next page url" do
-    it "should be able to yield requests until no url is given"
+    it "should be able to yield requests until no url is given" do
+      pager = CheeseGrater::Pager.create({:request => 
+                                            {:next_page_url_path => '//blah'}
+                                        })
+      yielded = []
+      pager.each_page_fields do |fields|
+        fields.should == {}
+        yielded << fields 
+      end
+      
+      yielded.length.should == 1
+    end
   end
   
   context "given a page field" do
