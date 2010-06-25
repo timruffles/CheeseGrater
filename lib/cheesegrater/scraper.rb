@@ -8,7 +8,8 @@ module CheeseGrater
                     :vos              => Vo.create_all(setup[:response][:vos]),
                     :pager            => Pager.create(setup[:pager]),
                     :is_root          => setup[:root],
-                    :related_scrapers => related_scrapers
+                    :related_scrapers => related_scrapers,
+                    :scrapers         => setup[:scrapers]
       end
     end
 
@@ -19,6 +20,7 @@ module CheeseGrater
       @related_scrapers = setup[:related_scrapers]
       @is_root          = setup[:is_root]
       @pager            = setup[:pager]
+      @scrapers         = setup[:scrapers]
     end
 
     def run
@@ -26,7 +28,7 @@ module CheeseGrater
       make_requests @requests, @pager do |raw_response|
         @response.raw = raw_response
         
-        read_response @vos, @response, @related_scrapers do |scraped|
+        read_response @vos, @response, @related_scrapers, @scrapers do |scraped|
           yield scraped
         end
 
@@ -60,7 +62,7 @@ module CheeseGrater
     end
 
     # read all items from response
-    def read_response vos, response, related_scrapers
+    def read_response vos, response, related_scrapers, scrapers
       # retrieve all items and yield vos, and any related vos
       vos.each do |vo|
         response.items(vo.item_path, vo.fields) do |fields|
@@ -75,26 +77,28 @@ module CheeseGrater
          
           scraper = related_scrapers[name]
           #scraper.setup(scraper)
-          related_setup[:fields].each do |field|
-            scraper.request.fields[field] = response.query(field)
+          response.items(vo.item_path, related_setup[:fields]) do |fields|
+            scraper.request.fields.merge!(fields)
+            scraper.related_to = vo
+            yield scraper
           end
-          scraper.related_to = vo
-
-          yield scraper
+          
         end
 
       end
       
+      # TODO this is an interesting bit - how should this scraper be setup and run,
+      # at the mo, a hash is passed in and the scraper sets it up
        # create and yield all related scrapers
-      response[:scrapers].each_pair do |name, related_setup|
+      scrapers.each_pair do |name, scraper_setup|
         
         scraper = related_scrapers[name]
-
-        related_setup[:fields].each do |field|
-          scraper.request.fields[field] = response.query(field)
+        
+        response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|
+          scraper.request.fields.merge!(fields)
+          yield scraper
         end
 
-        yield scraper
       end
     end
 

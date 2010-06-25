@@ -29,10 +29,6 @@ describe CheeseGrater::Scraper do
 
   end
   
-    
-    
-  end
-  
   context "integration" do
     
     it "should yield scrapers" do
@@ -40,8 +36,22 @@ describe CheeseGrater::Scraper do
       response = Response::Xpath.new
       response.raw = @fixtures[:scrapers]
       
+      related_scrapers = {
+        'ScraperOne' => Scraper.new(:requests         => Request::Base.new({:fields=>{},:endpoint=>'x'}),
+                                    :response         => Response::Base.new,
+                                    :vos              => Vo.new({}),
+                                    :pager            => Pager.new,
+                                    :is_root          => true,
+                                    :related_scrapers => {},
+                                    :scrapers         => {})
+      }
+      
+      scrapers = {
+        'ScraperOne' => {:item_path => '//div', :fields => {:a=>'./@name'}}
+      }
+      
       results = []
-      @scraper.send(:read_response, vos, response, {}) do |scraped|
+      @scraper.send(:read_response, [], response, related_scrapers, scrapers) do |scraped|
         results << scraped
       end
       
@@ -74,7 +84,5 @@ describe CheeseGrater::Scraper do
     end
     
   end
-    
-  
   
 end
