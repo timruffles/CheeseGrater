@@ -23,6 +23,3 @@ module CheeseGrater
     attr_accessor :fields, :related_to
   end
 end
-
-Vo.new :fields => {:rails=>:fields},
-       :related_to 
