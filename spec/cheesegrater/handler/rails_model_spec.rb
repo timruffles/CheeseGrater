@@ -1,6 +1,9 @@
 root = File.dirname(__FILE__)
 require root + '/../spec_helper'
 
+# require lib yo!
+include CheeseGrater
+
 describe CheeseGrater::Handler::RailsModel do
   
   before :each do    
