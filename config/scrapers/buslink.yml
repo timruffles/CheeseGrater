@@ -1,0 +1,48 @@
+BusinessLink:
+    request:
+        # format
+        format: querystring
+    EventDateSearch:
+        #should run before other scrapers:
+        root: root
+        request:
+            endpoint: http://www.businesslink.gov.uk/bdotg/action/event
+            fields:
+                site: 210
+        response:
+            type: xpathhtml
+            scrapers:
+                BusinessLink::EventsOnDate:
+                    # used * not option as for some reason it can't find the dev tags
+                    item_path: //*[@id='eventDate']//*[value!=99]
+                    # fields relative to item xpath (use . to query from that node, .. from one up etc)
+                    fields:
+                        date: ./@value
+                    
+    # Scrape all events on specific date (spawened by EventDateSearch)
+    EventsOnDate:
+        request:
+            format: querystring
+            endpoint: http://online.businesslink.gov.uk/bdotg/action/eventsearch
+            fields:
+                keywords:
+                location: -999
+                submit: Go
+                date: 1 # mixed in from EventDateSearch scraper
+        response:
+            type: xpathhtml
+            vos:
+                Event:
+                    item_path: //*[@id='add_maincontent']/div[1]/h3
+                    fields:
+                        title: .
+                        description: ./following-sibling::p[1]
+                        start_date: ./following-sibling::table[1]//tr[1]/td[1]/span
+                        location: ./following-sibling::table[1]//tr[2]/td[1]/span
+                        cost: ./following-sibling::table[1]//tr[5]/td[1]/span
+                        target_audience: ./following-sibling::table[1]//tr[6]/td[1]/span
+                        notes: ./following-sibling::table[1]//tr[7]/td[1]/span
+                        url: ./following-sibling::ul[@class='links'][1]//a[1]/@href
+                        telephone: Unknown
+                        email: Unknown
+                        people: Unknown

@@ -1,0 +1,32 @@
+EventBrite:
+    request:
+        format: querystring
+        fields:
+            app_key: MWY0YWRmMjNhZjFl
+    Events: 
+        root: true
+        request:
+            endpoint: http://www.eventbrite.com/xml/event_search
+            fields:
+                country: GB
+                keywords:
+                    type: csv
+                    value: [business]
+        response:
+            type: xpath
+            vos:
+                Event:
+                    item_path: //event
+                    handler: RailsModel
+                    fields:
+                        title: ./title
+                        description: ./description
+                        location: [./venue/name,./venue/address,./venue/address_2,./venue/city,./venue/postal_code]
+                        start_date: ./start_date
+                        url: ./url
+                        people: Unknown
+                        notes: Unknown
+                    related_to:
+                        EventBrite::Organiser::Organiser
+                            fields: # these fields are used to power the Organiser's request
+                                id: [./organiser/id]
