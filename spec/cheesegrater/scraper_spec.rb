@@ -73,7 +73,7 @@ describe CheeseGrater::Scraper do
       response.raw = @fixtures[:one]
       
       results = []
-      @scraper.send(:read_response, vos, response, {}) do |scraped|
+      @scraper.send(:read_response, vos, response) do |scraped|
         results << scraped
       end
       
