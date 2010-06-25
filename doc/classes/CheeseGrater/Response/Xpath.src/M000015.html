@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>items (CheeseGrater::Response::Xpath)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/cheesegrater/response/xpath.rb, line 17</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">items</span> <span class="ruby-identifier">item_path</span>, <span class="ruby-identifier">fields</span>
+        <span class="ruby-identifier">items</span> = <span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-identifier">item_path</span>)
+        <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;#{self.class} got #{items.length} items with xpath #{item_path}&quot;</span>
+        
+        <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+          
+          <span class="ruby-comment cmt"># yield each set of filled fields</span>
+          <span class="ruby-identifier">filled_in_fields</span> = {}
+          <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span>, <span class="ruby-identifier">field_path</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">selected</span> = <span class="ruby-identifier">item</span>.<span class="ruby-identifier">at_xpath</span> <span class="ruby-identifier">field_path</span>
+            <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">selected</span>
+                     <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Attr</span>                         <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">value</span>
+                     <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">NodeSet</span>, <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span> <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">node_or_set_value</span>(<span class="ruby-identifier">selected</span>)
+                     <span class="ruby-keyword kw">end</span>
+                     
+            <span class="ruby-identifier">filled_in_fields</span>[<span class="ruby-identifier">field</span>] = <span class="ruby-identifier">result</span>
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">filled_in_fields</span>
+          
+        <span class="ruby-keyword kw">end</span>
+        
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

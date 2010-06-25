@@ -24,3 +24,5 @@ module CheeseGrater
   end
 end
 
+Vo.new :fields => {:rails=>:fields},
+       :related_to 

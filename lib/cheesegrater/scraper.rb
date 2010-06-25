@@ -75,39 +75,39 @@ module CheeseGrater
 
         end
         
-        # setup all related Vo scrapes
-        vo.related_to.each_pair do |name, related_setup|
-         
-          scraper = related_scrapers[name]
-          #scraper.setup(scraper)
-          response.items(vo.item_path, related_setup[:fields]) do |fields|
-            scraper.request.fields.merge!(fields)
-            scraper.related_to = vo
-            yield scraper
-          end
-          
-        end
+        # # setup all related Vo scrapes
+        #     vo.related_to.each_pair do |name, related_setup|
+        #      
+        #       scraper = related_scrapers[name]
+        #       #scraper.setup(scraper)
+        #       response.items(vo.item_path, related_setup[:fields]) do |fields|
+        #         scraper.request.fields.merge!(fields)
+        #         scraper.related_to = vo
+        #         yield scraper
+        #       end
+        #       
+        #     end
 
       end
       
-      # TODO this is an interesting bit - how should this scraper be setup and run,
-      # at the mo, a hash is passed in and the scraper sets it up
-      # create and yield all related scrapers
-      
-      # TODO the way the requests are made is making this a big fugly - the requests.each etc, is it
-      # okay to assume it's appropriate to do that? probably in this context: request with multiple 
-      # dates, for instance, will still need to request all dates to access the full dataset with the
-      # additional filter scraped from the response
-      scrapers.each_pair do |name, scraper_setup|
-        
-        scraper = related_scrapers[name].dup
-        
-        response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|
-          scraper.requests.each {|request| request.fields.merge!(fields)}
-          yield scraper
-        end
-
-      end
+      # # TODO this is an interesting bit - how should this scraper be setup and run,
+      #    # at the mo, a hash is passed in and the scraper sets it up
+      #    # create and yield all related scrapers
+      #    
+      #    # TODO the way the requests are made is making this a big fugly - the requests.each etc, is it
+      #    # okay to assume it's appropriate to do that? probably in this context: request with multiple 
+      #    # dates, for instance, will still need to request all dates to access the full dataset with the
+      #    # additional filter scraped from the response
+      #    scrapers.each_pair do |name, scraper_setup|
+      #      
+      #      scraper = related_scrapers[name].dup
+      #      
+      #      response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|
+      #        scraper.requests.each {|request| request.fields.merge!(fields)}
+      #        yield scraper
+      #      end
+      # 
+      #    end
     end
 
   end

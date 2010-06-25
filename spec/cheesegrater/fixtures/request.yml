@@ -1,5 +1,5 @@
 csv:
-    format: querystring
+    format: Querystring
     endpoint: http://blah.com
     fields:
         country: GB
@@ -7,7 +7,7 @@ csv:
             type: csv
             value: [hippo, mustapha, ghandi]
 csv2:
-    format: querystring
+    format: Querystring
     endpoint: http://www.eventbrite.com/json/event_search
     fields:
         country: GB
@@ -15,7 +15,7 @@ csv2:
             type: csv
             value: [one, two, three]
 one_per_request:
-  format: querystring
+  format: Querystring
   endpoint: http://blah.com
   fields:
       country: GB
@@ -23,7 +23,7 @@ one_per_request:
           type: one_per_request
           value: [hippo, mustapha, ghandi]
 multiple_one_per_request:
-    format: querystring
+    format: Querystring
     endpoint: http://blah.com
     fields:
         country: GB

@@ -12,7 +12,7 @@ module CheeseGrater
 
       # create a scraper with a prepared config hash (all fields expanded/formatted etc)
       def create config
-        type = const_get(config[:format].capitalize).new(config)
+        type = const_get(config[:format]).new(config)
       rescue MissingRequestField => e
         raise e
       rescue

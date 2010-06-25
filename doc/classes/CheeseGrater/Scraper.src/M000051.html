@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>read_response (CheeseGrater::Scraper)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/cheesegrater/scraper.rb, line 67</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read_response</span> <span class="ruby-identifier">vos</span>, <span class="ruby-identifier">response</span>, <span class="ruby-identifier">related_scrapers</span>, <span class="ruby-identifier">scrapers</span>
+      
+      <span class="ruby-comment cmt"># retrieve all items and yield vos, and any related vos</span>
+      <span class="ruby-identifier">vos</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">vo</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">response</span>.<span class="ruby-identifier">items</span>(<span class="ruby-identifier">vo</span>.<span class="ruby-identifier">item_path</span>, <span class="ruby-identifier">vo</span>.<span class="ruby-identifier">fields</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fields</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">to_yield</span> = <span class="ruby-identifier">vo</span>.<span class="ruby-identifier">dup</span>
+          <span class="ruby-identifier">to_yield</span>.<span class="ruby-identifier">fields</span> = <span class="ruby-identifier">fields</span>
+          <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">to_yield</span>
+
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-comment cmt"># # setup all related Vo scrapes</span>
+        <span class="ruby-comment cmt">#     vo.related_to.each_pair do |name, related_setup|</span>
+        <span class="ruby-comment cmt">#      </span>
+        <span class="ruby-comment cmt">#       scraper = related_scrapers[name]</span>
+        <span class="ruby-comment cmt">#       #scraper.setup(scraper)</span>
+        <span class="ruby-comment cmt">#       response.items(vo.item_path, related_setup[:fields]) do |fields|</span>
+        <span class="ruby-comment cmt">#         scraper.request.fields.merge!(fields)</span>
+        <span class="ruby-comment cmt">#         scraper.related_to = vo</span>
+        <span class="ruby-comment cmt">#         yield scraper</span>
+        <span class="ruby-comment cmt">#       end</span>
+        <span class="ruby-comment cmt">#       </span>
+        <span class="ruby-comment cmt">#     end</span>
+
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-comment cmt"># # TODO this is an interesting bit - how should this scraper be setup and run,</span>
+      <span class="ruby-comment cmt">#    # at the mo, a hash is passed in and the scraper sets it up</span>
+      <span class="ruby-comment cmt">#    # create and yield all related scrapers</span>
+      <span class="ruby-comment cmt">#    </span>
+      <span class="ruby-comment cmt">#    # TODO the way the requests are made is making this a big fugly - the requests.each etc, is it</span>
+      <span class="ruby-comment cmt">#    # okay to assume it's appropriate to do that? probably in this context: request with multiple </span>
+      <span class="ruby-comment cmt">#    # dates, for instance, will still need to request all dates to access the full dataset with the</span>
+      <span class="ruby-comment cmt">#    # additional filter scraped from the response</span>
+      <span class="ruby-comment cmt">#    scrapers.each_pair do |name, scraper_setup|</span>
+      <span class="ruby-comment cmt">#      </span>
+      <span class="ruby-comment cmt">#      scraper = related_scrapers[name].dup</span>
+      <span class="ruby-comment cmt">#      </span>
+      <span class="ruby-comment cmt">#      response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|</span>
+      <span class="ruby-comment cmt">#        scraper.requests.each {|request| request.fields.merge!(fields)}</span>
+      <span class="ruby-comment cmt">#        yield scraper</span>
+      <span class="ruby-comment cmt">#      end</span>
+      <span class="ruby-comment cmt"># </span>
+      <span class="ruby-comment cmt">#    end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

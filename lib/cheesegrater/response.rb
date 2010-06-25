@@ -5,7 +5,7 @@ module CheeseGrater
     class << self
       
       def create setup
-        const_get(setup[:type].capitalize).new
+        const_get(setup[:type]).new
       end
       
     end
