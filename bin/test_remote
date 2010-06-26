@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+require "rubygems"
+require "bundler"
+Bundler.setup(:default)
+
+lib_dir = File.dirname(__FILE__) + "/../lib/"
+require lib_dir + 'cheesegrater'
+
+# kick things off
+# require 'active_record'
+# models_dir = File.dirname(__FILE__) + "/../../bizdiary_old/app/models/"
+# require models_dir + 'event'
+# require models_dir + 'organisation'
+# ActiveRecord::Base.establish_connection(
+#   :adapter => "mysql",
+#   :host => "localhost",
+#   :database => "thebusinessdiary_development",
+#   :username => "root",
+#   :password => ""
+# )
+ENV['RAILS_ENV'] = ARGV.first || ENV['RAILS_ENV'] || 'development'  
+require File.expand_path(File.dirname(__FILE__) + "/../../bizdiary_old/config/environment")
+
+puts Event.all.length
