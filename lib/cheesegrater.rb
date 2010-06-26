@@ -1,3 +1,4 @@
+# wtf does all this mean? looks a bit OTT??
 
 lib_dir = File.dirname(__FILE__)
 require lib_dir + '/cheesegrater/coreextensions'
