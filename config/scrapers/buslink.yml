@@ -27,7 +27,7 @@ BusinessLink:
                         email: Unknown
                         people: Unknown
         pager:
-            next_page_complete_endpoint: //*[@class='resultnav']//a[last()]/@href
+            next_page_complete_endpoint: //*[@class='resultnav']//a[last() and contains(.,'Next')]/@href
             
     EventLocationSearch:
         <<: *bl_event_search
