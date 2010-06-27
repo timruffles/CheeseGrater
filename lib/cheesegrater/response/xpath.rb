@@ -24,10 +24,7 @@ module CheeseGrater
           filled_in_fields = {}
           fields.each_pair do |field, field_path|
             selected = item.at_xpath field_path
-            result = case selected
-                     when Nokogiri::XML::Attr                         then selected.value
-                     when Nokogiri::XML::NodeSet, Nokogiri::XML::Node then node_or_set_value(selected)
-                     end
+            result = xpath_to_scalar(selected)
                      
             filled_in_fields[field] = result
           end
@@ -35,6 +32,17 @@ module CheeseGrater
           
         end
         
+      end
+      
+      def value value_path
+         xpath_to_scalar(@doc.at_xpath(item_path))
+      end
+      
+      def xpath_to_scalar xpath
+        case xpath
+        when Nokogiri::XML::Attr                         then selected.value
+        when Nokogiri::XML::NodeSet, Nokogiri::XML::Node then node_or_set_value(selected)
+        end
       end
       
       protected

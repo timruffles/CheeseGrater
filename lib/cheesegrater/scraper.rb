@@ -29,13 +29,18 @@ module CheeseGrater
       
       logger.info "#{self.class} running"
       
+      # take each request from make_requests(), and then pass the response
+      # to read_response, yielding up the final result
       make_requests @requests, @pager do |raw_response|
         @response.raw = raw_response
         
         read_response @vos, @response, @related_scrapers, @scrapers do |scraped|
+          # pass up the lovely cheese we've found!
           yield scraped
         end
-
+        
+        # return the response so that it can be passed back into the pager in make_requests()
+        @response
       end
 
     end
@@ -55,13 +60,19 @@ module CheeseGrater
       requests.each do |request|
 
         # setup the request with the fields required to page
-        pager.each_page_fields do |page_fields|
+        pager.page do |page_fields|
           
+          # merge in the page fields into the page
           request.fields.merge!(page_fields)
+          
+          response = 'waiting...'
           request.run do |raw_response|
-            yield raw_response
+            # yield up response to the run() method, retrieve the response object that is created
+            response = yield raw_response
           end
-
+          
+          # return the response so the pager can page to the next page if it finds what it needs
+          response
         end
 
       end

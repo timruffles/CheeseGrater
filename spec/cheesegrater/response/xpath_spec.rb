@@ -12,7 +12,18 @@ describe CheeseGrater::Response::Xpath do
     @xpath.raw = @html
   end
   
-  it "should return items in a way they can be queried" do
+  it "should return requests for individual bits of data as a scalar value" do
+    
+    found = []
+    values = []
+    @xpath.items
+    
+    values.inject(0) {|a, v| a += v.to_i}.should == 110
+    found.length.should == 5
+    
+  end
+  
+  it "should yield up fields as hashes of scalar values" do
     
     found = []
     values = []

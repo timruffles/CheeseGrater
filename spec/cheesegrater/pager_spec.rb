@@ -3,14 +3,18 @@ require root + '/spec_helper'
 
 describe CheeseGrater::Pager do
   
+  it "should expose a method to reset its state"
+  
   context "given an empty setup" do
     it "should yield a null page fields" do
       
       pager = CheeseGrater::Pager.create({})
       yielded = []
-      pager.each_page_fields do |fields|
-        fields.should == {}
-        yielded << fields 
+      
+      pager.page({}) do |fields|
+        
+        
+        
       end
       
       yielded.length.should == 1
@@ -28,7 +32,6 @@ describe CheeseGrater::Pager do
         fields.should == {}
         yielded << fields 
       end
-      
       yielded.length.should == 1
     end
   end

@@ -7,9 +7,12 @@ module CheeseGrater
       end
     end
     
-    def each_page_fields
+    def page
       
-      yield({})
+      first_page_response = yield({})
+      while fields = read_fields(first_page_response)
+         yield fields
+      end
       
     end
     

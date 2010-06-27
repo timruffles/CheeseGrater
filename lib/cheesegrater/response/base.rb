@@ -7,6 +7,10 @@ module CheeseGrater
         
       end
       
+      def value value_path
+        
+      end
+      
       attr_reader :raw
       
     end
