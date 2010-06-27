@@ -19,6 +19,6 @@ require lib_dir + 'cheesegrater'
 #   :password => ""
 # )
 ENV['RAILS_ENV'] = ARGV.first || ENV['RAILS_ENV'] || 'development'  
-require File.expand_path(File.dirname(__FILE__) + "/../../bizdiary_old/config/environment")
+require File.expand_path(File.dirname(__FILE__) + "/../../appq/config/environment")
 
 puts Event.all.length
