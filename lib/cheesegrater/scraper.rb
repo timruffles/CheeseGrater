@@ -32,6 +32,7 @@ module CheeseGrater
       # take each request from make_requests(), and then pass the response
       # to read_response, yielding up the final result
       make_requests @requests, @pager do |raw_response|
+        
         @response.raw = raw_response
         
         read_response @vos, @response, @related_scrapers, @scrapers do |scraped|
@@ -60,7 +61,7 @@ module CheeseGrater
       requests.each do |request|
 
         # setup the request with the fields required to page
-        pager.page(request) do
+        pager.page(request) do |raw_response|
           
           # yield up response to the run() method, retrieve and return the response for the pager
           response = yield raw_response

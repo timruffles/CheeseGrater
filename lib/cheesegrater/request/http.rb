@@ -12,19 +12,21 @@ module CheeseGrater
 
       def initialize config
         super(config)
-        @method = config[:method] || @method
+        @method = config[:method] || 'get'
         raise InvalidOrMissingRequestMethod.new("Didn't recognise method '#{@method}'") unless @@supported_methods.include? @method
       end
   
-      def run  &block
-        load(endpoint, &block)
+      def run
+        load(endpoint)
       end
   
       def load endpoint
+         raw_response = nil
          open(endpoint) do |response|
            logger.info "#{self.class} received a response #{response.length} characters long from #{endpoint}"
-           yield response.read
+           raw_response = response.read
          end
+         raw_response
       rescue StandardError => e
         raise e.class.new "Could not load endpoint #{endpoint}, got #{e}"
       end

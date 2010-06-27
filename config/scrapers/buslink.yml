@@ -1,25 +1,6 @@
 BusinessLink:
-    request:
-        # format
-        format: Querystring
-    EventDateSearch:
-        #should run before other scrapers:
-        root: root
-        request:
-            endpoint: http://www.businesslink.gov.uk/bdotg/action/event
-            fields:
-                site: 210
-        response:
-            type: XpathHtml
-        scrapers:
-            EventsOnDate:
-                # used * not option as for some reason it can't find the dev tags
-                item_path: //*[@id='eventDate']//*[@value!=99]
-                # fields relative to item xpath (use . to query from that node, .. from one up etc)
-                fields:
-                    date: ./@value
     # Scrape all events on specific date (spawened by EventDateSearch)
-    EventsOnDate:
+    EventSearchResults: &bl_event_search
         request:
             format: Querystring
             endpoint: http://online.businesslink.gov.uk/bdotg/action/eventsearch
@@ -45,3 +26,32 @@ BusinessLink:
                         telephone: Unknown
                         email: Unknown
                         people: Unknown
+        pager:
+            next_page_complete_endpoint: //*[@class='resultnav']//a[last()]/@href
+            
+    EventLocationSearch:
+        <<: *bl_event_search
+        #should run before other scrapers:
+        root: true
+        request:
+            format: Http
+            endpoint: http://online.businesslink.gov.uk/bdotg/action/eventsearch?keywords=&location=700&date=99&submit.x=18&submit.y=7&submit=Go&page=1
+            fields: {}
+
+    # not used at mo, as we want London only
+    EventDateSearch:
+        #should run before other scrapers:
+        request:
+            format: Querystring
+            endpoint: http://www.businesslink.gov.uk/bdotg/action/event
+            fields:
+                site: 210
+        response:
+            type: XpathHtml
+        scrapers:
+            EventsOnDate:
+                # used * not option as for some reason it can't find the dev tags
+                item_path: //*[@id='eventDate']//*[@value!=99]
+                # fields relative to item xpath (use . to query from that node, .. from one up etc)
+                fields:
+                    date: ./@value

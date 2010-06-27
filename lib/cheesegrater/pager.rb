@@ -6,7 +6,7 @@ module CheeseGrater
     class << self
       def create config = {}
         p = Pager.new
-        p.setup config
+        p.setup config || {}
         p
       end
     end

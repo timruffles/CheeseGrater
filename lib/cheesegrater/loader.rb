@@ -7,7 +7,6 @@ module CheeseGrater
     include Logging
     
     def load_scrapers scraper_groups = {}
-      
       # load all scrapers, and mix all shared fields into them
       scraper_groups.keys_to_symbols.each_pair do |group, included|
         

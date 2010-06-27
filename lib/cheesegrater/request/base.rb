@@ -4,7 +4,7 @@ module CheeseGrater
       
       include Kwalify::Util::HashLike
       
-      def intialize config = {}
+      def initialize config = {}
         setup config
       end
       def run
