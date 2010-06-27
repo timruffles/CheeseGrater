@@ -12,14 +12,7 @@ group :test do
 	gem 'aruba'
 end
 
-
-# resque
-# group :resque do
-# 	gem 'redis'
-# 	gem 'redis-namespace'
-# 	gem 'yajl-ruby'
-# 	gem 'resque'
-# end
+gem 'resque'
 
 # setup
 require 'yaml'
