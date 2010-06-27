@@ -4,10 +4,10 @@ module CheeseGrater
   # Abstracts the process of making a request to any type of data source with a set
   # of paramters.
   module Request
-
+    
     Csv = 'csv'
     OnePerRequest = 'one_per_request'
-
+    
     class << self
 
       # create a scraper with a prepared config hash (all fields expanded/formatted etc)
@@ -74,8 +74,12 @@ module CheeseGrater
     define_exception :MultiplePerRequestFieldError
     define_exception :MissingRequestField
     define_exception :InvalidRequestFormat
-
-    attr_reader :fields
+    
+    # fields to send with request
+    attr_accessor :fields
+    
+    # send fields to this endpoint
+    attr_accessor :endpoint
 
   end
 end

@@ -23,6 +23,8 @@ end
 
 # setup
 require 'yaml'
+gem 'kwalify'
+require 'kwalify'
 
 # scraper
 gem 'json_pure'

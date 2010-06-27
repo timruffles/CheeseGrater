@@ -1,44 +1,82 @@
 root = File.dirname(__FILE__) 
 require root + '/spec_helper'
 
-describe CheeseGrater::Pager do
+include CheeseGrater
+
+describe Pager do
+  
+  before :each do
+    @request = mock(Request::Base)
+    @request.stub(:run)
+    @request.stub(:setup)
+    @pager = Pager.create
+  end
   
   context "given an empty setup" do
-    it "should yield a null page fields" do
+    it "should run at least one page" do
       
-      pager = CheeseGrater::Pager.create({})
-      yielded = []
+      @request.stub(:run).and_return('raw')
       
-      pager.page do |fields|
+      runs = 0
+      
+      @pager.page(@request) do |raw_result|
+        runs += 1
+        raw_result.should == 'raw'
         
-        fields.should == {}
-        
+        # stop other requests
+        false
       end
       
+      runs.should == 1
+      
     end
+  end
+  
+  it "should modify the request setup" do
+    
+    url_path = '//blah'
+    pager = Pager.create(:next_page_complete_endpoint => url_path)
+    
+    response = mock('Response')
+    response.stub(:value).with(url_path).and_return('http://example')
+    @request.stub(:run)
+    
+    setups = []
+    @request.stub(:setup) do |setup|
+      setups << setup
+    end
+    
+    runs = 0
+    pager.page(@request) do
+      response.stub(:value).with(url_path).and_return(false) if (runs += 1) > 1
+      response
+    end
+    setups.length.should == 2
+    first_setup, second_setup = setups
+    first_setup.should == {}
+    second_setup.should == {:endpoint => 'http://example', :fields => {}}
+    
   end
   
   context "only given a next page url" do
     it "should be able to yield requests until no url is given" do
       
       url_path = '//blah'
-      pager = CheeseGrater::Pager.create({:request => 
-                                            {:next_page_url_path => url_path}
-                                        })
-                                        
+      pager = Pager.create(:next_page_complete_endpoint => url_path)
+      
       response = mock('Response')
       response.should_receive(:value).with(url_path).and_return('http://example')
+      @request.stub(:run).and_return(response)
       
-      yielded = []
-      pager.page do |fields|
+      runs = 0
+      pager.page(@request) do
         
-        fields.should == {:next_page_url_path=>'http://example'}
-        yielded << fields 
+        runs += 1
         
-        response.should_receive(:value).with(url_path).and_return('')
+        response.stub(:value)
         response
       end
-      yielded.length.should == 1
+      runs.should == 2
     end
   end
   

@@ -60,19 +60,11 @@ module CheeseGrater
       requests.each do |request|
 
         # setup the request with the fields required to page
-        pager.page do |page_fields|
+        pager.page(request) do
           
-          # merge in the page fields into the page
-          request.fields.merge!(page_fields)
+          # yield up response to the run() method, retrieve and return the response for the pager
+          response = yield raw_response
           
-          response = 'waiting...'
-          request.run do |raw_response|
-            # yield up response to the run() method, retrieve the response object that is created
-            response = yield raw_response
-          end
-          
-          # return the response so the pager can page to the next page if it finds what it needs
-          response
         end
 
       end

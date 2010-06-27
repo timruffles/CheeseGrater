@@ -16,7 +16,7 @@ module CheeseGrater
         raise InvalidOrMissingRequestMethod.new("Didn't recognise method '#{@method}'") unless @@supported_methods.include? @method
       end
   
-      def run &block
+      def run  &block
         load(endpoint, &block)
       end
   

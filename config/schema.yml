@@ -1,0 +1,40 @@
+type: seq
+sequence:
+- type: map
+  mapping:
+    name: 
+      type: str
+    scrapers:
+      type: seq
+      sequence:
+        - type: map
+          mapping:
+            root: 
+              type: bool
+            request:
+              type: map
+              #class: CheeseGrater::Request::Base
+              mapping:
+                type: {type: str}
+                fields:
+                  type: any
+                endpoint: {type: str}
+            response:
+              type: map
+              #class: CheeseGrater::Response::Base
+              mapping:
+                content:
+                  type: seq
+                  sequence:
+                    - type: map
+                      #class: CheeseGrater::Runnable
+                      mapping:
+                        type: {type: str}
+            pager:
+              type: map
+              class: CheeseGrater::Pager
+              mapping:
+                  request:
+                    type: any
+                  response:
+                    type: any

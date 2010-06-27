@@ -10,53 +10,54 @@ describe CheeseGrater::Request do
     @multiple_per_request = fixtures[:multiple_one_per_request].dup
   end
   
+    
   it "should raise an error if any required constructor args are missing" do
        lambda {
          @csv.delete(:endpoint)
          CheeseGrater::Request.create_all @csv
        }.should(raise_error(CheeseGrater::Request::MissingRequestField))
   end
-  
+
   it "should raise an error if an invliad or null request format are missing" do
        lambda {
          @csv.delete(:format)
          CheeseGrater::Request.create_all @csv
        }.should(raise_error(CheeseGrater::Request::InvalidRequestFormat))
   end
-  
+
   it "should make request fields into sets (eg, no repeated fields)"
-  
+
   it "should format csv type fields correctly" do
-    
+
     additional = []
-    
+
     fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@csv[:fields]) do | yielded |
       additional << yielded
     end
-    
+
     fields[:keywords].should == %w[hippo mustapha ghandi].join(',')
     additional.length.should == 0
-    
+
     additional = []
-    
+
     fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@csv2[:fields]) do | yielded |
       additional << yielded
     end
-    
+
     fields[:keywords].should == %w[one two three].join(',')
     additional.length.should == 0
-    
+
   end
-  
+
 
   it "should be able to generated the required overrides for per-request field type" do
-    
+
     additional = []
-    
+
    fields = CheeseGrater::Request.prepare_fields_and_override_hashes(@per_request[:fields]) do | yielded |
       additional << yielded
     end
-    
+
     # should yield an override for the second two: the first value is used in the main request
     additional.length.should == 2
     %w[mustapha ghandi].each do | expected_arg |
@@ -64,17 +65,17 @@ describe CheeseGrater::Request do
         hash[:keywords] == expected_arg
       end).length.should == 1 # one and only one request should have each of the per-request values
     end
-    
+
   end
-  
+
   it "should not allow multiple per-request varialbes " do
-    
+
      lambda {
        CheeseGrater::Request.prepare_fields_and_override_hashes(@multiple_per_request[:fields]) {}
      }.should raise_error(CheeseGrater::Request::MultiplePerRequestFieldError)
-    
+
   end
-  
+
   it "should create a request of the correct type with all fields" do
     request = CheeseGrater::Request.create @csv
     request.instance_eval do
@@ -82,7 +83,9 @@ describe CheeseGrater::Request do
       fields[:country].should == 'GB'
       fields[:keywords].should_not == nil
     end 
-    
+
   end
+    
+  
   
 end

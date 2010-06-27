@@ -71,14 +71,12 @@ api_scrapers:
                                 fields: # these fields are used to power the Organiser's request
                                     id: [./organiser/id]
             pager:
-                request:
-                    per_page:
-                        name: max
-                        amount: 100
-                    page: page
-                response:
-                    total_results: total_items
-                    page_results: num_showing
+                items_per_page:
+                    name: max
+                    amount: 100
+                page: page
+                # xpath returning the number of items on a page, either count(//path), or /path/to/count/in/results
+                result_count: num_showing
         Organiser:
             response:
                 type: xpath
@@ -93,14 +91,11 @@ api_scrapers:
                 fields:
                     id:
             pager:
-                request:
-                    per_page:
-                        name: max
-                        amount: 100
-                    page: page
-                response:
-                    total_results: total_items
-                    page_results: num_showing
+                per_page:
+                    name: max
+                    amount: 100
+                page: page
+                item_count:
     Meetup:
         endpoint: http://api/meetup/com/2/events/json/
         request:
@@ -128,13 +123,12 @@ api_scrapers:
                         notes: Unknown
         pager:
             request:
-                per_page:
+                items_per_page:
                     name: page
                     amount: 100
-                page: offset
             response:
-                total_results: total_count
-                page_results: count
+                # all we need to do is follow this next page endpoint
+                next_page_endpoint: /results/head/next
 http_scrapers:
     BusinessLink:
         request:
