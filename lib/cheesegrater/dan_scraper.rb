@@ -5,10 +5,13 @@ module CheeseGrater
     def self.perform(i)
       app_lib_dir = File.dirname(__FILE__) + "/../../../appq/lib/"
       require app_lib_dir + 'importer'
-      puts "scraper ##{i} start"
-      # sleep 5
-      Resque.enqueue(App::Importer, {:event => :object})
-      puts "scraper ##{i} end"
+
+      # slow this baby down a bit
+      sleep 5
+
+      params = {:event => :object}
+      Resque.enqueue(App::Importer, params)
+      puts "scraper (#{i}) -> saver (#{params})"
     end
   end
 end
