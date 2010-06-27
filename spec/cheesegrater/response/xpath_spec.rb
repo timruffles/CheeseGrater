@@ -12,14 +12,30 @@ describe CheeseGrater::Response::Xpath do
     @xpath.raw = @html
   end
   
-  it "should return requests for individual bits of data as a scalar value" do
+  context "when requested for an individual bit of data" do
     
-    found = []
-    values = []
-    @xpath.items
+    it "should return a scalar when given a path that yields an attribute" do
+      @xpath.value('//*[@id="add_maincontent"]/@name').should == 'main-content'
+    end
     
-    values.inject(0) {|a, v| a += v.to_i}.should == 110
-    found.length.should == 5
+    it "should return a scalar when given a path that yields a node" do
+      @xpath.value('//*[@id="eventDate"]/*[@value="99"]').should == 'Any date'
+    end
+    
+    it "should return a scalar when given a path that yields a node set" do
+      found = @xpath.value('//*[@id="location"]') 
+      %w[All North East England ---Northumberland ---Tyne and Wear].each do |scalar|
+        found.include?(scalar).should == true
+      end
+    end
+    
+    it "should return nil when given a path that yields nothing" do
+      @xpath.value('//*[@id="ss"]').should == nil
+    end
+    
+    it "should return the inner content of a node with XML, without XML nodes" do
+      /</.should_not match @xpath.value('//*[@id="location"]')
+    end
     
   end
   

@@ -230,7 +230,7 @@ one: |
 
 
 
-    	<div id="add_maincontent"> 
+    	<div id="add_maincontent" name="main-content"> 
 
     		<h1>Find events</h1> 
 

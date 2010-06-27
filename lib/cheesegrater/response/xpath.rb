@@ -35,17 +35,17 @@ module CheeseGrater
       end
       
       def value value_path
-         xpath_to_scalar(@doc.at_xpath(item_path))
+         xpath_to_scalar(@doc.at_xpath(value_path))
       end
       
-      def xpath_to_scalar xpath
-        case xpath
+      protected
+      
+      def xpath_to_scalar selected
+        case selected
         when Nokogiri::XML::Attr                         then selected.value
         when Nokogiri::XML::NodeSet, Nokogiri::XML::Node then node_or_set_value(selected)
         end
       end
-      
-      protected
       
       def node_or_set_value node
         @is_html ? node.inner_html : node.inner_text
