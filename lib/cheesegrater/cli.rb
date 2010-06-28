@@ -42,7 +42,7 @@ module CheeseGrater
     protected
     
     def runner
-      @runner ||= Runner.create(@options.runner || 'single')  # todo, why isn't this setting in options?
+      @runner ||= Runner.create(@options.runner || 'single')  # todo, why isn't this getting set in options?
     end
     
     def logger
@@ -52,7 +52,7 @@ module CheeseGrater
       @logger
     end
     
-    def read_options args
+    def read_options 
       options               = OpenStruct.new {
         runner = 'single'
       }
@@ -84,7 +84,7 @@ module CheeseGrater
       end
       
       opts.parse!(args)
-      options
+      args
     end
   end
 end

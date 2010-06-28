@@ -1,0 +1,40 @@
+FindNetworkingEvents:
+    EventLocationSearch:
+        #should run before other scrapers:
+        root: true
+        request:
+            format: Http
+            endpoint: http://www.findnetworkingevents.com/
+            fields: {}
+        response:
+            scrapers:
+                EventDetails:
+                    item_query: //*[@summary="Results"]
+                    fields:
+                        - .//*[@class='quoteTxt']/a[1]/@href
+    EventDetails:
+        request:
+            format: Restful
+        response:
+            endpoint: http://www.findnetworkingevents.com/
+            vos:
+                Event:
+                    item_query: id('rightContent')
+                    fields:
+                        title: //h1[1]
+                        description: ./p[1]
+                        start_date: ./p[2]
+                        location: ./p[@class="quoteTxt"]
+                        cost: ./p[@class="quoteTxt"]/following-sibling::p[1]
+                        target_audience: UNKNOWN
+                        notes: ./p[@class="quoteTxt"]/following-sibling::p[2]
+                        url: ENDPOINT
+                        telephone: UNKNOWN
+                        email: UNKNOWN
+                        people: UNKNOWN
+                    related_to:
+                        Organiser:
+                            item_query: //*[@id='rightContent']
+                            fields:
+                                name:
+                                url: (id('rightContent')/p[contains(.,'Details')])[last()]

@@ -1,0 +1,39 @@
+4Networking:
+    EventListing:
+        #should run before other scrapers:
+        root: true
+        request:
+            format: Http
+            endpoint: http://www.4networking.biz/events/
+            fields: {}
+        response:
+            format: XpathHtml
+            scrapers:
+                EventDetail:
+                    item_path: //*[@id='middleColumn']/div[2]/table/tbody/tr
+                    fields:
+                        - ./td[2]/a/@href
+    EventDetail:
+        root: true
+        request:
+            format: Restful
+            endpoint: http://www.4networking.biz/events/
+        response:
+            format: XpathHtml
+            vos:
+                Event:
+                    item_path: //*[@id="middleColumn"]//div[@class='darkBlueBox'] # hahah, ASPNet's idea of semantic
+                    fields:
+                        fully_booked: id('middleColumn')//img[@alt='Sorry this event is fully booked']
+                    related_to:
+                        Organiser:
+                            fields:
+                                name: id('ctl00_ctl00_BodyContent_MainContent_fvwEvent')/div/h2
+                        Speakers:
+                            item_path:  id('ctl00_ctl00_BodyContent_MainContent_fvwEvent')/div/div[last()]/div
+                            fields:
+                                name: ./div[@class='content']//p[@class='first']
+                                position: ./div[@class='top']/div[1]/span[1]/strong[1]
+                                url: [http://www.4networking.biz/events/, .//p[3]/a/@href]
+                                company: .//span[@class='blueText']/span
+                            

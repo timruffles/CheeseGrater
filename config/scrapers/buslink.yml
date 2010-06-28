@@ -49,7 +49,7 @@ BusinessLink:
         response:
             type: XpathHtml
         scrapers:
-            EventsOnDate:
+            EventSearchResults:
                 # used * not option as for some reason it can't find the dev tags
                 item_path: //*[@id='eventDate']//*[@value!=99]
                 # fields relative to item xpath (use . to query from that node, .. from one up etc)
