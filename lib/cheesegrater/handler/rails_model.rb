@@ -19,7 +19,7 @@ module CheeseGrater
           
           related_model = const_get(name)
           
-          # if it's a UUID, retireve the model by that
+          # if it's a UUID, retrieve the model by that
           # if it's a VO, create the model using the VO's fields
           if uuid_or_vo.respond_to? :fields
             
@@ -36,7 +36,7 @@ module CheeseGrater
           if relation.is_many?
             relation[vo.name] << model
           else
-            relation[vo.name] = model
+            relation[vo.name] = modelgit a
           end
           
         end
