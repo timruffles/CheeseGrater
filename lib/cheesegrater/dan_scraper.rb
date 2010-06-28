@@ -3,15 +3,15 @@ module CheeseGrater
     @queue = :scrape
     
     def self.perform(i)
-      app_lib_dir = File.dirname(__FILE__) + "/../../../appq/lib/"
-      require app_lib_dir + 'importer'
-
+      # need to load class before it can be queued
+      require File.expand_path("../../../../appq/lib/backend/importer", __FILE__)
+      
       # slow this baby down a bit
-      sleep 5
-
-      params = {:event => :object}
-      Resque.enqueue(App::Importer, params)
-      puts "scraper (#{i}) -> saver (#{params})"
+      #sleep 5
+      
+      params = {:event => Vo.new({})}
+      Resque.enqueue(Backend::Importer, params)
+      puts "scrape (#{i}) -> save (#{params})"
     end
   end
 end

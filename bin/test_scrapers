@@ -3,13 +3,19 @@ require "rubygems"
 require "bundler"
 Bundler.setup(:default)
 
+# TODO - move to bundler
+require "resque"
+
 lib_dir = File.dirname(__FILE__) + "/../lib/"
-require "#{lib_dir}cheesegrater/dan_scraper.rb"
+require "#{lib_dir}cheesegrater"
 
 #CheeseGrater::DanScraper.perform(99)
+CheeseGrater::DanScraper.perform(99)
 
-# CheeseGrater module name and cheesegrater filename breaks rails naming convention. Should be either Cheesegrater or cheese_grater :)
-3.times do |i|
- Resque.enqueue(CheeseGrater::DanScraper, (i+1))
- puts "Spawn Danscraper ##{i+1}"
+# CheeseGrater module name and cheesegrater filename breaks rails naming convention. 
+# ...should be either Cheesegrater or cheese_grater :)
+n = ARGV.empty? ? 3 : ARGV[0].to_i
+n.times do |i|
+ Resque.enqueue(CheeseGrater::Runner::Resque, i+1)
+ puts "Enqueue resque runner ##{i+1}"
 end
