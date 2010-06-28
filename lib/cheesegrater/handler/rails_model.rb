@@ -6,7 +6,7 @@ module CheeseGrater
         
         # grab the model that relates to the VO, and instantiate it
         model_class = const_get(vo.name)
-        model = model_class.new( vo.fields) )
+        model = model_class.new( vo.fields )
         
         # the vo could have one of two things here, a hash of model names (eg Organiser) to UUIDs of
         # previously yielded Vos, or a hash of model names to Vos.
@@ -18,7 +18,7 @@ module CheeseGrater
           # if it's a VO, create the model using the VO's fields
           if uuid_or_vo.respond_to? :fields
             
-            relation = related_model.new( vo.fields.merge )
+            relation = related_model.new( vo.fields )
             
           else
             
@@ -31,7 +31,7 @@ module CheeseGrater
           if relation.is_many?
             relation[vo.name] << model
           else
-            relation[vo.name] = modelgit a
+            relation[vo.name] = model
           end
           
         end

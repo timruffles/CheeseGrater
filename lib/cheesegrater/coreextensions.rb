@@ -1,6 +1,6 @@
 class Object
   def deep_clone
-    Marshal::load(Marshal.dump(self))
+    YAML::load(YAML::dump(self))
   end
   alias :deep_dup :deep_clone
 end

@@ -16,13 +16,12 @@ describe CheeseGrater::Scraper do
   end
   
   it "should run requests and yield the raw responses" do
-
     fields = {}
     response_msg = 'Response read!'
     
     request = mock('Request')
-    request.should_receive(:fields).and_return(fields)
-    request.should_receive(:run).and_yield(response_msg)
+    request.should_receive(:run).and_return(response_msg)
+    request.stub(:setup)
 
     responses = []
     @scraper.send(:make_requests, [request], CheeseGrater::Pager.new) do |raw_response|
@@ -31,7 +30,6 @@ describe CheeseGrater::Scraper do
 
     responses.length.should == 1
     responses[0].should == response_msg
-
   end
   
   context "integration" do
@@ -75,8 +73,7 @@ describe CheeseGrater::Scraper do
   
     it "should yield vos" do
       
-      vos = []
-      vos << Vo.new({:fields => {:location_code => "./@value"},:related_to => {},:item_path => "//*[@id='location']/*[@value!='-999']"})
+      vos = [Vo.new({:fields => {:location_code => "./@value"},:related_to => {},:item_path => "//*[@id='location']/*[@value!='-999']"})]
       response = Response::Xpath.new
       response.raw = @fixtures[:one]
       

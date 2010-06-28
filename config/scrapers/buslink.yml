@@ -37,7 +37,6 @@ BusinessLink:
             format: Http
             endpoint: http://online.businesslink.gov.uk/bdotg/action/eventsearch?keywords=&location=700&date=99&submit.x=18&submit.y=7&submit=Go&page=1
             fields: {}
-
     # not used at mo, as we want London only
     EventDateSearch:
         #should run before other scrapers:

@@ -1,7 +1,15 @@
+require 'uuid'
 module CheeseGrater
   class Scraper
     
     include Logging
+    
+    # get a UUID to identify the vo to the world
+    # docs: http://github.com/assaf/uuid/tree/v2.3.1
+    UUID.state_file = false
+    
+    # a single instance of the UUID generator
+    UUID_GEN = UUID.new
     
     class << self
       def create setup, related_scrapers = {}
@@ -70,57 +78,65 @@ module CheeseGrater
 
       end
     end
-
+    
     # read all items from response
     def read_response vos, response, related_scrapers = {}, scrapers = {}
       
       # retrieve all items and yield vos, and any related vos
       vos.each do |vo|
-        response.items(vo.item_path, vo.fields) do |fields|
-          to_yield = vo.dup
-          to_yield.fields = fields
-          yield to_yield
-
-        end
         
-        # setup all related Vo scrapes
-        vo.related_to.each_pair do |name, related_setup|
-         
-          scraper = related_scrapers[name]
-          #scraper.setup(scraper)
-          response.items(vo.item_path, related_setup[:fields]) do |fields|
-            scraper.request.fields.merge!(fields)
-            scraper.related_to = vo
-            yield scraper
+        response.items(vo.item_path, vo.fields) do |found_vo_fields|
+          
+          # for each set of VO fields found in the response
+          # create a new instance of the vo, and give it a uuid
+          found_vo = vo.dup
+          found_vo.fields = found_vo_fields.merge({:uuid => Scraper::UUID_GEN.generate})
+        
+          # setup all related Vo scrapes
+          found_vo.related_to.each_pair do |name, related_setup|
+          
+            # two possibilities: either we have all the data we need on this page, or we'll need another scrape
+            # in the first we relate the found_vo.to the actual found_vo.we create with that data
+            # in the second case we relate the scraper's found_vo.back to this found_vo. with this found_vo.s UUID
+            if is_scraper? name
+            
+              scraper = related_scrapers[name]
+            
+              response.items(related_setup[:item_path], related_setup[:fields]) do |fields|
+                scraper.request.fields.merge!(fields)
+                scraper.response.vos[name][:related_to].merge(found_vo.name => found_vo.fields[:uuid])
+                yield scraper
+              end
+            
+            else
+            
+              # create and setup the related vo, storing it in found_vo
+              related_vo = Vo.create(related_setup.merge(:name => name))
+              response.items(vo.item_path, vo.fields) do |related_vo_fields|
+                found_related_vo = related_vo.dup
+                found_vo.related_to << found_related_vo
+              end
+            
+            end
+          
           end
           
+          yield found_vo
+        
         end
 
       end
       
-      # TODO this is an interesting bit - how should this scraper be setup and run?
-      # at the mo, a hash is passed in and the scraper sets it up
-      # create and yield all related scrapers
-      
-      # TODO the way the requests are made is making this a big ugly - the requests.each etc, is it
-      # okay to assume it's appropriate to do that? probably in this context: request with multiple 
-      # dates, for instance, will still need to request all dates to access the full dataset with the
-      # additional filter scraped from the response
-      
+      # create and yield all scrapers found
       scrapers.each_pair do |name, scraper_setup|
         
         response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|
           
-          # because we can't deep clone the scraper (it has a class method from somewhere), we need to make 
-          # a shallow copy and shallow copy lots of bits we need to change
-          scraper = related_scrapers[name].dup
-          # p scraper.singleton_methods - but this is empty!!
-          scraper.requests = scraper.requests.map {|s| s.dup}
+          scraper = related_scrapers[name].deep_clone
           
           # TODO it should make request fields into sets (eg, no repeated fields)
           scraper.requests.each do |request| 
-            tmp = request.fields.dup
-            request.fields = tmp.merge(fields)
+            request.fields.merge!(fields)
           end
           yield scraper
         end
@@ -129,4 +145,10 @@ module CheeseGrater
     end
 
   end
+  
+  # determinies whether a name, from a related_to field, is another scraper, or a VO
+  def is_scraper? name
+    name.include? '::'
+  end
+  
 end
