@@ -100,17 +100,25 @@ describe CheeseGrater::Scraper do
           
           vos = Vo.create_all YAML.load(<<-YAML
             Event:
-              item_path
-          
+                item_path: id('rightContent')
+                fields:
+                    title: //h1[1]
+                related_to:
+                    Organiser:
+                        item_path: id('rightContent')
+                        fields:
+                            name: id('rightContent')/p/strong[contains(.,'Organised By')]/..
           YAML
-          ).keys.to_symbols
+          ).keys_to_symbols
           
+          results = []
           @scraper.send(:read_response, vos, @xpath_response) do |scraped|
             results << scraped
           end
           results.length.should == 1
-          results.related_to.length.should == 2
-          results.related_to[0].fields.should == {:name => 'John Doe', :url => 'http://blah'}
+          vo = results.shift
+          vo.related_to.length.should == 1
+          /4Networking/.should match(vo.related_to[:Organiser].fields[:name])
         end
         
       end
@@ -123,10 +131,16 @@ describe CheeseGrater::Scraper do
           
           vos = Vo.create_all YAML.load(<<-YAML
             Event:
-              item_path
-          
+                item_path: id('rightContent')
+                fields:
+                    title: //h1[1]
+                related_to:
+                    Organiser:
+                        item_path: id('rightContent')
+                        fields:
+                            name: id('rightContent')/p/strong[contains(.,'Organised By')]/..
           YAML
-          ).keys.to_symbols
+          ).keys_to_symbols
           vo = vos[0]
           vo.make_uuid!
           

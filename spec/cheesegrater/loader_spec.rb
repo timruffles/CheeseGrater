@@ -11,6 +11,7 @@ describe CheeseGrater::Loader do
       
       
       @scraper = mock('scraper')
+      @scraper.stub(:related_scrapers).and_return({})
       CheeseGrater::Scraper.stub!(:create).and_return(@scraper)
       @thecheese = CheeseGrater::Loader.new
     end
@@ -41,7 +42,7 @@ describe CheeseGrater::Loader do
     end
   
     it "should give access to all root scrapers" do
-        @scraper.should_receive(:root).exactly(2).times.and_return(true)
+        @scraper.should_receive(:is_root?).exactly(2).times.and_return(true)
         @thecheese.load_scrapers @setup[:simple_scrape]
         @thecheese.root_scrapers.length == 2
     end

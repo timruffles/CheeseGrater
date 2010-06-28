@@ -56,9 +56,7 @@ module CheeseGrater
         # get setup
         complete_setup = combine_scraper_with_shared_setup(setup, shared_setups)
         # create all related scrapers
-        related_scrapers = prepare_related_scraper_setups(setup, scraper_setups).each do |setup|
-          Scraper.create(setup)
-        end
+        related_scrapers = prepare_related_scraper_setups(setup, scraper_setups)
         
         scrapers[name] = Scraper.create(complete_setup, related_scrapers)
         

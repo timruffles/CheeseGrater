@@ -38,6 +38,7 @@ module CheeseGrater
          xpath_to_scalar(@doc.at_xpath(value_path))
       end
       
+      
       protected
       
       def xpath_to_scalar selected
