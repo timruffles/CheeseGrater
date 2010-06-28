@@ -30,5 +30,6 @@ require 'kwalify'
 gem 'json_pure'
 gem 'nokogiri' 
 gem 'log4r'
+git 'http://github.com/assaf/uuid.git', :tag => 'v2.3.1'
 
 # cli

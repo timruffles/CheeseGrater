@@ -4,14 +4,35 @@ module CheeseGrater
       
       def perform vo
         
-        model_class = const_get(vo.name)
-        model = model_class.new( vo.fields )
+        # get a UUID to identify the vo to the world
+        # docs: http://github.com/assaf/uuid/tree/v2.3.1
+        UUID.state_file = false
+        uid = UUID.new
         
-        vo.related_to.each_pair do |name, uuid|
+        # grab the model that relates to the VO, and instantiate it with our freshly minted uuid
+        model_class = const_get(vo.name)
+        model = model_class.new( vo.fields.merge({ :uuid => uid.generate}) )
+        
+        # the vo could have one of two things here, a hash of model names (eg Organiser) to UUIDs of
+        # previously yielded Vos, or a hash of model names to Vos.
+        vo.related_to.each_pair do |name, vo_or_uuid|
           
           related_model = const_get(name)
-          relation = related_model.find_by_uuid(uuid)
           
+          # if it's a UUID, retireve the model by that
+          # if it's a VO, create the model using the VO's fields
+          if uuid_or_vo.respond_to? :fields
+            
+            relation = related_model.new( vo.fields.merge({ :uuid => uid.generate}) )
+            
+          else
+            
+            relation = related_model.find_by_uuid(uuid)
+            
+          end
+          
+          
+          # now reflect the relationships and work out which VO needs to be added to which
           if relation.is_many?
             relation[vo.name] << model
           else
@@ -20,7 +41,8 @@ module CheeseGrater
           
         end
         
-        
+        # save our model, we're done!
+        model.save
         
       end
       
