@@ -6,6 +6,8 @@ module CheeseGrater
     
     include Logging
     
+    # TODO: make sure scrapers get all the scrapers they need, with the same paths as in config file
+    # at the momenent they do, as each scraper has a unique name
     def load_scrapers scraper_groups = {}
       # load all scrapers, and mix all shared fields into them
       scraper_groups.keys_to_symbols.each_pair do |group, included|
@@ -58,6 +60,8 @@ module CheeseGrater
         # create all related scrapers
         related_scrapers = prepare_related_scraper_setups(setup, scraper_setups)
         
+        # set name and create scraper
+        complete_setup.merge!(:name => name)
         scrapers[name] = Scraper.create(complete_setup, related_scrapers)
         
       end

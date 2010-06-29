@@ -19,7 +19,8 @@ module CheeseGrater
                       :pager            => Pager.create(setup[:pager]),
                       :is_root          => setup[:root],
                       :related_scrapers => related_scrapers,
-                      :scrapers         => setup[:scrapers]
+                      :scrapers         => setup[:scrapers],
+                      :name             => setup[:name]
       end
     end
 
@@ -31,6 +32,14 @@ module CheeseGrater
       @is_root          = setup[:is_root] 
       @pager            = setup[:pager] || {}
       @scrapers         = setup[:scrapers] || {}
+      @name             = setup[:name]
+      
+      if @name && Helper.const_defined?(@name)
+        @helper = Helper.const_get(@name).new
+      else 
+        @helper = Helper::Base.new
+      end
+      
     end
 
     def run
@@ -58,7 +67,7 @@ module CheeseGrater
       @is_root
     end
     
-    attr_accessor :requests, :response, :vos, :pager, :is_root, :related_scrapers, :scrapers
+    attr_accessor :requests, :response, :vos, :pager, :is_root, :related_scrapers, :scrapers, :name, :helper
     
     
     protected
@@ -86,11 +95,12 @@ module CheeseGrater
       vos.each do |vo|
         
         response.items(vo.item_path, vo.fields) do |found_vo_fields|
+          
           # for each set of VO fields found in the response
           # create a new instance of the vo, and give it a uuid
           found_vo = vo.dup
-          found_vo.fields = found_vo_fields.merge({:uuid => Scraper::UUID_GEN.generate})
-        
+          found_vo.fields = @helper.format_vo_fields(found_vo.name,found_vo_fields).merge({:uuid => Scraper::UUID_GEN.generate})
+          
           # setup all related Vo scrapes
           found_vo.related_to.each_pair do |name, related_setup|
           
@@ -102,7 +112,7 @@ module CheeseGrater
               scraper = related_scrapers[name]
             
               response.items(related_setup[:item_path], related_setup[:fields]) do |fields|
-                scraper.request.fields.merge!(fields)
+                scraper.request.fields.merge!(@helper.format_scraper_fields(name,fields))
                 scraper.response.vos[name][:related_to].merge(found_vo.name => found_vo.fields[:uuid])
                 yield scraper
               end
@@ -113,7 +123,7 @@ module CheeseGrater
               related_vo = Vo.create(related_setup.merge(:name => name))
               response.items(related_vo.item_path, related_vo.fields) do |related_vo_fields|
                 found_related_vo = related_vo.dup
-                found_related_vo.fields.merge!(related_vo_fields)
+                found_related_vo.fields.merge!(@helper.format_related_vo_fields(found_related_vo.name,related_vo_fields))
                 found_vo.related_to[name] = found_related_vo
               end
             

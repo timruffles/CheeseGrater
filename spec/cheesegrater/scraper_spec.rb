@@ -10,7 +10,7 @@ describe CheeseGrater::Scraper do
     @fixtures = YAML.load_file(root + '/fixtures/scraper.yml').keys_to_symbols
     @xpath_response = Response::XpathHtml.new
     
-    @vo_for_fixture_one = [Vo.new({:fields => 
+    @vos_for_fixture_one = [Vo.new({:fields => 
                       {:location_code => "./@value"},
                   :related_to => {},
                   :item_path => "//*[@id='location']/*[@value!='-999']"})]
@@ -78,7 +78,7 @@ describe CheeseGrater::Scraper do
       @xpath_response.raw = @fixtures[:one]
       
       results = []
-      @scraper.send(:read_response, @vo_for_fixture_one, @xpath_response) do |scraped|
+      @scraper.send(:read_response, @vos_for_fixture_one, @xpath_response) do |scraped|
         results << scraped
       end
       
@@ -135,21 +135,63 @@ describe CheeseGrater::Scraper do
                 fields:
                     title: //h1[1]
                 related_to:
-                    Organiser:
+                    Scraper::Organiser:
                         item_path: id('rightContent')
                         fields:
                             name: id('rightContent')/p/strong[contains(.,'Organised By')]/..
           YAML
           ).keys_to_symbols
           vo = vos[0]
-          vo.make_uuid!
+          uuid = 'xyz'
+          vo.fields[:uuid] = uuid
           
           @scraper.send(:read_response, vos, @xpath_response) do |scraped|
             results << scraped
           end
           results.length.should == 2
-          results.each {|scraper| scraper.vos[:Organiser].related_to[:Event].should == vo.uuid}
+          results.each {|scraper| scraper.vos[:Organiser].related_to[:Event].should == uuid}
           
+        end
+        
+      end
+      
+    end
+    
+    context "when a helper class exists" do
+      
+      
+      module CheeseGrater
+        class Scraper
+          module Helper
+            class Test
+              
+              def included_method
+                
+              end
+              
+              def format_vo_fields name, fields
+                fields
+              end
+              
+            end
+          end
+        end
+      end
+      
+      it "should instantiate that module on initialization" do
+        
+        scraper = Scraper.new({:name => 'Test'})
+        (Scraper::Helper::Test === scraper.helper).should == true
+        (scraper.helper.respond_to? :included_method).should == true
+      end
+      
+      it "should apply the helper methods as hooks" do
+        
+        scraper = Scraper.new({:name => 'Test'})
+        scraper.helper.should_receive(:format_vo_fields).exactly(5).times.and_return({})
+        
+        @xpath_response.raw = @fixtures[:one]
+        scraper.send(:read_response, @vos_for_fixture_one, @xpath_response) do |scraped|
         end
         
       end
