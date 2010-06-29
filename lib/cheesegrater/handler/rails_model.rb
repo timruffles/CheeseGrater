@@ -18,11 +18,11 @@ module CheeseGrater
           # if it's a VO, create the model using the VO's fields
           if uuid_or_vo.respond_to? :fields
             
-            relation = related_model.new( vo.fields )
+            relation = related_model.new( uuid_or_vo.fields )
             
           else
             
-            relation = related_model.find_by_uuid(uuid)
+            relation = related_model.find_by_uuid(uuid_or_vo)
             
           end
           
