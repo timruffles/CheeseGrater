@@ -90,7 +90,6 @@ module CheeseGrater
     
     # read all items from response
     def read_response vos, response, related_scrapers = {}, scrapers = {}
-      
       # retrieve all items and yield vos, and any related vos
       vos.each do |vo|
         
@@ -109,11 +108,14 @@ module CheeseGrater
             # in the second case we relate the scraper's found_vo.back to this found_vo. with this found_vo.s UUID
             if is_scraper? name.to_s
             
-              scraper = related_scrapers[name]
+              # at mo, just need the first part of the name, the Scraper which is unique
+              # TODO need to allow for full paths
+              related_scraper_name, related_vo_name = name.to_s.split('::')
+              scraper = related_scrapers[related_scraper_name.to_sym]
             
               response.items(related_setup[:item_path], related_setup[:fields]) do |fields|
-                scraper.request.fields.merge!(@helper.format_scraper_fields(name,fields))
-                scraper.response.vos[name][:related_to].merge(found_vo.name => found_vo.fields[:uuid])
+                scraper.requests.each {|r| r.fields.merge!(@helper.format_scraper_fields(name,fields))}
+                scraper.vos[related_vo_name.to_sym].related_to.merge!(found_vo.name => found_vo.fields[:uuid])
                 yield scraper
               end
             

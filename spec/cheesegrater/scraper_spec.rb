@@ -127,7 +127,7 @@ describe CheeseGrater::Scraper do
         
         it "should yield each of the related vo scrapers with the original vo's UUID in their relations'" do
           
-          @xpath_response.raw = @fixtures[:related_vos_external]
+          @xpath_response.raw = @fixtures[:related_vos_on_page]
           
           vos = Vo.create_all YAML.load(<<-YAML
             Event:
@@ -141,16 +141,28 @@ describe CheeseGrater::Scraper do
                             name: id('rightContent')/p/strong[contains(.,'Organised By')]/..
           YAML
           ).keys_to_symbols
-          vo = vos[0]
-          uuid = 'xyz'
-          vo.fields[:uuid] = uuid
           
-          @scraper.send(:read_response, vos, @xpath_response) do |scraped|
+          related_scraper = Scraper.new({
+            :requests => [
+              Request::Base.new({
+                                  :fields => {},
+                               })],
+
+             :vos => {
+
+               :Organiser => Vo.new({})
+
+             }
+
+          })
+          
+          results = []
+          @scraper.send(:read_response, vos, @xpath_response, {:Scraper => related_scraper}) do |scraped|
             results << scraped
           end
+          related_scraper, vo = results
           results.length.should == 2
-          results.each {|scraper| scraper.vos[:Organiser].related_to[:Event].should == uuid}
-          
+          related_scraper.vos[:Organiser].related_to[:Event].should == vo.fields[:uuid]
         end
         
       end
