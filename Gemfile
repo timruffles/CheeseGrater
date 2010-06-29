@@ -23,3 +23,9 @@ gem 'nokogiri'
 gem 'log4r'
 
 # cli
+
+
+
+# used in rails app
+gem 'mysql'
+gem 'activerecord'
