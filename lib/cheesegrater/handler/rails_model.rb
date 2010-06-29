@@ -16,29 +16,22 @@ module CheeseGrater
           
           # if it's a UUID, retrieve the model by that
           # if it's a VO, create the model using the VO's fields
-          if uuid_or_vo.respond_to? :fields
-            
-            relation = related_model.new( uuid_or_vo.fields )
-            
+          if vo_or_uuid.respond_to? :fields
+            relation_model = related_model.new(vo_or_uuid.fields)
           else
-            
-            relation = related_model.find_by_uuid(uuid_or_vo)
-            
+            relation_model = related_model.find_by_uuid(vo_or_uuid)
           end
           
-          
           # now reflect the relationships and work out which VO needs to be added to which
-          if relation.is_many?
+          if relation_model.is_many?
             relation[vo.name] << model
           else
             relation[vo.name] = model
-          end
-          
+          end          
         end
         
         # save our model, we're done!
-        model.save
-        
+        model.save        
       end
       
       
