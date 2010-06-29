@@ -88,8 +88,6 @@ describe CheeseGrater::Scraper do
       
     end
     
-    it "should yield related scrapers"
-    
     context "given a vo with a list of related vos" do
     
       context "when the vo data is present on the same page" do
