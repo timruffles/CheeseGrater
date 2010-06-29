@@ -16,6 +16,11 @@ ActiveRecord::Base.establish_connection(
   :password => ""
 )
 
+# freaks out loading acts as taggable on
+#models_dir = File.dirname(__FILE__) + '/../../appq/app/models'
+#load("#{models_dir}/event.rb")
+#load("#{models_dir}/organisation.rb")
+
 class Event < ActiveRecord::Base
   belongs_to :organisation
 end
@@ -24,7 +29,20 @@ class Organisation < ActiveRecord::Base
   has_many :events
 end
 
-puts Event.all
+puts ""
+puts ""
+p Event.find_or_create_by_uuid('123')
+p Event.find_by_uuid('123')
+puts ""
+p Event.find_all_by_uuid('123').count
+p Event.count_by_sql("SELECT COUNT(*) FROM events WHERE uuid = '123'")
+puts ""
+p Event.find_by_sql("SELECT * FROM events WHERE uuid = '123'")
+p Event.find_by_sql("SELECT * FROM events WHERE uuid = '123'")[0].class
+puts ""
+p ActiveRecord::Base.connection.execute("SELECT * FROM events WHERE uuid = '123'")
+puts ""
+puts ""
 
 #ENV['RAILS_ENV'] = ARGV.first || ENV['RAILS_ENV'] || 'development'  
 #require File.expand_path(File.dirname(__FILE__) + "/../../appq/config/application")

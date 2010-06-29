@@ -3,11 +3,8 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
+# put bundler setup here instead?
 require "resque"
-
-# load cheesegrater lib classes! (otherwise resque workers will FAILLLL)
-#lib_dir = File.dirname(__FILE__) + "/lib/"
-#require lib_dir + 'cheesegrater'
 
 # load cheesy lib tasks
 lib_tasks_dir = File.dirname(__FILE__) + '/lib/tasks'
