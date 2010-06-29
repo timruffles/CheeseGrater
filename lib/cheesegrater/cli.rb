@@ -1,6 +1,7 @@
 require 'ostruct'
 require 'optparse'
 
+# docs: http://www.ensta.fr/~diam/ruby/online/ruby-doc-stdlib/libdoc/optparse/rdoc/classes/OptionParser.html
 module CheeseGrater
   
   class Cli
@@ -15,10 +16,16 @@ module CheeseGrater
       
       begin
       
-        @options = read_options args
+        #puts args.inspect
+        args = read_options args
+        #puts args.inspect
         
+        p @options
+
         loader = Loader.new
       
+        #p @options
+
         (files = args).each do |file|
           path = Pathname.new(file)
           config = YAML.load_file(path.absolute? ? path.realpath : "#{Dir.getwd}/#{path}")
@@ -26,6 +33,9 @@ module CheeseGrater
           loader.load_scrapers config
         end
         
+        #p @options
+        #exit
+      
         logger.info "Found #{loader.root_scrapers.length} root scrapers"
         runner.run loader.root_scrapers
       
@@ -42,7 +52,7 @@ module CheeseGrater
     protected
     
     def runner
-      @runner ||= Runner.create(@options.runner || 'single')  # todo, why isn't this getting set in options?
+      @runner ||= Runner.create(@options.runner || 'single')  # todo, why isn't this setting in options?
     end
     
     def logger
@@ -52,7 +62,7 @@ module CheeseGrater
       @logger
     end
     
-    def read_options 
+    def read_options args
       options               = OpenStruct.new {
         runner = 'single'
       }
@@ -63,8 +73,8 @@ module CheeseGrater
         opts.separator ""
         opts.separator "Options:"
         
-        opts.on("-r", "--runner", "Specify which runner to use to run scrapers") do
-          exit
+        opts.on("-r", "--runner [RUNNER]", "Specify which runner to use to run scrapers") do |r|
+          options.runner = r
         end
         
         opts.separator ""
@@ -83,7 +93,9 @@ module CheeseGrater
         
       end
       
+      
       opts.parse!(args)
+      @options = options
       args
     end
   end
