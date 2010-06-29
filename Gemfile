@@ -24,8 +24,7 @@ gem 'log4r'
 
 # cli
 
-
-
 # used in rails app
+gem 'fastercsv'
 gem 'mysql'
 gem 'activerecord'
