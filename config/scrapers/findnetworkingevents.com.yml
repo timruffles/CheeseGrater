@@ -3,9 +3,11 @@ FindNetworkingEvents:
         #should run before other scrapers:
         root: true
         request:
-            format: Http
-            endpoint: http://www.findnetworkingevents.com/events/index.cfm?action=eventslist&region=1
-            fields: {}
+            format: Querystring
+            endpoint: http://www.findnetworkingevents.com
+            fields: {
+                no_key: /events/index.cfm?action=eventslist&region=1
+            }
         response:
             type: XpathHtml
         scrapers:
@@ -13,6 +15,10 @@ FindNetworkingEvents:
                 item_path: //*[@summary="Results"]
                 fields:
                     no_key: .//*[@class='quoteTxt']/a[1]/@href
+            GreaterLondonEvents:
+                item_path: (id('rightContent')/*[@class='pagination'])[1]//a/strong[contains(.,'Next')]/..
+                fields:
+                    no_key: ./@href
     FnEventDetails:
         request:
             endpoint: http://www.findnetworkingevents.com/
@@ -31,13 +37,12 @@ FindNetworkingEvents:
                         cost: .//*[@class="quoteMid"]/following-sibling::p[1]
                         target_audience: UNKNOWN
                         notes: .//*[@class="quoteMid"]/following-sibling::p[2]
-                        url: ENDPOINT
-                        telephone: UNKNOWN
-                        email: UNKNOWN
-                        people: UNKNOWN
+                        url:
+                        telephone:
+                        email:
+                        people:
                     related_to:
                         Organiser:
-                            item_query: //*[@id='rightContent']
+                            item_path: id('rightContent')
                             fields:
-                                name:
-                                url: (id('rightContent')/p[contains(.,'Details')])[last()]
+                                name: (id('rightContent')/p[contains(.,'Organised By')])[last()]

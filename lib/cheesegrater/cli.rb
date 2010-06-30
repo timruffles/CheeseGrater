@@ -58,8 +58,8 @@ module CheeseGrater
     def logger
       # ensure root logger also logs to stdout
       super
-      @logger.add Outputter.stdout unless @logger.outputters.include? Outputter.stdout
-      @logger
+      GraterLog.add Outputter.stdout unless GraterLog.outputters.include? Outputter.stdout
+      GraterLog
     end
     
     def read_options args

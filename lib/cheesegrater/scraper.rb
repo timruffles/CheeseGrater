@@ -43,7 +43,6 @@ module CheeseGrater
     end
 
     def run
-      
       logger.info "#{self.name} running"
       
       # take each request from make_requests(), and then pass the response
@@ -93,7 +92,6 @@ module CheeseGrater
       # retrieve all items and yield vos, and any related vos
       logger.info("Trying to find #{vos.length} vos") if vos.length > 0
       vos.each do |vo|
-        
         response.items(vo.item_path, vo.fields) do |found_vo_fields|
           
           # for each set of VO fields found in the response
@@ -126,7 +124,7 @@ module CheeseGrater
             
               # create and setup the related vo, storing it in found_vo
               related_vo = Vo.create(related_setup.merge(:name => name))
-              response.items(related_vo.item_path, related_vo.fields) do |related_vo_fields|
+              response.items(related_vo.fields) do |related_vo_fields|
                 found_related_vo = related_vo.dup
                 found_related_vo.fields.merge!(@helper.format_related_vo_fields(found_related_vo.name,related_vo_fields))
                 logger.info("Relating #{name} Vo to #{vo.name}")

@@ -26,6 +26,10 @@ BusinessLink:
                         telephone: Unknown
                         email: Unknown
                         people: Unknown
+                    related_to:
+                        Organiser:
+                            fields:
+                                name: ./following-sibling::table[1]//tr[3]/td[1]/span
         pager:
             next_page_complete_endpoint: //*[@class='resultnav']//a[last() and contains(.,'Next')]/@href
             

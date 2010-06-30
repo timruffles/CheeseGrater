@@ -14,6 +14,7 @@ module CheeseGrater
         @is_html ? ::Nokogiri::HTML(raw) : ::Nokogiri::XML(raw)
       end
       
+      # TODO this is hard to use to requery in item context, rewrite!
       def items item_path, fields
         items = @doc.xpath(item_path)
         logger.info "#{self.class} got #{items.length} items with xpath #{item_path}"
@@ -28,7 +29,7 @@ module CheeseGrater
                      
             filled_in_fields[field] = result
           end
-          yield filled_in_fields
+          yield filled_in_fields, item
           
         end
         
