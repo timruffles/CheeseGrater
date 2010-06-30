@@ -99,7 +99,7 @@ module CheeseGrater
           found_vo.fields = @helper.format_vo_fields(found_vo.name,found_vo_fields)
           found_vo.fields.merge!({:uuid => Scraper::UUID_GEN.generate})
           
-          setup_relations!(found_vo, item_scope, response, &yielder)
+          setup_relations!(found_vo, item_scope, related_scrapers, response, &yielder)
             
           # yield up that VO goodness!
           yielder.call(found_vo)
@@ -108,12 +108,12 @@ module CheeseGrater
 
       end
       
-      read_scrapers(scrapers, response, &yielder)
+      read_scrapers(scrapers, related_scrapers, response, &yielder)
     end
     
     # sets up a VOs relation_to objects in place, yielding all related scrapers rather than including
     # them in the VO
-    def setup_relations! the_vo, vo_scope, response
+    def setup_relations! the_vo, vo_scope, related_scrapers, response
       
       the_vo.related_to.each_pair do |name, related_setup|
         
@@ -129,7 +129,7 @@ module CheeseGrater
           scraper                               = related_scrapers[related_scraper_name.to_sym]
           
           relation_handler = lambda do |fields|
-             logger.info("Yiedling #{scraper.class} to scraper related vo")
+             logger.info("Yielding #{scraper.class} to scraper related vo")
             
              scraper.requests.each {|r| r.fields.merge!(@helper.format_scraper_fields(name,fields))}
              scraper.vos[related_vo_name.to_sym].related_to.merge!(the_vo.name => the_vo.fields[:uuid])
@@ -143,10 +143,10 @@ module CheeseGrater
           related_vo = Vo.create(related_setup.merge(:name => name))
           
           relation_handler = lambda do |fields|
-            logger.info("Relating #{name} Vo to #{vo.name}")
+            logger.info("Relating #{name} Vo to #{the_vo.name}")
             
             found_related_vo          = related_vo.dup
-            found_related_vo.fields.merge!(@helper.format_related_vo_fields(found_related_vo.name,related_vo_fields))
+            found_related_vo.fields.merge!(@helper.format_related_vo_fields(found_related_vo.name,fields))
             the_vo.related_to[name] = found_related_vo
           end
         
@@ -160,7 +160,7 @@ module CheeseGrater
                 end
         
         scope.to_a.each do |scope|
-          relation_handler.call(response.hash_query(related_setup[:item_path], scope))
+          relation_handler.call(response.hash_query(related_setup[:fields], scope))
         end
         
       end
@@ -168,7 +168,7 @@ module CheeseGrater
     end
     
     # creates and yields all scrapers found in response
-    def read_scrapers scrapers, response
+    def read_scrapers scrapers, related_scrapers, response
       
       logger.info("Trying to find #{scrapers.length} scrapers") if scrapers.length > 0
       
@@ -181,7 +181,7 @@ module CheeseGrater
 
           # TODO it should make request fields into sets (eg, no repeated fields)
           scraper.requests.each do |request| 
-            request.fields.merge!(fields)
+            request.fields.merge!(scraper_fields)
           end
           
           # yield the finished scraper

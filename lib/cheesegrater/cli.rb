@@ -5,6 +5,7 @@ require 'optparse'
 module CheeseGrater
   
   class Cli
+    
     include Logging
     
     define_exception :CliError

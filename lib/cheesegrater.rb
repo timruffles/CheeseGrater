@@ -1,4 +1,4 @@
-# wtf does all this mean? looks a bit OTT??
+require 'kwalify'
 
 lib_dir = File.dirname(__FILE__)
 require lib_dir + '/cheesegrater/coreextensions'
@@ -13,5 +13,3 @@ def _____req_all file
   end
 end
 _____req_all(lib_dir + '/cheesegrater')
-
-require 'kwalify'

@@ -6,7 +6,7 @@ module CheeseGrater
 
     GraterLog = Logger.new('graterlog')
     
-    GraterLog.outputters << RollingFileOutputter.new("error_log", {
+    RollingFileOutputter.new("rolling_outputter", {
       "filename" => "log/grater.log",
       "maxsize" => 16000
     })

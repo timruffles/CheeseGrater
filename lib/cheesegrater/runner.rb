@@ -41,7 +41,14 @@ module CheeseGrater
     end
     
     class Resque
+      
+      include Logging
+      
       @queue = :scrape
+      
+      def logger
+        GraterLogger.add Outputter.rolling_outputter unless GraterLogger.outputters.include? Outputter.rolling_outputter
+      end
 
       # RUN ROOT SCRAPERS, ADD TO :SCRAPER QUEUE
       # que = list of root scrapers

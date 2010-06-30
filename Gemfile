@@ -15,9 +15,7 @@ end
 gem 'resque'
 
 # setup
-require 'yaml'
 gem 'kwalify'
-require 'kwalify'
 
 # scraper
 gem 'json_pure'
@@ -30,5 +28,5 @@ gem 'sanitize'
 
 # used in rails app
 gem 'fastercsv'
-gem 'mysql'
+#gem 'mysql'
 gem 'activerecord'
