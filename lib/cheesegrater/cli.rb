@@ -1,10 +1,10 @@
 require 'ostruct'
 require 'optparse'
 
+# docs: http://www.ensta.fr/~diam/ruby/online/ruby-doc-stdlib/libdoc/optparse/rdoc/classes/OptionParser.html
 module CheeseGrater
   
   class Cli
-    
     include Logging
     
     define_exception :CliError
@@ -12,11 +12,8 @@ module CheeseGrater
     Version = [0,1]
     
     def run args
-      
       begin
-      
-        @options = read_options args
-        
+        args = read_options args
         loader = Loader.new
       
         (files = args).each do |file|
@@ -35,8 +32,7 @@ module CheeseGrater
         logger.error e
       rescue Exception => e  
         logger.error e
-      end
-      
+      end      
     end
     
     protected
@@ -63,8 +59,8 @@ module CheeseGrater
         opts.separator ""
         opts.separator "Options:"
         
-        opts.on("-r", "--runner", "Specify which runner to use to run scrapers") do
-          exit
+        opts.on("-r", "--runner [RUNNER]", "Specify which runner to use to run scrapers") do |r|
+          options.runner = r
         end
         
         opts.separator ""
@@ -80,11 +76,11 @@ module CheeseGrater
           puts Version.join('.')
           exit
         end
-        
       end
       
       opts.parse!(args)
-      options
+      @options = options
+      args
     end
   end
 end
