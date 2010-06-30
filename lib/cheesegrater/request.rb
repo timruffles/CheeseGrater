@@ -7,7 +7,6 @@ module CheeseGrater
     
     Csv = 'csv'
     OnePerRequest = 'one_per_request'
-    
     class << self
 
       # create a scraper with a prepared config hash (all fields expanded/formatted etc)
@@ -52,20 +51,20 @@ module CheeseGrater
             value = setup[:value]
             case setup[:type]
 
-            when OnePerRequest
+              when OnePerRequest
 
-              one_per_request_count += 1
-              raise MultiplePerRequestFieldError unless one_per_request_count == 1
+                one_per_request_count += 1
+                raise MultiplePerRequestFieldError unless one_per_request_count == 1
 
-              # use first one for initial request, and rest for additional, yielding n - 1 new requests
-              fields[field] = value.shift
-              (value.map {|val| {field => val} }).each do |overrides|
-                yield overrides
-              end
+                # use first one for initial request, and rest for additional, yielding n - 1 new requests
+                fields[field] = value.shift
+                (value.map {|val| {field => val} }).each do |overrides|
+                  yield overrides
+                end
 
-            when Csv
-              fields[field] = value.join(',') 
-
+              when Csv
+                fields[field] = value.join(',') 
+                
             end
           end
           

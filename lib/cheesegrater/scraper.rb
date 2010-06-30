@@ -44,7 +44,7 @@ module CheeseGrater
 
     def run
       
-      logger.info "#{self.class} running"
+      logger.info "#{self.name} running"
       
       # take each request from make_requests(), and then pass the response
       # to read_response, yielding up the final result
@@ -91,6 +91,7 @@ module CheeseGrater
     # read all items from response
     def read_response vos, response, related_scrapers = {}, scrapers = {}
       # retrieve all items and yield vos, and any related vos
+      logger.info("Trying to find #{vos.length} vos") if vos.length > 0
       vos.each do |vo|
         
         response.items(vo.item_path, vo.fields) do |found_vo_fields|
@@ -99,6 +100,7 @@ module CheeseGrater
           # create a new instance of the vo, and give it a uuid
           found_vo = vo.dup
           found_vo.fields = @helper.format_vo_fields(found_vo.name,found_vo_fields).merge({:uuid => Scraper::UUID_GEN.generate})
+          logger.info("Found a #{vo.name} Vo")
           
           # setup all related Vo scrapes
           found_vo.related_to.each_pair do |name, related_setup|
@@ -116,6 +118,7 @@ module CheeseGrater
               response.items(related_setup[:item_path], related_setup[:fields]) do |fields|
                 scraper.requests.each {|r| r.fields.merge!(@helper.format_scraper_fields(name,fields))}
                 scraper.vos[related_vo_name.to_sym].related_to.merge!(found_vo.name => found_vo.fields[:uuid])
+                logger.info("Yiedling #{scraper.class} to scraper related vo")
                 yield scraper
               end
             
@@ -126,6 +129,7 @@ module CheeseGrater
               response.items(related_vo.item_path, related_vo.fields) do |related_vo_fields|
                 found_related_vo = related_vo.dup
                 found_related_vo.fields.merge!(@helper.format_related_vo_fields(found_related_vo.name,related_vo_fields))
+                logger.info("Relating #{name} Vo to #{vo.name}")
                 found_vo.related_to[name] = found_related_vo
               end
             
@@ -140,27 +144,28 @@ module CheeseGrater
       end
       
       # create and yield all scrapers found
+      logger.info("Trying to find #{scrapers.length} scrapers") if scrapers.length > 0
       scrapers.each_pair do |name, scraper_setup|
         
         response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|
-          
           scraper = related_scrapers[name].deep_clone
           
           # TODO it should make request fields into sets (eg, no repeated fields)
           scraper.requests.each do |request| 
             request.fields.merge!(fields)
           end
+          logger.info("Yielding a #{scraper.name} scraper found with #{scraper_setup[:item_path]}")
           yield scraper
         end
 
       end
     end
+    
+    # determinies whether a name, from a related_to field, is another scraper, or a VO
+    def is_scraper? name
+      name.include? '::'
+    end
 
-  end
-  
-  # determinies whether a name, from a related_to field, is another scraper, or a VO
-  def is_scraper? name
-    name.include? '::'
   end
   
 end

@@ -12,4 +12,12 @@ describe CheeseGrater::Request::Querystring do
     /age=18/i.should match @qs.endpoint
   end
   
+  it "should add no key params after a slash" do
+    @setup[:fields][:no_key] = ['html.html']
+    @qs =  CheeseGrater::Request::Querystring.new(@setup)
+    /html\.html\?name=john\+doe/i.should match @qs.endpoint
+  end
+  
+  
+  
 end

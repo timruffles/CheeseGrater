@@ -85,7 +85,7 @@ describe CheeseGrater::Request do
     end 
 
   end
-    
+  
   
   
 end

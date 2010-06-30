@@ -19,7 +19,7 @@ module CheeseGrater
       def run
         load(endpoint)
       end
-  
+      
       def load endpoint
          raw_response = nil
          open(endpoint) do |response|

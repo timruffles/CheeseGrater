@@ -31,5 +31,6 @@ gem 'json_pure'
 gem 'nokogiri' 
 gem 'log4r'
 gem 'uuid', :git => 'http://github.com/assaf/uuid.git', :tag => 'v2.3.1'
+gem 'sanitize'
 
 # cli

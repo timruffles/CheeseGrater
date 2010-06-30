@@ -14,7 +14,6 @@
                     fields:
                         - ./td[2]/a/@href
     EventDetail:
-        root: true
         request:
             format: Restful
             endpoint: http://www.4networking.biz/events/

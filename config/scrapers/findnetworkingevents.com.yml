@@ -1,33 +1,36 @@
 FindNetworkingEvents:
-    EventLocationSearch:
+    GreaterLondonEvents:
         #should run before other scrapers:
         root: true
         request:
             format: Http
-            endpoint: http://www.findnetworkingevents.com/
+            endpoint: http://www.findnetworkingevents.com/events/index.cfm?action=eventslist&region=1
             fields: {}
         response:
-            scrapers:
-                EventDetails:
-                    item_query: //*[@summary="Results"]
-                    fields:
-                        - .//*[@class='quoteTxt']/a[1]/@href
-    EventDetails:
+            type: XpathHtml
+        scrapers:
+            FnEventDetails:
+                item_path: //*[@summary="Results"]
+                fields:
+                    no_key: .//*[@class='quoteTxt']/a[1]/@href
+    FnEventDetails:
         request:
-            format: Restful
-        response:
             endpoint: http://www.findnetworkingevents.com/
+            format: Querystring
+            fields: {}
+        response:
+            type: XpathHtml
             vos:
                 Event:
-                    item_query: id('rightContent')
+                    item_path: id('rightContent')
                     fields:
-                        title: //h1[1]
-                        description: ./p[1]
+                        title: ./p[1]
+                        description: (id('rightContent')/p[contains(.,'Details')])[1]
                         start_date: ./p[2]
-                        location: ./p[@class="quoteTxt"]
-                        cost: ./p[@class="quoteTxt"]/following-sibling::p[1]
+                        location: .//p[@class="quoteTxt"]
+                        cost: .//*[@class="quoteMid"]/following-sibling::p[1]
                         target_audience: UNKNOWN
-                        notes: ./p[@class="quoteTxt"]/following-sibling::p[2]
+                        notes: .//*[@class="quoteMid"]/following-sibling::p[2]
                         url: ENDPOINT
                         telephone: UNKNOWN
                         email: UNKNOWN
