@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>prepare_fields_and_override_hashes (CheeseGrater::Request)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/cheesegrater/request.rb, line 41</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare_fields_and_override_hashes</span> <span class="ruby-identifier">fields</span>
+
+        <span class="ruby-identifier">fields</span> = <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">dup</span>
+        <span class="ruby-identifier">one_per_request_count</span> = <span class="ruby-value">0</span>
+
+        <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span>, <span class="ruby-identifier">setup</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Hash</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">setup</span>
+            <span class="ruby-identifier">value</span> = <span class="ruby-identifier">setup</span>[<span class="ruby-identifier">:value</span>]
+            <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">setup</span>[<span class="ruby-identifier">:type</span>]
+
+            <span class="ruby-keyword kw">when</span> <span class="ruby-constant">OnePerRequest</span>
+
+              <span class="ruby-identifier">one_per_request_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+              <span class="ruby-identifier">raise</span> <span class="ruby-constant">MultiplePerRequestFieldError</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">one_per_request_count</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+
+              <span class="ruby-comment cmt"># use first one for initial request, and rest for additional, yielding n - 1 new requests</span>
+              <span class="ruby-identifier">fields</span>[<span class="ruby-identifier">field</span>] = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">shift</span>
+              (<span class="ruby-identifier">value</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span> {<span class="ruby-identifier">field</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">val</span>} }).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">overrides</span><span class="ruby-operator">|</span>
+                <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">overrides</span>
+              <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Csv</span>
+              <span class="ruby-identifier">fields</span>[<span class="ruby-identifier">field</span>] = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">','</span>) 
+
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+          
+          <span class="ruby-identifier">fields</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

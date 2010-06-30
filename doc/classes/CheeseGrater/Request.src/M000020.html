@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create_all (CheeseGrater::Request)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/cheesegrater/request.rb, line 23</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_all</span> <span class="ruby-identifier">config</span>
+        
+        <span class="ruby-identifier">field_overrides</span> = []
+
+        <span class="ruby-identifier">fields</span> = <span class="ruby-identifier">prepare_fields_and_override_hashes</span>(<span class="ruby-identifier">config</span>[<span class="ruby-identifier">:fields</span>]) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">overridden_fields_for_request</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">field_overrides</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">overridden_fields_for_request</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-comment cmt"># initial request which has formatted fields (eg csvs from [] to ,,), but otherwise is the same as config[:fields]</span>
+        <span class="ruby-identifier">field_overrides</span> <span class="ruby-operator">&lt;&lt;</span> {}
+
+        <span class="ruby-comment cmt"># return with all additiional requests required</span>
+        <span class="ruby-identifier">field_overrides</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">override_hash</span><span class="ruby-operator">|</span> 
+          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">merge</span>({<span class="ruby-identifier">:fields</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">deep_merge</span>(<span class="ruby-identifier">override_hash</span>)}))
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

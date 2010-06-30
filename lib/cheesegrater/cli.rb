@@ -5,7 +5,6 @@ require 'optparse'
 module CheeseGrater
   
   class Cli
-    
     include Logging
     
     define_exception :CliError
@@ -13,15 +12,8 @@ module CheeseGrater
     Version = [0,1]
     
     def run args
-      
       begin
-      
-        #puts args.inspect
         args = read_options args
-        #puts args.inspect
-        
-        p @options
-
         loader = Loader.new
       
         #p @options
@@ -45,8 +37,7 @@ module CheeseGrater
         logger.error e
       rescue Exception => e  
         logger.error e
-      end
-      
+      end      
     end
     
     protected
@@ -90,7 +81,6 @@ module CheeseGrater
           puts Version.join('.')
           exit
         end
-        
       end
       
       

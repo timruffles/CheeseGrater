@@ -12,14 +12,7 @@ group :test do
 	gem 'aruba'
 end
 
-
-# resque
-# group :resque do
-# 	gem 'redis'
-# 	gem 'redis-namespace'
-# 	gem 'yajl-ruby'
-# 	gem 'resque'
-# end
+gem 'resque'
 
 # setup
 require 'yaml'
@@ -33,3 +26,8 @@ gem 'log4r'
 gem 'uuid', :git => 'http://github.com/assaf/uuid.git', :tag => 'v2.3.1'
 
 # cli
+
+# used in rails app
+gem 'fastercsv'
+gem 'mysql'
+gem 'activerecord'

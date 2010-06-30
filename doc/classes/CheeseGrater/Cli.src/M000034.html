@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>read_options (CheeseGrater::Cli)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/cheesegrater/cli.rb, line 55</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read_options</span> <span class="ruby-identifier">args</span>
+      <span class="ruby-identifier">options</span>               = <span class="ruby-constant">OpenStruct</span>.<span class="ruby-identifier">new</span> {
+        <span class="ruby-identifier">runner</span> = <span class="ruby-value str">'single'</span>
+      }
+
+      <span class="ruby-identifier">opts</span> = <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opts</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">banner</span> = <span class="ruby-value str">&quot;Usage: grater [options] [&lt;file&gt;]&quot;</span>
+
+        <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+        <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Options:&quot;</span>
+        
+        <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-r&quot;</span>, <span class="ruby-value str">&quot;--runner&quot;</span>, <span class="ruby-value str">&quot;Specify which runner to use to run scrapers&quot;</span>) <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">exit</span>
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+        <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Utility:&quot;</span>
+
+        <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on_tail</span>(<span class="ruby-value str">&quot;-h&quot;</span>, <span class="ruby-value str">&quot;--help&quot;</span>, <span class="ruby-value str">&quot;Show this message&quot;</span>) <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-identifier">opts</span>
+          <span class="ruby-identifier">exit</span>
+        <span class="ruby-keyword kw">end</span>
+        
+        <span class="ruby-comment cmt"># Another typical switch to print the version.</span>
+        <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on_tail</span>(<span class="ruby-value str">&quot;--version&quot;</span>, <span class="ruby-value str">&quot;Show version&quot;</span>) <span class="ruby-keyword kw">do</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-constant">Version</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'.'</span>)
+          <span class="ruby-identifier">exit</span>
+        <span class="ruby-keyword kw">end</span>
+        
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">options</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
