@@ -54,14 +54,14 @@ module CheeseGrater
         
         # page_no, move to next?
         :page_no => lambda do |response|
-          if response && response.value(self[:items_on_page_path]) > 0
+          if response && response.scalar_query(self[:items_on_page_path]) > 0
             setup[:fields][:page_no] = current_page += 1
           end
         end,
         
         # endpoint: must come last, as replaces all request fields
         :next_page_complete_endpoint => lambda do |response|
-          if response && endpoint = response.value(self[:next_page_complete_endpoint])
+          if response && endpoint = response.scalar_query(self[:next_page_complete_endpoint])
             # no other fields required
             setup = {:endpoint => endpoint, :fields => {}}
           end

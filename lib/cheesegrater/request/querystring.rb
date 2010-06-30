@@ -9,7 +9,8 @@ module CheeseGrater
 
       def endpoint
         fields = @fields.dup
-        no_key = (fields.delete(:no_key) || []).to_a
+        no_key = fields.delete(:no_key)
+        no_key = no_key.to_a rescue [no_key]
         "#{@endpoint}".join_with('/',no_key.join).join_with('?',hash_to_query_s(fields))
       end
 

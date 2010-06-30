@@ -37,6 +37,8 @@ module CheeseGrater
             que << yielded
           end
         end
+        
+        p vos.to_yaml
       end   
     end
     

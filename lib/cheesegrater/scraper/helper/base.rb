@@ -46,7 +46,7 @@ module CheeseGrater
         
         def remove what_by_field, fields
           what_by_field.each do |field, to_remove|
-            to_remove.to_a.each do |remove|
+            (to_remove.to_a rescue [to_remove]).each do |remove|
               fields[field].gsub!(remove,'') if fields[field]
             end
           end
