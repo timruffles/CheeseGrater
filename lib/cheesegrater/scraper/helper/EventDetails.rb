@@ -33,6 +33,7 @@ module CheeseGrater
             super name, fields
           end
         end
+        
       end
     end
   end

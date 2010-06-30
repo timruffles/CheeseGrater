@@ -10,15 +10,22 @@ module CheeseGrater
         COMPLETE = {}
         
         def format_vo_fields name, fields
-          trim_all(fields)
+          trim_all(sanitize_all(fields))
         end
 
         def format_scraper_fields name, fields
-          trim_all(fields)
+          trim_all(sanitize_all(fields))
         end
 
         def format_related_vo_fields name, fields
-          trim_all(fields)
+          trim_all(sanitize_all(fields))
+        end
+        
+        def sanitize_all fields, setup = BASIC
+          fields.each_pair do |field, value|
+            fields[field] = Sanitize.clean(value, setup) rescue value
+          end
+          fields
         end
         
         def sanitize_fields which, fields, setup = BASIC

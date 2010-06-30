@@ -3,7 +3,7 @@ EventBrite:
         format: Querystring
         fields:
             app_key: MWY0YWRmMjNhZjFl
-    Events: 
+    EbEvents: 
         root: true
         request:
             endpoint: http://www.eventbrite.com/xml/event_search
@@ -27,6 +27,6 @@ EventBrite:
                         people: Unknown
                         notes: Unknown
                     related_to:
-                        EventBrite::Organiser::Organiser
+                        EbOrganiser::Organiser
                             fields: # these fields are used to power the Organiser's request
                                 id: [./organiser/id]
