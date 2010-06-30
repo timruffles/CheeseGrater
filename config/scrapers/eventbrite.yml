@@ -1,6 +1,6 @@
 EventBrite:
     request:
-        format: querystring
+        format: Querystring
         fields:
             app_key: MWY0YWRmMjNhZjFl
     Events: 
@@ -13,7 +13,7 @@ EventBrite:
                     type: csv
                     value: [business]
         response:
-            type: xpath
+            type: Xpath
             vos:
                 Event:
                     item_path: //event

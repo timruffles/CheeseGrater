@@ -189,6 +189,7 @@ module CheeseGrater
           yield scraper
         end
       end
+
     end
     
     # determinies whether a name, from a related_to field, is another scraper, or a VO
