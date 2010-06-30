@@ -7,36 +7,28 @@ module CheeseGrater
       
       def raw= doc
         @raw = doc.dup
-        @doc = make_doc(doc)
+        @document = make_doc(doc)
       end
       
       def make_doc raw
         @is_html ? ::Nokogiri::HTML(raw) : ::Nokogiri::XML(raw)
       end
       
-      # TODO this is hard to use to requery in item context, rewrite!
-      def items item_path, fields
-        items = @doc.xpath(item_path)
-        logger.info "#{self.class} got #{items.length} items with xpath #{item_path}"
-        
-        items.each do |item|
-          
-          # yield each set of filled fields
-          filled_in_fields = {}
-          fields.each_pair do |field, field_path|
-            selected = item.at_xpath field_path
-            result = xpath_to_scalar(selected)
-                     
-            filled_in_fields[field] = result
-          end
-          yield filled_in_fields, item
-          
-        end
-        
+      def query query, scope = @document
+        to_q = make_doc(scope) rescue scope
+        to_q.xpath(query)
       end
       
-      def value value_path
-         xpath_to_scalar(@doc.at_xpath(value_path))
+      def scalar_query query, scope = @document
+        to_q = make_doc(scope) rescue scope
+        xpath_to_scalar(to_q.at_xpath(query))
+      end
+      
+      def hash_query hash_of_queries, scope = @document
+        hash_of_queries.inject({}) do |filled_in, (field, query)|
+          filled_in[field] = scalar_query(query, scope)
+          filled_in
+        end
       end
       
       

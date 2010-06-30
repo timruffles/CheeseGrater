@@ -73,89 +73,121 @@ module CheeseGrater
 
     # make all paged requests, yielding the raw results from each
     def make_requests requests, pager
-
       requests.each do |request|
-
         # setup the request with the fields required to page
         pager.page(request) do |raw_response|
-          
           # yield up response to the run() method, retrieve and return the response for the pager
           response = yield raw_response
-          
         end
-
       end
     end
     
     # read all items from response
-    def read_response vos, response, related_scrapers = {}, scrapers = {}
-      # retrieve all items and yield vos, and any related vos
+    def read_response vos, response, related_scrapers = {}, scrapers = {}, &yielder
+      
       logger.info("Trying to find #{vos.length} vos") if vos.length > 0
+      
+      # retrieve all items and yield vos, and any related vos
       vos.each do |vo|
-        response.items(vo.item_path, vo.fields) do |found_vo_fields|
+        response.query(vo.item_path).each do |item_scope|
+          
+          found_vo_fields = response.hash_query(vo.fields, item_scope)
           
           # for each set of VO fields found in the response
           # create a new instance of the vo, and give it a uuid
-          found_vo = vo.dup
-          found_vo.fields = @helper.format_vo_fields(found_vo.name,found_vo_fields).merge({:uuid => Scraper::UUID_GEN.generate})
+          found_vo        = vo.dup
+          found_vo.fields = @helper.format_vo_fields(found_vo.name,found_vo_fields)
+          found_vo.fields.merge!({:uuid => Scraper::UUID_GEN.generate})
+          
+          setup_relations!(found_vo, item_scope, response, &yielder)
+            
+          # yield up that VO goodness!
+          yielder.call(found_vo)
           logger.info("Found a #{vo.name} Vo")
-          
-          # setup all related Vo scrapes
-          found_vo.related_to.each_pair do |name, related_setup|
-          
-            # two possibilities: either we have all the data we need on this page, or we'll need another scrape
-            # in the first we relate the found_vo.to the actual found_vo.we create with that data
-            # in the second case we relate the scraper's found_vo.back to this found_vo. with this found_vo.s UUID
-            if is_scraper? name.to_s
-            
-              # at mo, just need the first part of the name, the Scraper which is unique
-              # TODO need to allow for full paths
-              related_scraper_name, related_vo_name = name.to_s.split('::')
-              scraper = related_scrapers[related_scraper_name.to_sym]
-            
-              response.items(related_setup[:item_path], related_setup[:fields]) do |fields|
-                scraper.requests.each {|r| r.fields.merge!(@helper.format_scraper_fields(name,fields))}
-                scraper.vos[related_vo_name.to_sym].related_to.merge!(found_vo.name => found_vo.fields[:uuid])
-                logger.info("Yiedling #{scraper.class} to scraper related vo")
-                yield scraper
-              end
-            
-            else
-            
-              # create and setup the related vo, storing it in found_vo
-              related_vo = Vo.create(related_setup.merge(:name => name))
-              response.items(related_vo.fields) do |related_vo_fields|
-                found_related_vo = related_vo.dup
-                found_related_vo.fields.merge!(@helper.format_related_vo_fields(found_related_vo.name,related_vo_fields))
-                logger.info("Relating #{name} Vo to #{vo.name}")
-                found_vo.related_to[name] = found_related_vo
-              end
-            
-            end
-          
-          end
-          
-          yield found_vo
-        
         end
 
       end
       
-      # create and yield all scrapers found
-      logger.info("Trying to find #{scrapers.length} scrapers") if scrapers.length > 0
-      scrapers.each_pair do |name, scraper_setup|
+      read_scrapers(scrapers, response, &yielder)
+    end
+    
+    # sets up a VOs relation_to objects in place, yielding all related scrapers rather than including
+    # them in the VO
+    def setup_relations! the_vo, vo_scope, response
+      
+      the_vo.related_to.each_pair do |name, related_setup|
         
-        response.items(scraper_setup[:item_path], scraper_setup[:fields]) do |fields|
-          scraper = related_scrapers[name].deep_clone
+        # two possibilities: either we have all the data we need on this page, or we'll need another scrape:
+
+        # 1   in the first we relate the the_vo.to the actual the_vo.we create with that data
+        relation_handler = nil # this will be called once for each time the related thing is found
+        if is_scraper? name.to_s
+        
+          # at mo, just need the first part of the name, the Scraper which is unique
+          # TODO need to allow for full paths
+          related_scraper_name, related_vo_name = name.to_s.split('::')
+          scraper                               = related_scrapers[related_scraper_name.to_sym]
           
+          relation_handler = lambda do |fields|
+             logger.info("Yiedling #{scraper.class} to scraper related vo")
+            
+             scraper.requests.each {|r| r.fields.merge!(@helper.format_scraper_fields(name,fields))}
+             scraper.vos[related_vo_name.to_sym].related_to.merge!(the_vo.name => the_vo.fields[:uuid])
+             yield scraper
+          end
+        
+        # 2   in the second case we relate the scraper's the_vo.back to this the_vo. with this the_vo.s UUID
+        else
+        
+          # create and setup the related vo, storing it in the_vo
+          related_vo = Vo.create(related_setup.merge(:name => name))
+          
+          relation_handler = lambda do |fields|
+            logger.info("Relating #{name} Vo to #{vo.name}")
+            
+            found_related_vo          = related_vo.dup
+            found_related_vo.fields.merge!(@helper.format_related_vo_fields(found_related_vo.name,related_vo_fields))
+            the_vo.related_to[name] = found_related_vo
+          end
+        
+        end
+        
+        # are we querying the whole document, or just the item's scope?
+        scope = if related_setup[:item_path]
+                  response.query(related_setup[:item_path], vo_scope)
+                else
+                  vo_scope
+                end
+        
+        scope.to_a.each do |scope|
+          relation_handler.call(response.hash_query(related_setup[:item_path], scope))
+        end
+        
+      end
+      
+    end
+    
+    # creates and yields all scrapers found in response
+    def read_scrapers scrapers, response
+      
+      logger.info("Trying to find #{scrapers.length} scrapers") if scrapers.length > 0
+      
+      # create and yield all scrapers found
+      scrapers.each_pair do |name, scraper_setup|
+        response.query(scraper_setup[:item_path]).each do |item_scope|
+          
+          scraper        = related_scrapers[name].deep_clone
+          scraper_fields = response.hash_query(scraper_setup[:fields],item_scope)
+
           # TODO it should make request fields into sets (eg, no repeated fields)
           scraper.requests.each do |request| 
             request.fields.merge!(fields)
           end
+          
+          # yield the finished scraper
           logger.info("Yielding a #{scraper.name} scraper found with #{scraper_setup[:item_path]}")
           yield scraper
         end
-
       end
     end
     
