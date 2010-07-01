@@ -92,6 +92,7 @@ describe CheeseGrater::Scraper do
     
       context "when the vo data is present on the same page" do
         
+        # helper for following two yaml tests
         def run yaml
           @xpath_response.raw = @fixtures[:related_vos_on_page]
           
