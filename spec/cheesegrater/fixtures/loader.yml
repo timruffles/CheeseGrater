@@ -27,3 +27,23 @@ related_setup:
         even:
           nested: should be overridden
         id: [/]
+problem_one:
+    Group:
+        EbOrganiser:
+            request: 
+                format: Querystring
+                fields:
+                    id:
+            response:
+                type: Xpath
+                vos:
+                    Organiser:
+                        item_path: //organiser
+                        fields:
+                            telephone: ./telephone
+                            email: ./email
+            pager:
+                per_page:
+                    name: max
+                    amount: 100
+                page: page

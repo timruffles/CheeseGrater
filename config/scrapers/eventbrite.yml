@@ -12,21 +12,27 @@ EventBrite:
                 keywords:
                     type: csv
                     value: [business]
+                    max: 100
         response:
             type: Xpath
             vos:
                 Event:
                     item_path: //event
-                    handler: RailsModel
                     fields:
                         title: ./title
                         description: ./description
-                        location: [./venue/name,./venue/address,./venue/address_2,./venue/city,./venue/postal_code]
+                        location: [./venue/name, ./venue/address, ./venue/address_2, ./venue/city, ./venue/postal_code]
                         start_date: ./start_date
                         url: ./url
-                        people: Unknown
-                        notes: Unknown
+                        people:
+                        notes:
                     related_to:
-                        EbOrganiser::Organiser
+                        Organiser:
                             fields: # these fields are used to power the Organiser's request
-                                id: [./organiser/id]
+                                name: ./organizer/name
+                                description: ./organizer/description
+                                url: ./organizer/url
+        pager:
+            items_on_page_path: //events/summary/num_showing
+            page_no: page
+            

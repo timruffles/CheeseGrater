@@ -66,6 +66,12 @@ module CheeseGrater
       @is_root
     end
     
+    def get_vo name
+      vos.each do |vo|
+        return vo if vo.name == name
+      end
+    end
+    
     attr_accessor :requests, :response, :vos, :pager, :is_root, :related_scrapers, :scrapers, :name, :helper
     
     
@@ -95,15 +101,16 @@ module CheeseGrater
           
           # for each set of VO fields found in the response
           # create a new instance of the vo, and give it a uuid
-          found_vo        = vo.dup
+          found_vo        = vo.deep_clone
           found_vo.fields = @helper.format_vo_fields(found_vo.name,found_vo_fields)
           found_vo.fields.merge!({:uuid => Scraper::UUID_GEN.generate})
+          
+          logger.info("Found a #{vo.name} Vo")
           
           setup_relations!(found_vo, item_scope, related_scrapers, response, &yielder)
             
           # yield up that VO goodness!
           yielder.call(found_vo)
-          logger.info("Found a #{vo.name} Vo")
         end
 
       end
@@ -126,13 +133,14 @@ module CheeseGrater
           # at mo, just need the first part of the name, the Scraper which is unique
           # TODO need to allow for full paths
           related_scraper_name, related_vo_name = name.to_s.split('::')
-          scraper                               = related_scrapers[related_scraper_name.to_sym]
+          scraper                               = related_scrapers[related_scraper_name.to_sym].deep_clone
           
           relation_handler = lambda do |fields|
              logger.info("Yielding #{scraper.class} to scraper related vo")
-            
+             
              scraper.requests.each {|r| r.fields.merge!(@helper.format_scraper_fields(name,fields))}
-             scraper.vos[related_vo_name.to_sym].related_to.merge!(the_vo.name => the_vo.fields[:uuid])
+             scraper.get_vo(related_vo_name.to_sym) \
+                    .related_to.merge!(the_vo.name => the_vo.fields[:uuid])
              yield scraper
           end
         
@@ -146,7 +154,7 @@ module CheeseGrater
           relation_handler = lambda do |fields|
             logger.info("Relating #{name} Vo to #{the_vo.name}")
             
-            found_related_vo          = related_vo.dup
+            found_related_vo        = related_vo.deep_clone
             found_related_vo.fields.merge!(@helper.format_related_vo_fields(found_related_vo.name,fields))
             the_vo.related_to[name] = found_related_vo
           end
@@ -159,7 +167,7 @@ module CheeseGrater
                  else
                   [vo_scope]
                  end
-                
+                 
        scopes.each do |scope|
          relation_handler.call(response.hash_query(related_setup[:fields], scope))
        end

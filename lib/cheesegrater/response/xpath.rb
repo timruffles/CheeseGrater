@@ -21,7 +21,13 @@ module CheeseGrater
       
       def scalar_query query, scope = @document
         to_q = make_doc(scope) rescue scope
-        xpath_to_scalar(to_q.at_xpath(query))
+        if Array === query
+          query.inject([]) do |results, query|
+            results << xpath_to_scalar(to_q.at_xpath(query))
+          end
+        else
+          xpath_to_scalar(to_q.at_xpath(query))
+        end
       end
       
       def hash_query hash_of_queries, scope = @document
@@ -30,7 +36,6 @@ module CheeseGrater
           filled_in
         end
       end
-      
       
       protected
       

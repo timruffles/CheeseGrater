@@ -63,11 +63,9 @@ module CheeseGrater
         # set name and create scraper
         complete_setup.merge!(:name => name)
         scrapers[name] = Scraper.create(complete_setup, related_scrapers)
-        
       end
       # TODO the information defecit is solved... nastily
       scrapers.each_pair do |name, scraper|
-        
         scraper.related_scrapers.merge!(scrapers)
       end
       scrapers

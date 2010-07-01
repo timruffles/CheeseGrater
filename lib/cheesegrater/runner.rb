@@ -59,7 +59,7 @@ module CheeseGrater
           end
         end
         
-        p vos.to_yaml
+        puts vos.to_yaml
       end   
     end
     

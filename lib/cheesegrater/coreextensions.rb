@@ -46,12 +46,12 @@ class String
   
   # joins two strings with a joiner, not adding a joiner if present on either end of the join
   def join_with joiner, string
-    joiner = Regexp.quote(joiner)
-    self_ret = self.dup.gsub(Regexp.new("#{joiner}*$"),'')
+    joiner_match = Regexp.quote(joiner)
+    self_ret = self.dup.gsub(Regexp.new("#{joiner_match}*$"),'')
     
     self_ret == '' || string == '' ? 
       self + string : 
-      self_ret + joiner + string.gsub(Regexp.new("^#{joiner}*"),'')
+      self_ret + joiner + string.gsub(Regexp.new("^#{joiner_match}*"),'')
   end
   
 end

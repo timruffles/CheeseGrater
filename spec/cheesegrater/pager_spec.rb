@@ -38,7 +38,7 @@ describe Pager do
     pager = Pager.create(:next_page_complete_endpoint => url_path)
     
     response = mock('Response')
-    response.stub(:value).with(url_path).and_return('http://example')
+    response.stub(:scalar_query).with(url_path).and_return('http://example')
     @request.stub(:run)
     
     setups = []
@@ -48,7 +48,7 @@ describe Pager do
     
     runs = 0
     pager.page(@request) do
-      response.stub(:value).with(url_path).and_return(false) if (runs += 1) > 1
+      response.stub(:scalar_query).with(url_path).and_return(false) if (runs += 1) > 1
       response
     end
     setups.length.should == 2
@@ -65,7 +65,7 @@ describe Pager do
       pager = Pager.create(:next_page_complete_endpoint => url_path)
       
       response = mock('Response')
-      response.should_receive(:value).with(url_path).and_return('http://example')
+      response.should_receive(:scalar_query).with(url_path).and_return('http://example')
       @request.stub(:run).and_return(response)
       
       runs = 0
@@ -73,7 +73,7 @@ describe Pager do
         
         runs += 1
         
-        response.stub(:value)
+        response.stub(:scalar_query)
         response
       end
       runs.should == 2

@@ -23,9 +23,9 @@ BusinessLink:
                         intended_audience: ./following-sibling::table[1]//tr[6]/td[1]/span
                         notes: ./following-sibling::table[1]//tr[7]/td[1]/span
                         url: ./following-sibling::ul[@class='links'][1]//a[1]/@href
-                        telephone: Unknown
-                        email: Unknown
-                        people: Unknown
+                        telephone:
+                        email:
+                        people:
                     related_to:
                         Organiser:
                             fields:
