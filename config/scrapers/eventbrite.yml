@@ -10,9 +10,10 @@ EventBrite:
             fields:
                 country: GB
                 keywords:
-                    type: csv
-                    value: [business]
-                    max: 100
+                    type: one_per_request
+                    value: [business, management, management, startups]
+                city: London
+                max: 100
         response:
             type: Xpath
             vos:

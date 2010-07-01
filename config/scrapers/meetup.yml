@@ -1,0 +1,46 @@
+Meetup:
+    MuEvents:
+        root: true
+        request:
+            format: Querystring
+            endpoint: http://api.meetup.com/2/events.xml
+            fields:
+                key: 601b6869351a5d69521e40232f4a1a65
+                country: gb
+                topic:
+                    type: one_per_request
+                    value:
+                        - business
+                        - entrepreneur
+                        - web technology
+                        - internet & technology
+                        - startup businesses
+                        - women entrepreneurs
+                        - small business
+                        - work at Home
+                        - business strategy and networking
+                        - business networking
+                        - startup businesses
+        response:
+            type: Xpath
+            vos:
+                Event:
+                    item_path: //items/item
+                    fields:
+                        title: ./name
+                        description: ./description
+                        location: [./venue/name, ./venue/address_1, ./venue/address_2, ./venue/address_3, ./venue/city, ./venue/zip]
+                        start_date: ./time
+                        url: ./event_url
+                        telephone:
+                        email:
+                        people:
+                        notes:
+                    related_to:
+                        Organiser:
+                            fields:
+                                name: ./group/name
+                                url: ./group/urlname
+        # pager:
+        #     page_no: offset
+        #     page: 100

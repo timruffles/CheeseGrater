@@ -35,7 +35,7 @@ module CheeseGrater
         def flatten_multiples fields
           fields.each_pair do |field, value|
             next unless value.respond_to? :each
-            fields[field] = value.join(', ')
+            fields[field] = value.select({|v| v != nil }).join(', ')
           end
           fields
         end

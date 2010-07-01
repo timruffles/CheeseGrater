@@ -14,7 +14,7 @@ module CheeseGrater
     
     # page a request, yielding the raw responses generated
     def page request
-      
+      logger.info "Pager starting:"
       # page all other pages as long as they're required
       response = false
       has_run = false
@@ -30,6 +30,7 @@ module CheeseGrater
          has_run = true
       end
       
+      logger.info "Pager finished."
     end
     
     # fields for the request
@@ -63,8 +64,8 @@ module CheeseGrater
             fields[page_no] = (self.current_page += 1)
             @continue = true
             logger.info "Paging to page no #{self.current_page}"
-          else
-            logger.info "Giving up, only got #{response.scalar_query(items_on_page_path)} events" if response
+          elsif response && response.scalar_query(items_on_page_path).to_i == 0
+            logger.info "That's all folks, no more items" if response
           end
         end,
         
@@ -74,6 +75,7 @@ module CheeseGrater
             # no other fields required
             setup = {:endpoint => endpoint, :fields => {}}
             @continue = true
+            logger.info "Paging to complete endpoint, #{endpoint}"
           end
         end
       }

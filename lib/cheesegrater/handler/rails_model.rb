@@ -3,11 +3,11 @@ require "yaml"
 require 'active_record'
 
 ActiveRecord::Base.establish_connection(
-  :adapter => "mysql",
-  :host => "localhost",
-  :database => "thebusinessdiary_development",
-  :username => "root",
-  :password => ""
+  :adapter => "sqlite",
+  #:host => "localhost",
+  :database => "thebusinessdiary_development"
+  #:username => "root",
+  #:password => ""
 )
 
 # freaks out loading acts as taggable on

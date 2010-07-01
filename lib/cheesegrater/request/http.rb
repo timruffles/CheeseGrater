@@ -28,7 +28,7 @@ module CheeseGrater
          end
          raw_response
       rescue StandardError => e
-        raise e.class.new "Could not load endpoint #{endpoint}, got #{e}"
+        raise e
       end
   
       define_exception :InvalidOrMissingRequestMethod
