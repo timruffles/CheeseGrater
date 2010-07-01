@@ -92,32 +92,60 @@ describe CheeseGrater::Scraper do
     
       context "when the vo data is present on the same page" do
         
-        it "should only yield the vo with related vos stored inside it with all data" do
-          
+        def run yaml
           @xpath_response.raw = @fixtures[:related_vos_on_page]
           
-          vos = Vo.create_all YAML.load(<<-YAML
-            Event:
-                item_path: id('rightContent')
-                fields:
-                    title: //h1[1]
-                related_to:
-                    Organiser:
-                        item_path: id('rightContent')
-                        fields:
-                            name: id('rightContent')/p/strong[contains(.,'Organised By')]/..
-          YAML
+          vos = Vo.create_all YAML.load(yaml
           ).keys_to_symbols
           
           results = []
           @scraper.send(:read_response, vos, @xpath_response) do |scraped|
             results << scraped
           end
+          
+          results
+        end
+        
+        it "should only yield the vo with related vos containing requested data, when the paths are relative to the original VO" do
+          
+          results = run <<-YAML
+          Event:
+              item_path: id('rightContent')
+              fields:
+                  title: //h1[1]
+              related_to:
+                  Organiser:
+                      item_path: id('rightContent')
+                      fields:
+                          name: ./p/strong[contains(.,'Organised By')]/..
+          YAML
+          
           results.length.should == 1
           vo = results.shift
           vo.related_to.length.should == 1
           /4Networking/.should match(vo.related_to[:Organiser].fields[:name])
         end
+        
+        it "should only yield the vo with related vos containing requested data, when the paths are not relativ to the original VO" do
+          
+          results = run <<-YAML
+          Event:
+              item_path: id('rightContent')
+              fields:
+                  title: //h1[1]
+              related_to:
+                  Organiser:
+                      fields:
+                          name: id('rightContent')/p/strong[contains(.,'Organised By')]/..
+          YAML
+          
+          results.length.should == 1
+          vo = results.shift
+          vo.related_to.length.should == 1
+          /4Networking/.should match(vo.related_to[:Organiser].fields[:name])
+          
+        end
+        
         
       end
       

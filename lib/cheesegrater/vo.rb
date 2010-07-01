@@ -10,12 +10,12 @@ module CheeseGrater
         end
       end
       
-      def create config
+      def create config = {}
         Vo.new config
       end
     end
     
-    def initialize setup
+    def initialize setup = {}
       @related_to = setup[:related_to] || {}  # list of other VOs that need to be associated on save
       @fields     = setup[:fields] || {}      # class attributes
       @name       = setup[:name]              # class name of VO

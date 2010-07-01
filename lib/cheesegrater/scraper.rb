@@ -138,10 +138,11 @@ module CheeseGrater
         
         # 2   in the second case we relate the scraper's the_vo.back to this the_vo. with this the_vo.s UUID
         else
-        
+          
           # create and setup the related vo, storing it in the_vo
           related_vo = Vo.create(related_setup.merge(:name => name))
-          
+          #p the_vo.related_to, related_vo, related_setup
+          #exit
           relation_handler = lambda do |fields|
             logger.info("Relating #{name} Vo to #{the_vo.name}")
             
@@ -153,16 +154,16 @@ module CheeseGrater
         end
         
         # are we querying the whole document, or just the item's scope?
-        scope = if related_setup[:item_path]
-                  response.query(related_setup[:item_path], vo_scope)
-                else
-                  vo_scope
-                end
-        
-        scope.to_a.each do |scope|
-          relation_handler.call(response.hash_query(related_setup[:fields], scope))
-        end
-        
+        scopes = if related_setup[:item_path]
+                  response.query(related_setup[:item_path])
+                 else
+                  [vo_scope]
+                 end
+                
+       scopes.each do |scope|
+         relation_handler.call(response.hash_query(related_setup[:fields], scope))
+       end
+       
       end
       
     end

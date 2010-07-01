@@ -35,7 +35,7 @@ FindNetworkingEvents:
                         start_date: ./p[2]
                         location: .//p[@class="quoteTxt"]
                         cost: .//*[@class="quoteMid"]/following-sibling::p[1]
-                        target_audience: UNKNOWN
+                        intended_audience: UNKNOWN
                         notes: .//*[@class="quoteMid"]/following-sibling::p[2]
                         url:
                         telephone:

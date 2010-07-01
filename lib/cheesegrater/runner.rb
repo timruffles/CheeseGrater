@@ -23,6 +23,27 @@ module CheeseGrater
       end
     end
     
+    # class Specgenerator < Base
+    #   
+    #   include Util::TestGenerator
+    #   
+    #   def run que
+    #     vos = []
+    #     while task = que.shift
+    #       
+    #       next if task.respond_to? :fields
+    #       
+    #       Specgenerator.create(task)
+    #       
+    #       task.run do |yielded|
+    #         que << yielded
+    #       end
+    #     end
+    #     
+    #   end
+    #   
+    # end
+    
     # single threaded - will have to load db enviroment to save found VOs
     class Single < Base
       
