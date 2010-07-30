@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'log4r'
 module CheeseGrater
   module Logging
@@ -6,10 +7,11 @@ module CheeseGrater
 
     GraterLog = Logger.new('graterlog')
     
-    RollingFileOutputter.new("rolling_outputter", {
-      "filename" => "log/grater.log",
-      "maxsize" => 16000
-    })
+    # TODO setup diff enviroments so this isn't run by testing
+    # RollingFileOutputter.new("rolling_outputter", {
+    #   "filename" => File.dirname(__FILE__) + "/log/grater.log",
+    #   "maxsize" => 16000
+    # })
     
     # access class's logger
     def logger

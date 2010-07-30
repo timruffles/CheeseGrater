@@ -23,9 +23,9 @@ BusinessLink:
                         intended_audience: ./following-sibling::table[1]//tr[6]/td[1]/span
                         notes: ./following-sibling::table[1]//tr[7]/td[1]/span
                         url: 
-                          fallbacks:
+                          try_each:
                               - ./following-sibling::ul[@class='links'][1]//a[1]/@href
-                              - [request,endpoint]
+                              - [:methods, request,endpoint]
                         telephone:
                         email:
                         people:

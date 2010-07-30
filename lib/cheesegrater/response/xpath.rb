@@ -30,25 +30,18 @@ module CheeseGrater
         end
       end
       
-      def hash_query hash_of_queries, scope = @document
-        hash_of_queries.inject({}) do |filled_in, (field, query)|
-          filled_in[field] = scalar_query(query, scope)
-          filled_in
-        end
-      end
-      
       protected
       
-      def xpath_to_scalar selected
-        case selected
-        when Nokogiri::XML::Attr                         then selected.value
-        when Nokogiri::XML::NodeSet, Nokogiri::XML::Node then node_or_set_value(selected)
+        def xpath_to_scalar selected
+          case selected
+          when Nokogiri::XML::Attr                         then selected.value
+          when Nokogiri::XML::NodeSet, Nokogiri::XML::Node then node_or_set_value(selected)
+          end
         end
-      end
       
-      def node_or_set_value node
-        @is_html ? node.inner_html : node.inner_text
-      end
+        def node_or_set_value node
+          @is_html ? node.inner_html : node.inner_text
+        end
       
     end
   end

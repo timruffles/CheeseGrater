@@ -12,11 +12,6 @@ module CheeseGrater
         raise "Implement"
       end
       
-      # takes a query that'll yield a set of items, and a hash of fields to fill in by querying each item found, from an intial_scope
-      def hash_query(fields_to_queries, scope = @document)
-        raise "Implement"
-      end
-      
       attr_reader :document, :raw
       
     end

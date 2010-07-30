@@ -50,19 +50,4 @@ describe CheeseGrater::Response::Xpath do
     
   end
   
-  it "should yield up fields as hashes of scalar values" do
-    
-    found = []
-    values = []
-    @xpath.query("//*[@id='location']/*[@value!='-999']").each do |scope|
-      fields =  @xpath.hash_query({:value=>'./@value'}, scope)
-      found  << fields
-      values << fields[:value]
-    end
-    
-    values.inject(0) {|a, v| a += v.to_i}.should == 110
-    found.length.should == 5
-    
-  end
-
 end
