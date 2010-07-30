@@ -7,20 +7,16 @@ Meetup:
             fields:
                 key: 601b6869351a5d69521e40232f4a1a65
                 country: gb
+                city: London
                 topic:
                     type: one_per_request
                     value:
                         - business
                         - entrepreneur
-                        - web technology
-                        - internet & technology
-                        - startup businesses
-                        - women entrepreneurs
-                        - small business
-                        - work at Home
-                        - business strategy and networking
-                        - business networking
-                        - startup businesses
+                        - technology
+                        - web
+                        - accounting
+                        - management
         response:
             type: Xpath
             vos:
@@ -36,6 +32,7 @@ Meetup:
                         email:
                         people:
                         notes:
+                        source: Meetup
                     related_to:
                         Organiser:
                             fields:

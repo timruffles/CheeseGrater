@@ -9,6 +9,9 @@ module CheeseGrater
           fields    = sanitize_fields([:description, :location], fields)
           fields    = sanitize_fields([:title, :start_date, :cost, :notes], fields, COMPLETE)
           
+          # linearise location TODO make a descision about what to do with these lists
+          fields[:location] = fields[:location].gsub!(/<br\s?\/?>/,",\n")
+          
           remove({:cost => 'Cost', :description => 'Details', :when => 'When', :notes => 'Event Contact Details', :location => 'Venue'}, fields)
           
           # get as good as time data as we can
@@ -27,6 +30,7 @@ module CheeseGrater
         def format_related_vo_fields name, fields
           if name == :Organiser
             
+            remove({:name => 'Organised By'}, fields)
             fields = sanitize_fields([:name], fields, COMPLETE)
             
           else

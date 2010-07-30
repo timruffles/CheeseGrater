@@ -4,7 +4,8 @@ module CheeseGrater
     module Helper
       class Base
         
-        BASIC = {:elements => ['br', 'a', 'ol', 'ul', 'li', 'h1', 'h2', 'h3', 'h4', 'h5'],
+        # TODO add a br squeeze
+        BASIC = {:elements => ['p','br', 'a', 'ol', 'ul', 'li'],
                 :attributes => {'a' => ['href', 'title']},
                 :protocols => {'a' => {'href' => ['http', 'https', 'mailto']}}}
         COMPLETE = {}
@@ -35,7 +36,7 @@ module CheeseGrater
         def flatten_multiples fields
           fields.each_pair do |field, value|
             next unless value.respond_to? :each
-            fields[field] = value.select({|v| v != nil }).join(', ')
+            fields[field] = (value.select {|v| v != nil }).join(', ')
           end
           fields
         end

@@ -97,6 +97,8 @@ module CheeseGrater
       vos.each do |vo|
         response.query(vo.item_path).each do |item_scope|
           
+          # TODO this is a bit awkward, there is logic around whether a VO's field should
+          # be fulfilled from a query, or from some other part of program state, like the scraper
           found_vo_fields = response.hash_query(vo.fields, item_scope)
           
           # for each set of VO fields found in the response

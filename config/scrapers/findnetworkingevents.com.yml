@@ -41,6 +41,7 @@ FindNetworkingEvents:
                         telephone:
                         email:
                         people:
+                        source: FindNetworkingEvents
                     related_to:
                         Organiser:
                             item_path: id('rightContent')

@@ -11,7 +11,7 @@ EventBrite:
                 country: GB
                 keywords:
                     type: one_per_request
-                    value: [business, management, management, startups]
+                    value: [business, management, startups]
                 city: London
                 max: 100
         response:
@@ -25,8 +25,7 @@ EventBrite:
                         location: [./venue/name, ./venue/address, ./venue/address_2, ./venue/city, ./venue/postal_code]
                         start_date: ./start_date
                         url: ./url
-                        people:
-                        notes:
+                        source: EventBrite
                     related_to:
                         Organiser:
                             fields: # these fields are used to power the Organiser's request
