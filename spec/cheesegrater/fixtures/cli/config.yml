@@ -1,1 +1,5 @@
-demo: config
+log4r_config:
+  loggers:
+    - name: grater_log
+      outputters: []
+  outputters: []

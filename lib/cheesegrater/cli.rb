@@ -8,56 +8,65 @@ module CheeseGrater
     
     include Logging
     
+    # cli logger logs before the main grater_log is setup, and
+    # in debug mode outputs to stdout
+    CLI_LOGGER_NAME = 'grater_cli_log'
+    CLI_LOGGER = Logger.new(CLI_LOGGER_NAME)
+    CLI_LOGGER.outputters = Log4r::Outputter['stderr']
+    
     define_exception :CliError
     
     Version = [0,1]
     
     def run args
-      begin
-        args = read_options args
-        loader = Loader.new
+      args = read_options args
       
-        #p @options
+      CLI_LOGGER.outputters = [Log4r::Outputter['stdout'], Log4r::Outputter['stderr']] if @options.debug
+      
+      loader = Loader.new
+      
+      # loads in each file specified, actually allowing config to be overridden if it comes later in the chain
+      (files = args).each do |file|
+        
+        CLI_LOGGER.info("Loaded #{file}")
+        
+        path = Pathname.new(file)
+        config = YAML.load_file(path.absolute? ? path.realpath : "#{Dir.getwd}/#{path}")
+        
+        # load in all outputters
+        config['log4r_config']['loggers'].each do |logger|
+          if logger['name'] == LOGGER_NAME
+            logger['outputters'] += @options.outputters
+          end
+        end if config['log4r_config'] && @options.outputters.length > 0
 
-        (files = args).each do |file|
-          path = Pathname.new(file)
-          config = YAML.load_file(path.absolute? ? path.realpath : "#{Dir.getwd}/#{path}")
-          logger.info "Loaded #{file.split('/').pop}" if config
-          loader.load_scrapers config
-        end
-        
-        #p @options
-        #exit
+        loader.load config
+      end
       
-        logger.info "Found #{loader.root_scrapers.length} root scrapers"
-        runner.run loader.root_scrapers
+      CLI_LOGGER.info "Found #{loader.root_scrapers.length} root scrapers, running:"
+      runner.run loader.root_scrapers
       
-        raise CliError.new("No config file specified") if files.length == 0 
-        
-      rescue CliError => e
-        logger.error e
-      rescue Exception => e  
-        logger.error e
-      end      
+      raise CliError.new("No config file specified") if files.length == 0 
+      
+    rescue CliError => e
+      CLI_LOGGER.error e
+    rescue Exception => e
+      CLI_LOGGER.error e
     end
     
     protected
     
     def runner
-      @runner ||= Runner.create(@options.runner || 'single')  # todo, why isn't this setting in options?
-    end
-    
-    def logger
-      # ensure root logger also logs to stdout
-      super
-      GraterLog.add Outputter.stdout unless GraterLog.outputters.include? Outputter.stdout
-      GraterLog
+      @runner ||= Runner.create(@options.runner || 'single')  # TODO, why isn't this setting in options?
     end
     
     def read_options args
-      options               = OpenStruct.new {
-        runner = 'single'
-      }
+      
+      options = OpenStruct.new({
+        :runner => 'single',
+        :outputters => '',
+        :debug => false
+      })
 
       opts = OptionParser.new do |opts|
         opts.banner = "Usage: grater [options] [<file>]"
@@ -67,6 +76,14 @@ module CheeseGrater
         
         opts.on("-r", "--runner [RUNNER]", "Specify which runner to use to run scrapers") do |r|
           options.runner = r
+        end
+        
+        opts.on("-d", "--debug", "Set debug, all output goes to stdout, verbosity increased") do
+          options.debug = true
+        end
+        
+        opts.on("-o", "--outputters [OUTPUTTERS]", "Specify which outputters will be used") do |o|
+          options.outputters = o.split(/, ?/)
         end
         
         opts.separator ""

@@ -1,4 +1,5 @@
 simple_scrape:
+  scrapers:
     TheGroup:
       request:
         format: not wanted
@@ -28,6 +29,7 @@ related_setup:
           nested: should be overridden
         id: [/]
 problem_one:
+  scrapers:
     Group:
         EbOrganiser:
             request: 

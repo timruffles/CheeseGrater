@@ -1,49 +1,50 @@
-FindNetworkingEvents:
-    GreaterLondonEvents:
-        #should run before other scrapers:
-        root: true
-        request:
-            format: Querystring
-            endpoint: http://www.findnetworkingevents.com
-            fields: {
-                no_key: /events/index.cfm?action=eventslist&region=1
-            }
-        response:
-            type: XpathHtml
-        scrapers:
-            FnEventDetails:
-                item_path: //*[@summary="Results"]
-                fields:
-                    no_key: .//*[@class='quoteTxt']/a[1]/@href
-            GreaterLondonEvents:
-                item_path: (id('rightContent')/*[@class='pagination'])[1]//a/strong[contains(.,'Next')]/..
-                fields:
-                    no_key: ./@href
-    FnEventDetails:
-        request:
-            endpoint: http://www.findnetworkingevents.com/
-            format: Querystring
-            fields: {}
-        response:
-            type: XpathHtml
-            vos:
-                Event:
-                    item_path: id('rightContent')
-                    fields:
-                        title: ./p[1]
-                        description: (id('rightContent')/p[contains(.,'Details')])[1]
-                        start_date: ./p[2]
-                        location: .//p[@class="quoteTxt"]
-                        cost: .//*[@class="quoteMid"]/following-sibling::p[1]
-                        intended_audience: UNKNOWN
-                        notes: .//*[@class="quoteMid"]/following-sibling::p[2]
-                        url:
-                        telephone:
-                        email:
-                        people:
-                        source: FindNetworkingEvents
-                    related_to:
-                        Organiser:
-                            item_path: id('rightContent')
-                            fields:
-                                name: (id('rightContent')/p[contains(.,'Organised By')])[last()]
+scrapers:
+  FindNetworkingEvents:
+      GreaterLondonEvents:
+          #should run before other scrapers:
+          root: true
+          request:
+              format: Querystring
+              endpoint: http://www.findnetworkingevents.com
+              fields: {
+                  no_key: /events/index.cfm?action=eventslist&region=1
+              }
+          response:
+              type: XpathHtml
+          scrapers:
+              FnEventDetails:
+                  item_path: //*[@summary="Results"]
+                  fields:
+                      no_key: .//*[@class='quoteTxt']/a[1]/@href
+              GreaterLondonEvents:
+                  item_path: (id('rightContent')/*[@class='pagination'])[1]//a/strong[contains(.,'Next')]/..
+                  fields:
+                      no_key: ./@href
+      FnEventDetails:
+          request:
+              endpoint: http://www.findnetworkingevents.com/
+              format: Querystring
+              fields: {}
+          response:
+              type: XpathHtml
+              vos:
+                  Event:
+                      item_path: id('rightContent')
+                      fields:
+                          title: ./p[1]
+                          description: (id('rightContent')/p[contains(.,'Details')])[1]
+                          start_date: ./p[2]
+                          location: .//p[@class="quoteTxt"]
+                          cost: .//*[@class="quoteMid"]/following-sibling::p[1]
+                          intended_audience: UNKNOWN
+                          notes: .//*[@class="quoteMid"]/following-sibling::p[2]
+                          url:
+                          telephone:
+                          email:
+                          people:
+                          source: [:literal, FindNetworkingEvents]
+                      related_to:
+                          Organiser:
+                              item_path: id('rightContent')
+                              fields:
+                                  name: (id('rightContent')/p[contains(.,'Organised By')])[last()]

@@ -48,9 +48,16 @@ describe CheeseGrater::Scraper do
       two_context.should_receive(:endpoint).and_return(endpoint)
       
       @scraper.stub(:one).and_return(two_context)
-      field = [:methods, :one, :endpoint]
+      field = [:method, :one, :endpoint]
       
       @scraper.send(:perform_field_query, field, {}, {})
+      
+    end
+    
+    it "should recognise and react when a field query requires a literal" do
+      
+      field = [:literal, 'hello']
+      @scraper.send(:perform_field_query, field, {}, {}).should == 'hello'
       
     end
     

@@ -1,38 +1,39 @@
-EventBrite:
-    request:
-        format: Querystring
-        fields:
-            app_key: MWY0YWRmMjNhZjFl
-    EbEvents: 
-        root: true
-        request:
-            endpoint: http://www.eventbrite.com/xml/event_search
-            fields:
-                country: GB
-                keywords:
-                    type: one_per_request
-                    value: [business, management, startups]
-                city: London
-                max: 100
-        response:
-            type: Xpath
-            vos:
-                Event:
-                    item_path: //event
-                    fields:
-                        title: ./title
-                        description: ./description
-                        location: [./venue/name, ./venue/address, ./venue/address_2, ./venue/city, ./venue/postal_code]
-                        start_date: ./start_date
-                        url: ./url
-                        source: EventBrite
-                    related_to:
-                        Organiser:
-                            fields: # these fields are used to power the Organiser's request
-                                name: ./organizer/name
-                                description: ./organizer/description
-                                url: ./organizer/url
-        pager:
-            items_on_page_path: //events/summary/num_showing
-            page_no: page
+scrapers:
+  EventBrite:
+      request:
+          format: Querystring
+          fields:
+              app_key: MWY0YWRmMjNhZjFl
+      EbEvents: 
+          root: true
+          request:
+              endpoint: http://www.eventbrite.com/xml/event_search
+              fields:
+                  country: GB
+                  keywords:
+                      type: one_per_request
+                      value: [business, management, startups]
+                  city: London
+                  max: 100
+          response:
+              type: Xpath
+              vos:
+                  Event:
+                      item_path: //event
+                      fields:
+                          title: ./title
+                          description: ./description
+                          location: [./venue/name, ./venue/address, ./venue/address_2, ./venue/city, ./venue/postal_code]
+                          start_date: ./start_date
+                          url: ./url
+                          source: [:literal, EventBrite]
+                      related_to:
+                          Organiser:
+                              fields: # these fields are used to power the Organiser's request
+                                  name: ./organizer/name
+                                  description: ./organizer/description
+                                  url: ./organizer/url
+          pager:
+              items_on_page_path: //events/summary/num_showing
+              page_no: page
             

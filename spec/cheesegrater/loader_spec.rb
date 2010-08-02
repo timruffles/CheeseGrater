@@ -25,7 +25,7 @@ describe Loader do
   
       it "should accept a hash of scrapers and turn them into runnable scrapers" do
         Scraper.should_receive(:create)
-        @thecheese.load_scrapers @setup[:simple_scrape]
+        @thecheese.load @setup[:simple_scrape]
         @thecheese.scrapers[:TheGroup].length.should == 2
       end
     
@@ -50,8 +50,30 @@ describe Loader do
   
       it "should give access to all root scrapers" do
           @scraper.should_receive(:is_root?).exactly(2).times.and_return(true)
-          @thecheese.load_scrapers @setup[:simple_scrape]
+          @thecheese.load @setup[:simple_scrape]
           @thecheese.root_scrapers.length == 2
+      end
+      
+      it "should configure log4r" do
+        
+        config = YAML.load <<-YAML
+          log4r:
+            loggers:
+              blah:
+        YAML
+        
+        pass = false
+        
+        # mocking doesn't work here, god knows why?
+        conf_eigen = class << Log4r::YamlConfigurator; self; end
+        conf_eigen.instance_eval do
+          define_method :load_yaml_string do |str|
+            pass = true
+          end
+        end
+        
+        @thecheese.load config
+        pass.should == true
       end
       
     end
@@ -60,7 +82,7 @@ describe Loader do
     
       it "should setup this previously problematic setup correctly" do
       
-        @thecheese.load_scrapers @setup[:problem_one]
+        @thecheese.load @setup[:problem_one]
         scrapers = @thecheese.scrapers
         (Vo === scrapers[:Group][:EbOrganiser].get_vo(:Organiser)).should == true
       end

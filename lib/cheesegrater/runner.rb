@@ -48,6 +48,7 @@ module CheeseGrater
     class Single < Base
       
       def run que
+        
         vos = []
         while task = que.shift
           
@@ -59,6 +60,7 @@ module CheeseGrater
           end
         end
         
+        # pull in rails env or send to a runner at this point?
         puts vos.to_yaml
       end   
     end

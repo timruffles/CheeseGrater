@@ -1,4 +1,3 @@
-## uses JSON path
 topics: &id1
     - Small Business
     - Business
@@ -23,6 +22,30 @@ countries: &id2
 cities: &id3
     - london
     - manchester
+log4r_config:
+  # define all pre config ... none
+  # pre_config:
+  # define all loggers ...
+  loggers:
+    - name      : grater_log
+      additive  : 'false'
+      trace     : 'false'      
+      outputters:
+        - stderr
+#         - logfile 
+#         - email    
+
+  # define all outputters (incl. formatters)      
+  outputters: []
+    # - type     : StderrOutputter
+    #   name     : stderr 
+    #   only_at  :
+    #     - WARN
+    #     - Error
+    #     - FATAL
+    # - type     : StdoutOutputter
+    #   name     : debug
+
 # Format:
 #   APIName
 #     Endpoints
@@ -38,145 +61,3 @@ cities: &id3
 #           pager
 #             request
 #             response
-api_scrapers:
-    EventBrite:
-        request:
-            format: querystring
-            fields:
-                app_key: MWY0YWRmMjNhZjFl
-        Events: 
-            request:
-                endpoint: https://www/eventbrite/com/json/event_search
-                fields:
-                    country: GB
-                    keywords:
-                        type: csv
-                        values: *id1
-            response:
-                type: xpath
-                vos:
-                    Event:
-                        item_path: [//event]
-                        handler: RailsModel
-                        fields:
-                            title: ./title
-                            description: ./description
-                            location: [./venue/name, ./venue/address, ./venue/address_2, ./venue/city, ./venue/postal_code]
-                            start_date: ./start_date
-                            url: ./url
-                            people: Unknown
-                            notes: Unknown
-                        related_to:
-                            EventBrite::Organiser::Organiser:
-                                fields: # these fields are used to power the Organiser's request
-                                    id: [./organiser/id]
-            pager:
-                items_per_page:
-                    name: max
-                    amount: 100
-                page: page
-                # xpath returning the number of items on a page, either count(//path), or /path/to/count/in/results
-                result_count: num_showing
-        Organiser:
-            response:
-                type: xpath
-                vos:
-                    Organiser:
-                        type: RailsModel
-                        item_path: [.//organiser]
-                        fields:
-                            telephone: ./telephone
-                            email: ./email
-            request: 
-                fields:
-                    id:
-            pager:
-                per_page:
-                    name: max
-                    amount: 100
-                page: page
-                item_count:
-    Meetup:
-        endpoint: http://api/meetup/com/2/events/json/
-        request:
-            format: querystring
-            fields:
-                key: 601b6869351a5d69521e40232f4a1a65
-                country: gb
-                topic:
-                    type: one_per_request
-                    values: *id1
-        response:
-            type: xpath
-            vos:
-                Event:
-                    item_path: [.//results]
-                    fields:
-                        title: ./name
-                        description: ./description
-                        location: [./venue/name, ./venue/address_1, ./venue/address_2, ./venue/address_3, ./venue/city, ./venue/zip]
-                        start_date: ./start_date
-                        url: ./event_url
-                        telephone: Unknown
-                        email: Unknown
-                        people: Unknown
-                        notes: Unknown
-        pager:
-            request:
-                items_per_page:
-                    name: page
-                    amount: 100
-            response:
-                # all we need to do is follow this next page endpoint
-                next_page_endpoint: /results/head/next
-http_scrapers:
-    BusinessLink:
-        request:
-            # format
-            format: querystring
-        # Find event dates, which will get passed to EventsOnDate scraper
-        EventDateSearch:
-            #should run before other scrapers:
-            root: root
-            request:
-                endpoint: http://www.businesslink.gov.uk/bdotg/action/event
-                fields:
-                    site: 210
-            response:
-                type: xpath::html
-                scrapers:
-                    BusinessLink::EventsOnDate:
-                        # used * not option as for some reason it can't find the dev tags
-                        item_path: //*[@id='eventDate']//option[value!=99]
-                        # fields relative to item xpath (use . to query from that node, .. from one up etc)
-                        fields:
-                            date: ./@value
-                            
-        # Scrape all events on specific date (spawened by EventDateSearch)
-        EventsOnDate:
-            root: true
-            request:
-                format: querystring
-                endpoint: http://online.businesslink.gov.uk/bdotg/action/eventsearch
-                fields:
-                    keywords:
-                    location: -999
-                    submit: Go
-                    date: 1 # mixed in from EventDateSearch scraper
-            response:
-                type: xpathhtml
-                vos:
-                    Event:
-                        item_path: //*[@id='add_maincontent']/div[1]/h3
-                        fields:
-                            title: .
-                            description: ./following-sibling::p[1]
-                            start_date: ./following-sibling::table[1]//tr[1]/td[1]/span
-                            location: ./following-sibling::table[1]//tr[2]/td[1]/span
-                            cost: ./following-sibling::table[1]//tr[5]/td[1]/span
-                            target_audience: ./following-sibling::table[1]//tr[6]/td[1]/span
-                            notes: ./following-sibling::table[1]//tr[7]/td[1]/span
-                            url: ./following-sibling::ul[@class='links'][1]//a[1]/@href
-                            telephone: Unknown
-                            email: Unknown
-                            people: Unknown

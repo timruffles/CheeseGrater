@@ -63,7 +63,9 @@ module CheeseGrater
         # return the response so that it can be passed back into the pager in make_requests()
         @response
       end
-
+      
+    rescue Exception => e
+      logger.error e
     end
     
     def is_root?
@@ -133,15 +135,14 @@ module CheeseGrater
             # hash
           result[key] = 
             if setup.respond_to? :keys
-              if try_each = setup.delete(:try_each)
-                
+              if try_each = setup[:try_each]
                 value = nil
                 try_each.any? do |query|
                   value = perform_field_query(query, response, scope)
                 end
                 value
               else
-                raise "Unknown field setup for #{key}: #{setup.inspect}"
+                raise "Unknown field setup for #{key}: #{setup.inspect} in #{request_hash.inspect}"
               end
           
             # scalar or array
@@ -157,9 +158,12 @@ module CheeseGrater
       # performs the scalar query on a field, deadling with any special methods for making it
       def perform_field_query query, response, scope
         if Array === query
-          if query.first == :methods
-            query.shift
-            return eval(query.join('.'))
+          case query.first
+            when :method # a method call
+              query.shift
+              return eval(query.join('.'))
+            when :literal # a literal value
+              return query.last
           end
         end
         response.scalar_query(query, scope)

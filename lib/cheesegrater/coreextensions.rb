@@ -13,8 +13,23 @@ class Hash
     end
     merge(with_hash,&merger)
   end
+  
   # helper class to normalize config from yaml
   def keys_to_symbols recursive = true
+    hash = {}
+    each_pair do |key,val|
+      
+      if recursive && (val.class.equal? Hash)
+        val = val.keys_to_symbols
+      end
+      next if Symbol === key
+      
+      hash[key.to_sym] = val
+    end
+    hash
+  end
+  
+  def keys_to_symbols! recursive = true
     each_pair do |key,val|
       
       if recursive && (val.class.equal? Hash)

@@ -8,9 +8,20 @@ module CheeseGrater
     
     # TODO: make sure scrapers get all the scrapers they need, with the same paths as in config file
     # at the momenent they do, as each scraper has a unique name
-    def load_scrapers scraper_groups = {}
+    def load config
+      
+      # TODO better place for this?
+      if config['log4r_config']
+        ycfg = Log4r::YamlConfigurator
+        # ycfg['foo'] = bar          # replaces instances of #{foo} in the YAML with bar
+        ycfg.load_yaml_string(YAML.dump(config))
+      end
+      
+      # gah - log4r expects strings, so only convert to symbols here
+      config.keys_to_symbols!
+      
       # load all scrapers, and mix all shared fields into them
-      scraper_groups.keys_to_symbols.each_pair do |group, included|
+      config[:scrapers].each_pair do |group, included|
         
         shared_setup = {}
         scraper_setups  = {}
@@ -29,7 +40,7 @@ module CheeseGrater
         
         # create each scraper when whole setup is present
        scrapers[group] = setup_scrapers(scraper_setups, shared_setup);
-      end
+      end if config[:scrapers]
     end
     
     # return all root scrapers
