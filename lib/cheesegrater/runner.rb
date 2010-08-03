@@ -61,7 +61,7 @@ module CheeseGrater
         end
         
         # pull in rails env or send to a runner at this point?
-        puts vos.to_yaml
+        puts vos.map {|v| v.to_h}.to_yaml
       end   
     end
     

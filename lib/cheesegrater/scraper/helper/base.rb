@@ -4,6 +4,10 @@ module CheeseGrater
     module Helper
       class Base
         
+        # TODO add exclude method to exclude various fields from filter/sanitize chain
+        @exclude = {:url => [:sanitize, :flattern]}
+        
+        
         # TODO add a br squeeze
         BASIC = {:elements => ['p','br', 'a', 'ol', 'ul', 'li'],
                 :attributes => {'a' => ['href', 'title']},
@@ -36,7 +40,7 @@ module CheeseGrater
         def flatten_multiples fields
           fields.each_pair do |field, value|
             next unless value.respond_to? :each
-            fields[field] = (value.select {|v| v != nil }).join(', ')
+            fields[field] = value.reject(&lambda {|v| /^[\t\s]*$/ =~ v || v == nil}).map(&lambda {|v| v.strip}).join(', ')
           end
           fields
         end
@@ -83,13 +87,14 @@ module CheeseGrater
         end
         
         def optimistic_email_re
+          # aiming to match tim@blah.com, tim @ blah.com, tim (at) blah.com etc
           /[\w\.-_]+(\s{0,2})   # wordy bits, followed by one to two spaces group 1
-            (?:@|\(?at\)?)      # with either an at, or the word at, with parens around them if present
+            (?:@|\(?at\)?)      # with either an at, or the word at with optional parens around
             \1
             (?:
-              (?:[\w\-_])+      # followed by some words etc, with at least one of a . or the word dot
-              (?:\.|\s?dot\s?|\s.\s) 
-              (?:[\w\-_])+
+              [\w\-_]+          # followed by some words etc, with at least one of a . or the word dot
+              (?:\.|\s\.\s|\s?dot\s?)
+              [\w\-_]+          # the tld
             )+/x
         end
         

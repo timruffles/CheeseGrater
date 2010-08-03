@@ -61,12 +61,23 @@ describe CheeseGrater::Scraper do
       
     end
     
+    it "should expose some helper methods to allow fields to query the scraper's current state" do
+      
+      mock_request = mock('Request')
+      mock_request.should_receive(:endpoint).and_return('http//blah.com')
+      @scraper.instance_variable_set(:@current_request, mock_request)
+      field = [:method, :current_request, :endpoint]
+      
+      @scraper.send(:perform_field_query, field, {}, {})
+      
+    end
+    
     it "should keep running 'try_each' clauses when nothing is returned" do
       
       query_context = {}
       
       response = mock('Response')
-      response.should_receive(:scalar_query).with(:fail,{}).and_return(nil)
+      response.should_receive(:scalar_query).with(:fail,{}).and_return('')
       response.should_receive(:scalar_query).with(:succeed,{}).and_return(:some_data)
       
       fields_hash = YAML.load <<-YAML

@@ -1,0 +1,211 @@
+--- 
+- :type: :Event
+  :fields: 
+    :email: 
+    :start_date: 23 Aug 2010
+    :telephone: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :source: BusinessLink
+    :cost: Free
+    :intended_audience: New employers or new/inexperienced payroll staff
+    :notes: All industries
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :people: 
+    :uuid: 5d358050-807b-012d-b5a0-0800273c0afb
+    :location: Thames Street, Staines
+    :title: Becoming an Employer - What You Need to Know
+  :related_to: 
+  - :type: :Organiser
+    :fields: 
+      :name: HM Revenue &amp; Customs
+    :related_to: []
+
+- :type: :Event
+  :fields: 
+    :email: 
+    :start_date: 13 Sep 2010
+    :telephone: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :source: BusinessLink
+    :cost: Free
+    :intended_audience: New employers or new/inexperienced payroll staff
+    :notes: All industries
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :people: 
+    :uuid: 5d36a8f0-807b-012d-b5a0-0800273c0afb
+    :location: London Road, Twickenham
+    :title: Becoming an Employer - What You Need to Know
+  :related_to: 
+  - :type: :Organiser
+    :fields: 
+      :name: HM Revenue &amp; Customs
+    :related_to: []
+
+- :type: :Event
+  :fields: 
+    :email: 
+    :start_date: 22 Oct 2010
+    :telephone: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :source: BusinessLink
+    :cost: Free
+    :intended_audience: New employers or new/inexperienced payroll staff
+    :notes: All industries
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :people: 
+    :uuid: 5d384670-807b-012d-b5a0-0800273c0afb
+    :location: London Road, Twickenham
+    :title: Becoming an Employer - What You Need to Know
+  :related_to: 
+  - :type: :Organiser
+    :fields: 
+      :name: HM Revenue &amp; Customs
+    :related_to: []
+
+- :type: :Event
+  :fields: 
+    :email: 
+    :start_date: 1 Nov 2010
+    :telephone: 
+    :description: This workshop is based on the Employer CD-Rom and explains how to calculate tax and National Insurance.  It also covers how to use P45/P46 forms for new employees and leavers, how to register for online services and where to get help when needed.
+    :source: BusinessLink
+    :cost: Free
+    :intended_audience: New employers or new/inexperienced payroll staff
+    :notes: All industries
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :people: 
+    :uuid: 5d398340-807b-012d-b5a0-0800273c0afb
+    :location: London Road, Twickenham
+    :title: Becoming an Employer - What You Need to Know
+  :related_to: 
+  - :type: :Organiser
+    :fields: 
+      :name: HM Revenue &amp; Customs
+    :related_to: []
+
+- :type: :Event
+  :fields: 
+    :email: 
+    :start_date: 30 Sep 2010
+    :telephone: 
+    :description: Business Link London is hosting a workshop  to help you decide whether starting a business is the right choice and to ensure that you understand everything you need to know to give the business the best chance of success. This event has been designed for deaf and disabled entrepreneurs in London.
+    :source: BusinessLink
+    :cost: All events organised by Business Link in London are FREE of charge
+    :intended_audience: All industries
+    :notes: 
+    :url: http://online.businesslink.gov.uk/bdotg/action/eventDescription?site=181&amp;r.lc=en&amp;type=EVENTS&amp;itemId=5001629103
+    :people: 
+    :uuid: 5d3aee90-807b-012d-b5a0-0800273c0afb
+    :location: Wellcome Collection Conference Centre, 183 Euston Road, London,  NW1 2BE
+    :title: Starting a business for deaf and disabled entrepreneurs
+  :related_to: 
+  - :type: :Organiser
+    :fields: 
+      :name: Business Link in London
+    :related_to: []
+
+- :type: :Event
+  :fields: 
+    :email: 
+    :start_date: 6 Sep 2010
+    :telephone: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :source: BusinessLink
+    :cost: Free
+    :intended_audience: Employers and staff who will be running the payroll
+    :notes: All industries
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/south.htm
+    :people: 
+    :uuid: 5d3c2820-807b-012d-b5a0-0800273c0afb
+    :location: Thames Street, Staines
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+  :related_to: 
+  - :type: :Organiser
+    :fields: 
+      :name: HM Revenue &amp; Customs
+    :related_to: []
+
+- :type: :Event
+  :fields: 
+    :email: 
+    :start_date: 15 Sep 2010
+    :telephone: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :source: BusinessLink
+    :cost: Free
+    :intended_audience: Employers and staff who will be running the payroll
+    :notes: All industries
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :people: 
+    :uuid: 5d3d4670-807b-012d-b5a0-0800273c0afb
+    :location: London Road, Twickenham
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+  :related_to: 
+  - :type: :Organiser
+    :fields: 
+      :name: HM Revenue &amp; Customs
+    :related_to: []
+
+- :type: :Event
+  :fields: 
+    :email: 
+    :start_date: 22 Oct 2010
+    :telephone: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :source: BusinessLink
+    :cost: Free
+    :intended_audience: Employers and staff who will be running the payroll
+    :notes: All industries
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :people: 
+    :uuid: 5d3ecb10-807b-012d-b5a0-0800273c0afb
+    :location: London Road, Twickenham
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+  :related_to: 
+  - :type: :Organiser
+    :fields: 
+      :name: HM Revenue &amp; Customs
+    :related_to: []
+
+- :type: :Event
+  :fields: 
+    :email: 
+    :start_date: 5 Nov 2010
+    :telephone: 
+    :description: This event will explain how to install the CD-ROM, use it to work out an employee's tax and National Insurance deductions, what details you need to include on a wage slip, fill in forms when an employee starts or leaves your employment and work out your payments due to HMRC.
+    :source: BusinessLink
+    :cost: Free
+    :intended_audience: Employers and staff who will be running the payroll
+    :notes: All industries
+    :url: http://www.hmrc.gov.uk/bst/advice-teams-area/london.htm
+    :people: 
+    :uuid: 5d40ec50-807b-012d-b5a0-0800273c0afb
+    :location: London Road, Twickenham
+    :title: Paying Someone for the First Time Using the Employer CD-Rom
+  :related_to: 
+  - :type: :Organiser
+    :fields: 
+      :name: HM Revenue &amp; Customs
+    :related_to: []
+
+- :type: :Event
+  :fields: 
+    :email: 
+    :start_date: 1 Dec 2010
+    :telephone: 
+    :description: This half day seminar is designed to provide a general introduction to export control for those who are completely new to the subject or who only require a broad overview.  The workshop covers the reasons for controls, what is controlled, the use of technology, types of licence and compliance and enforcement.
+    :source: BusinessLink
+    :cost: "\xC2\xA390.00 inc VAT"
+    :intended_audience: Businesses needing to understand more about the UK's strategic export controls
+    :notes: All industries
+    :url: http://www.bis.gov.uk/policies/export-control-organisation/eco-training-skills-academy/events-calendar-export-control-academy
+    :people: 
+    :uuid: 5d42fd10-807b-012d-b5a0-0800273c0afb
+    :location: Conference Centre, Department for Business, London
+    :title: Beginners' Workshop
+  :related_to: 
+  - :type: :Organiser
+    :fields: 
+      :name: Export Control Organisation
+    :related_to: []
+

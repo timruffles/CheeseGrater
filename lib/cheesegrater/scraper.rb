@@ -78,7 +78,7 @@ module CheeseGrater
       end
     end
     
-    attr_accessor :requests, :response, :vos, :pager, :is_root, :related_scrapers, :scrapers, :name, :helper
+    attr_accessor :requests, :response, :vos, :pager, :is_root, :related_scrapers, :scrapers, :name, :helper, :current_request
     
     
     protected
@@ -86,6 +86,8 @@ module CheeseGrater
       # make all paged requests, yielding the raw results from each
       def make_requests requests, pager
         requests.each do |request|
+          
+          @current_request = request
           # setup the request with the fields required to page
           pager.page(request) do |raw_response|
             # yield up response to the run() method, retrieve and return the response for the pager
@@ -135,12 +137,12 @@ module CheeseGrater
             # hash
           result[key] = 
             if setup.respond_to? :keys
-              if try_each = setup[:try_each]
+              if try_each = setup[:try_each] # keep going until a query returns a non-nill or non-whitespace only result
                 value = nil
-                try_each.any? do |query|
+                try_each.all? do |query|
                   value = perform_field_query(query, response, scope)
-                end
-                value
+                  /^[\t\s]*$/ =~ value.to_s || nil
+                end ? nil : value
               else
                 raise "Unknown field setup for #{key}: #{setup.inspect} in #{request_hash.inspect}"
               end

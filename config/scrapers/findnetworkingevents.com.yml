@@ -6,9 +6,8 @@ scrapers:
           request:
               format: Querystring
               endpoint: http://www.findnetworkingevents.com
-              fields: {
-                  no_key: /events/index.cfm?action=eventslist&region=1
-              }
+              fields:
+                no_key: /events/index.cfm?action=eventslist&region=1
           response:
               type: XpathHtml
           scrapers:
@@ -38,7 +37,7 @@ scrapers:
                           cost: .//*[@class="quoteMid"]/following-sibling::p[1]
                           intended_audience: UNKNOWN
                           notes: .//*[@class="quoteMid"]/following-sibling::p[2]
-                          url:
+                          url: [:method, current_request, endpoint]
                           telephone:
                           email:
                           people:

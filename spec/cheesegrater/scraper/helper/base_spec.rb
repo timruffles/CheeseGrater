@@ -21,6 +21,12 @@ describe Base do
     
   end
   
+  it "should flatten multiples into a comma separated list, ignoring blank or whitespace only fields" do
+    
+    @base.flatten_multiples(:field => ['6 marsh',' lane','','    ','    ','marling   ']).should == {:field => '6 marsh, lane, marling'}
+    
+  end
+  
   it "should match lots of badly formatted email addresses" do
     
     match = ['tim @ blah dot com', 'tim at blah.com', 'tim(at)blah.com', 'tim at blah dot com','tim (at) blah dot com''tim@blah.com','jean.paul@francious.fr.co','montague_pyke.one@py.cc', 'tim @ blah . com']

@@ -1,0 +1,6 @@
+
+describe RubADub do
+  
+  
+  
+end

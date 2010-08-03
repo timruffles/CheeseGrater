@@ -1,0 +1,31 @@
+sanitize:
+  :basic:
+    :elements: ['p','br', 'a', 'ol', 'ul', 'li']
+    :attributes: {'a' => ['href', 'title']},
+    :protocols: {'a' => {'href' => ['http', 'https', 'mailto']}}}
+  :complete: {}
+
+groups:  
+  baseline:
+    - 
+    - [:trim]
+    
+event_fields:
+  - [:sanitize, :basic]
+  - except: :url
+    actions: [:sanitize, :basic]
+    
+fields:
+  title:
+  description:
+  start_date:
+  location:
+  cost:
+  intended_audience:
+  notes:
+  url:
+  telephone:
+  email:
+  people:
+  source:
+

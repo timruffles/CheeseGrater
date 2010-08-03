@@ -26,7 +26,7 @@ scrapers:
                           url: 
                             try_each: 
                             - ./following-sibling::ul[@class='links'][1]//a[1]/@href
-                            - [:method, request, endpoint]
+                            - [:method, current_request, endpoint]
                           telephone:
                           email:
                           people:

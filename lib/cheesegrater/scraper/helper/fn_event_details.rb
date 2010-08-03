@@ -10,9 +10,9 @@ module CheeseGrater
           fields    = sanitize_fields([:title, :start_date, :cost, :notes], fields, COMPLETE)
           
           # linearise location TODO make a descision about what to do with these lists
-          fields[:location] = fields[:location].gsub!(/<br\s?\/?>/,",\n")
+          #fields[:location] = fields[:location].gsub!(/<br\s?\/?>/,",\n")
           
-          remove({:cost => 'Cost', :description => 'Details', :when => 'When', :notes => 'Event Contact Details', :location => 'Venue'}, fields)
+          remove({:cost => 'Cost', :description => 'Details<br>,', :when => 'When', :notes => 'Event Contact Details', :location => 'Venue'}, fields)
           
           # get as good as time data as we can
           time_date     = Sanitize.clean(fields[:start_date])

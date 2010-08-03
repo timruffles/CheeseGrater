@@ -34,8 +34,8 @@ module CheeseGrater
       
         def xpath_to_scalar selected
           case selected
-          when Nokogiri::XML::Attr                         then selected.value
-          when Nokogiri::XML::NodeSet, Nokogiri::XML::Node then node_or_set_value(selected)
+            when Nokogiri::XML::Attr                         then selected.value
+            when Nokogiri::XML::NodeSet, Nokogiri::XML::Node then node_or_set_value(selected)
           end
         end
       

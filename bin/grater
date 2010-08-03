@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+# load the bundle in the current dir
+wd = Dir.getwd
+Dir.chdir(File.dirname(__FILE__) + '/..')
 require "rubygems"
 require "bundler"
 Bundler.setup(:default)
@@ -6,6 +9,8 @@ Bundler.setup(:default)
 lib_dir = File.dirname(__FILE__) + "/../lib/"
 require lib_dir + 'cheesegrater'
 
+# switch back to calling wd so relative paths from there will work
+Dir.chdir(wd)
 
 cli = CheeseGrater::Cli.new
 cli.run ARGV
