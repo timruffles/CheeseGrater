@@ -4,9 +4,21 @@ module CheeseGrater
     module Helper
       class Base
         
-        # TODO add exclude method to exclude various fields from filter/sanitize chain
-        @exclude = {:url => [:sanitize, :flattern]}
+        include RubADub
         
+        # TODO add exclude method to exclude various fields from filter/sanitize chain
+        cleaners :event => [
+          :strip!,
+          :flatten_multiples,
+          {:exclude => :url, :actions => [:sanitize, :basic]}
+        ], :organiser => [
+          :strip!,
+          :flatten_multiples,
+          {:exclude => :url, :actions => [:sanitize, :basic]}
+        ], :scrapers => [
+          :strip!,
+          {:exclude => :url, :actions => [:sanitize]}
+        ]
         
         # TODO add a br squeeze
         BASIC = {:elements => ['p','br', 'a', 'ol', 'ul', 'li'],
@@ -14,51 +26,21 @@ module CheeseGrater
                 :protocols => {'a' => {'href' => ['http', 'https', 'mailto']}}}
         COMPLETE = {}
         
-        def format_vo_fields name, fields
-          default_treatment(fields)
+        def format_vo_fields vo_name, fields
+          clean vo_name.to_s.downcase.to_sym, fields
         end
 
         def format_scraper_fields name, fields
-          default_treatment(fields)
+          clean :scrapers, fields
         end
 
-        def format_related_vo_fields name, fields
-          default_treatment(fields)
+        def sanitize field, level = BASIC
+           Sanitize.clean(field, level) rescue value
         end
         
-        def sanitize_all fields, setup = BASIC
-          fields.each_pair do |field, value|
-            fields[field] = Sanitize.clean(value, setup) rescue value
-          end
-          fields
-        end
-        
-        def default_treatment fields
-          trim_all(sanitize_all(flatten_multiples(fields)))
-        end
-        
-        def flatten_multiples fields
-          fields.each_pair do |field, value|
-            next unless value.respond_to? :each
-            fields[field] = value.reject(&lambda {|v| /^[\t\s]*$/ =~ v || v == nil}).map(&lambda {|v| v.strip}).join(', ')
-          end
-          fields
-        end
-        
-        def sanitize_fields which, fields, setup = BASIC
-          
-          which.each do |field|
-            next unless fields[field]
-            fields[field] = Sanitize.clean(fields[field], setup)
-          end
-          
-          fields 
-        end
-        
-        def trim_all fields
-          fields.each_key do |key|
-            fields[key].strip! rescue nil
-          end
+        def flatten_multiple field
+          next unless value.respond_to? :each
+          field.reject(&lambda {|v| /^[\t\s]*$/ =~ v || v == nil}).map(&lambda {|v| v.strip}).join(', ')
         end
         
         def remove what_by_field, fields

@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/eventscraper'
+require File.dirname(__FILE__) + '/../lib/cheesegrater'
 require 'yaml'
 
 # TODO - Move to Rspec mixin :)
